@@ -1,2 +1,2 @@
-"The year is 1999 and you have been appointed Chancellor of the Exchequer. The economy is growing, and your budget's expenditure is level with tax revenue. How difficult could it be?"
+The year is 1999 and you have been appointed Chancellor of the Exchequer. The economy is growing, and your budget's expenditure is level with tax revenue. How difficult could it be?\
 Part of an ongoing project to teach economics and the inner workings of government and finance from multiple perspectives.
