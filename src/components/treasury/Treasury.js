@@ -72,6 +72,8 @@ export default function Treasury() {
     submitLongTermBudget(newYear(), totalTax, totalSpending);
   }
 
+
+
   return (
     <div className="treasury">
       <div className="nav">

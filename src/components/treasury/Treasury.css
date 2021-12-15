@@ -34,7 +34,7 @@
   display: flex;
   /* justify-content: center; */
   align-items: center;
-  border-top: 2px solid black;
+  /* border-top: 2px solid black; */
 }
 
 .calculator-container {
@@ -68,7 +68,4 @@
 .button-group {
   display: flex;
   justify-self: flex-start;
-}
-.chart {
-  /* margin: auto */
 }
