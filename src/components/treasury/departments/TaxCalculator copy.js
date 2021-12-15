@@ -11,19 +11,6 @@ const taxRevenueData = [
   { receipt: "other", revenue: 56 },
 ];
 
-const spending = [
-  { department: "Debt Interest", expenditure: 26 },
-  { department: "Defense", expenditure: 22 },
-  { department: "Education", expenditure: 41 },
-  { department: "Health", expenditure: 61 },
-  { department: "Housing & Environment", expenditure: 13 },
-  { department: "Industry, Agriculture, Employment", expenditure: 15 },
-  { department: "Law & Order", expenditure: 19 },
-  { department: "Other", expenditure: 41 },
-  { department: "Social Security", expenditure: 102 },
-  { department: "Transport", expenditure: 9 },
-];
-
 const useStyles = makeStyles(() => ({
   form: {
     borderRadius: "20px",
@@ -32,8 +19,6 @@ const useStyles = makeStyles(() => ({
     // height: "500px",
     padding: "20px",
     width: "320px",
-    margin: "auto",
-    marginTop: "100px",
   },
   label: {
     textAlign: "left",
@@ -42,7 +27,7 @@ const useStyles = makeStyles(() => ({
     width: "80%",
   },
 }));
-export default function Form() {
+export default function Calculator() {
   const [taxRevenue, setTaxRevenue] = useState(taxRevenueData);
   const [totalRevenue, setTotalRevenue] = useState(349);
 

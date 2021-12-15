@@ -1,12 +1,10 @@
-// import Treasury from "./components/treasury/Treasury"
-import Details from "./components/treasury/data/details"
+import Treasury from "./components/treasury/Treasury"
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      {/* <Treasury/> */}
-      <Details />
+      <Treasury />
     </div>
   );
 }
