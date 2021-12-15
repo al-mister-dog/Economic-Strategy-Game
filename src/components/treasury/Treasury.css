@@ -1,20 +1,41 @@
 .treasury {
+  width: 100vw;
   display: flex;
   flex-direction: column;
+}
+
+.nav {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .title {
   display: flex;
 }
 
-.body {
+.buttons {
   display: flex;
-  align-items: flex-start;
+  justify-content: baseline;
 }
 
-.budget {
+.body {
   display: flex;
-  align-items: flex-start;
+  height: 88vh;
+}
+.graph {
+  background: blue;
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.budget {
+  background: red;
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .chart-container {
   display: flex;
