@@ -1,38 +1,77 @@
 import { useState } from "react";
 import Graph from "./Graph";
-import Calculator from "./departments/Calculator";
-import taxAndSpending from "./data/taxAndSpending";
+import Budget from "./Budget";
 import ExchequerIcon from "./ExchequerIcon";
-import { Button, ButtonGroup, makeStyles } from "@material-ui/core";
 import "./Treasury.css";
 
-const useStyles = makeStyles(() => ({
-  muiButton: {
-    border: "2px solid black",
-    fontWeight: "bold"
-  }
-}));
-
+const FIRST_YEAR = [
+  {
+    year: 1999,
+    revenue: 349,
+    expenditure: 349,
+    deficit: 0,
+  },
+];
 export default function Treasury() {
-  const classes = useStyles()
-  const [settingBudget, setSettingBudget] = useState(false);
-  const [calculating, setCalculating] = useState(false);
-  const [calculatingTax, setCalculatingTax] = useState(false);
-  const [calculatingSpending, setCalculatingSpending] = useState(false);
+  const [annualBudget, setAnnualBudget] = useState(FIRST_YEAR);
+  const [longTermBudget, setLongTermBudget] = useState(FIRST_YEAR);
 
-  function createBudget() {
-    setSettingBudget(true);
+  const newYear = () => {
+    return annualBudget[annualBudget.length - 1].year + 1;
+  };
+  const prevLongTermYear = () => {
+    return longTermBudget[longTermBudget.length - 1];
+  };
+  const prevAnnualYear = () => {
+    return annualBudget[annualBudget.length - 1];
+  };
+
+  function calculateDeficit(newRevenue, newExpenditure) {
+    const deficit = newExpenditure - newRevenue;
+    return -deficit;
   }
-  function openTaxRevenue() {
-    setCalculatingSpending(false);
-    setCalculatingTax(true);
-    setCalculating(true);
+
+  function calculateLongTermDeficit(revenue, expenditure) {
+    let deficit = calculateDeficit(revenue, expenditure);
+    deficit >= prevAnnualYear().deficit
+      ? (deficit += prevLongTermYear().deficit)
+      : (deficit -= prevLongTermYear().deficit);
+    return deficit;
   }
-  function openSpending() {
-    setCalculatingTax(false);
-    setCalculatingSpending(true);
-    setCalculating(true);
+
+  function submitLongTermBudget(year, revenue, expenditure) {
+    const deficit = calculateLongTermDeficit(revenue, expenditure);
+    const newLongTermBudget = [
+      ...longTermBudget,
+      {
+        year,
+        revenue,
+        expenditure,
+        deficit,
+      },
+    ];
+    setLongTermBudget(newLongTermBudget);
   }
+
+  function submitAnnualBudget(year, revenue, expenditure) {
+    const deficit = calculateDeficit(revenue, expenditure);
+    const newAnnualBudget = [
+      ...annualBudget,
+      {
+        year,
+        revenue,
+        expenditure,
+        deficit,
+      },
+    ];
+    setAnnualBudget(newAnnualBudget);
+  }
+
+  function onSubmitBudget(totalTax, totalSpending) {
+    submitAnnualBudget(newYear(), totalTax, totalSpending);
+    submitLongTermBudget(newYear(), totalTax, totalSpending);
+  }
+
   return (
     <div className="treasury">
       <div className="nav">
@@ -40,36 +79,14 @@ export default function Treasury() {
           <ExchequerIcon />
           <h2>HM Treasury</h2>
         </div>
-
-        <div className="buttons">
-          <Button className={classes.muiButton} variant="contained" color="primary" onClick={() => createBudget()}>Create Budget</Button>
-          {settingBudget && (
-            <ButtonGroup
-              variant="outlined"
-              aria-label="outlined primary button group"
-            >
-              <Button className={classes.muiButton} variant="contained" color="secondary" onClick={() => openTaxRevenue()}>Tax Revenue</Button>
-              <Button className={classes.muiButton} variant="contained" color="secondary" onClick={() => openSpending()}>Spending</Button>
-            </ButtonGroup>
-          )}
-        </div>
       </div>
 
       <div className="body">
         <div className="graph">
-        <Graph />
+          <Graph budget={longTermBudget} />
         </div>
         <div className="budget">
-          {calculating && (
-            <div>
-              {calculatingTax && (
-                <Calculator data={taxAndSpending.taxRevenueData} />
-              )}
-              {calculatingSpending && (
-                <Calculator data={taxAndSpending.spendingData} />
-              )}
-            </div>
-          )}
+          <Budget budget={annualBudget} onSubmitBudget={onSubmitBudget} />
         </div>
       </div>
     </div>

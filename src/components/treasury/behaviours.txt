@@ -1,6 +1,8 @@
-Cutting Taxes eliminates revenue
-Raising Taxes raises revenue
-Increasing Spending raises the deficit
-Cutting Spending lowers the deficit
-
-
+if the deficit is -100
+and next years budget is equal in tax and Spending
+then the deficit remains -100
+T   S
+100 100 0
+100 200 -100
+100 100 -100
+200 100 0

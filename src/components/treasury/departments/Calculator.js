@@ -6,7 +6,7 @@ const useStyles = makeStyles(() => ({
     borderRadius: "20px",
     border: "3px solid black",
     boxSizing: "border-box",
-    padding: "10px",
+    padding: "5px",
     width: "320px",
   },
   label: {
@@ -16,16 +16,10 @@ const useStyles = makeStyles(() => ({
     width: "80%",
   },
 }));
-export default function Calculator({ data }) {
+export default function Calculator({ data, budgetType, calculateTotalAmount }) {
   const [amount, setAmount] = useState(data);
-  const [totalAmount, setTotalAmount] = useState();
+  // const [totalAmount, setTotalAmount] = useState();
 
-  function calculateTotalAmount() {
-    const total = amount.reduce((a, b) => ({
-      amount: a.amount + b.amount,
-    }));
-    setTotalAmount(total.amount);
-  }
 
   const handleChangeSlider = (index) => (e, value) => {
     const newArr = [...amount];
@@ -34,7 +28,7 @@ export default function Calculator({ data }) {
   };
 
   useEffect(() => {
-    calculateTotalAmount();
+    calculateTotalAmount(amount, budgetType);
   }, [amount]);
 
   const classes = useStyles();

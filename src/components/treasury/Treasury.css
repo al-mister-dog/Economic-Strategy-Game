@@ -24,24 +24,50 @@
   height: 88vh;
 }
 .graph {
-  background: blue;
-  width: 50vw;
+  width: 45vw;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .budget {
-  background: red;
-  width: 50vw;
+  width: 55vw;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  border-top: 2px solid black;
+}
+
+.calculator-container {
+  width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.dashboard {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.dashboard-buttons {
+  margin: 7px auto;
+  display: flex;
+}
+.dashboard-button {
+  display: flex;
+  flex-direction: column;
 }
 .chart-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.button-group {
+  display: flex;
+  justify-self: flex-start;
 }
 .chart {
   /* margin: auto */
