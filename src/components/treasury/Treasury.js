@@ -1,9 +1,11 @@
 import { useState } from "react";
 import Graph from "./Graph";
-import Budget from "./Budget";
+import Dashboard from "./Dashboard";
+import Calculator from "./Calculator";
 import ExchequerIcon from "./ExchequerIcon";
 import { Box, Toolbar, Typography, makeStyles } from "@material-ui/core";
 import "./Treasury.css";
+import taxAndSpending from "./data/taxAndSpending";
 
 const FIRST_YEAR = [
   {
@@ -17,7 +19,7 @@ const FIRST_YEAR = [
 
 const useStyles = makeStyles(() => ({
   toolbar: {
-    marginTop: "5px"
+    marginTop: "5px",
   },
   title: {
     margin: "10px 50px 10px 10px",
@@ -25,13 +27,27 @@ const useStyles = makeStyles(() => ({
 }));
 export default function Treasury() {
   const classes = useStyles();
-  const [annualBudget, setAnnualBudget] = useState(FIRST_YEAR);
+  const [budget, setBudget] = useState(FIRST_YEAR);
+  const [totalTax, setTotalTax] = useState(349);
+  const [totalSpending, setTotalSpending] = useState(349);
+
+  function calculateTotalAmount(amount, budgetType) {
+    const total = amount.reduce((a, b) => ({
+      amount: a.amount + b.amount,
+    }));
+    if (budgetType === "TAX") {
+      setTotalTax(total.amount);
+    }
+    if (budgetType === "SPENDING") {
+      setTotalSpending(total.amount);
+    }
+  }
 
   const newYear = () => {
-    return annualBudget[annualBudget.length - 1].year + 1;
+    return budget[budget.length - 1].year + 1;
   };
   const prevYear = () => {
-    return annualBudget[annualBudget.length - 1];
+    return budget[budget.length - 1];
   };
 
   function calculateDeficit(newRevenue, newExpenditure) {
@@ -47,11 +63,11 @@ export default function Treasury() {
     return deficit;
   }
 
-  function submitAnnualBudget(year, revenue, expenditure) {
+  function submitBudget(year, revenue, expenditure) {
     const deficit = calculateDeficit(revenue, expenditure);
     const long_term_deficit = calculateLongTermDeficit(revenue, expenditure);
-    const newAnnualBudget = [
-      ...annualBudget,
+    const newBudget = [
+      ...budget,
       {
         year,
         revenue,
@@ -60,11 +76,11 @@ export default function Treasury() {
         long_term_deficit,
       },
     ];
-    setAnnualBudget(newAnnualBudget);
+    setBudget(newBudget);
   }
 
   function onSubmitBudget(totalTax, totalSpending) {
-    submitAnnualBudget(newYear(), totalTax, totalSpending);
+    submitBudget(newYear(), totalTax, totalSpending);
   }
 
   return (
@@ -76,8 +92,24 @@ export default function Treasury() {
         </Typography>
       </Toolbar>
       <body className="treasury-body">
-      <Graph budget={annualBudget} />
-      <Budget budget={annualBudget} onSubmitBudget={onSubmitBudget} />  
+        <Graph budget={budget} />
+        <Dashboard
+          totalTax={totalTax}
+          totalSpending={totalSpending}
+          budget={budget}
+          onSubmitBudget={onSubmitBudget}
+        />
+        <Calculator
+          data={taxAndSpending.taxRevenueData}
+          budgetType={"TAX"}
+          calculateTotalAmount={calculateTotalAmount}
+        />
+
+        <Calculator
+          data={taxAndSpending.spendingData}
+          budgetType={"SPENDING"}
+          calculateTotalAmount={calculateTotalAmount}
+        />
       </body>
     </Box>
   );
