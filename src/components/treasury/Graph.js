@@ -10,11 +10,7 @@ import {
   Legend,
 } from "recharts";
 import "./Treasury.css";
-
-const budgetRed = "#f44335";
-const budgetGreen = "#35f46e";
-const budgetBlue = "#5135f4";
-const budgetOrange = "#f4a135";
+import colorScheme from "./data/colorScheme";
 
 const useStyles = makeStyles(() => ({
   paper: {
@@ -36,40 +32,40 @@ export default function Treasury({ budget }) {
       <ResponsiveContainer width="90%" height="90%">
         <LineChart data={budget}>
           <CartesianGrid strokeDasharray="3 3" strokeWidth={2} />
-          <XAxis dataKey="year" strokeWidth={1} />
-          <YAxis strokeWidth={1} />
+          <XAxis dataKey="year" strokeWidth={2} />
+          <YAxis strokeWidth={2} />
           <Tooltip />
           <Legend />
           <Line
             type="monotone"
             animationDuration={duration}
             dataKey="revenue"
-            stroke={budgetRed}
-            strokeWidth={1}
+            stroke={colorScheme.red}
+            strokeWidth={2}
             activeDot={{ r: 8 }}
           />
           <Line
             type="monotone"
             animationDuration={duration}
             dataKey="deficit"
-            stroke={budgetGreen}
-            strokeWidth={1}
+            stroke={colorScheme.green}
+            strokeWidth={2}
             activeDot={{ r: 8 }}
           />
           <Line
             type="monotone"
             animationDuration={duration}
             dataKey="long_term_deficit"
-            stroke={budgetBlue}
-            strokeWidth={1}
+            stroke={colorScheme.blue}
+            strokeWidth={2}
             activeDot={{ r: 8 }}
           />
           <Line
             type="monotone"
             animationDuration={duration}
             dataKey="expenditure"
-            stroke={budgetOrange}
-            strokeWidth={1}
+            stroke={colorScheme.orange}
+            strokeWidth={2}
             activeDot={{ r: 8 }}
           />
         </LineChart>

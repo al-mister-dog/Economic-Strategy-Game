@@ -1,12 +1,10 @@
 import { useState } from "react";
 import Calculator from "./Calculator";
 import taxAndSpending from "./data/taxAndSpending";
-import { Paper, Button, makeStyles, Typography } from "@material-ui/core";
 import "./Treasury.css";
-const budgetRed = '#f44335'
-const budgetGreen = '#35f46e'
-const budgetBlue = "#5135f4"
-const budgetOrange = "#f4a135"
+import colorScheme from "./data/colorScheme";
+import { Paper, Button, makeStyles, Typography } from "@material-ui/core";
+
 const useStyles = makeStyles(() => ({
   paperBudget: {
     margin: "0 20px 0 20px",
@@ -18,25 +16,23 @@ const useStyles = makeStyles(() => ({
     alignItems: "center",
   },
   muiButton: {
-    // background: budgetBlue,
     width: "8rem",
-    marginRight: "3px"
+    marginRight: "3px",
   },
   muiButtonActive: {
-    background: budgetBlue,
+    background: colorScheme.blue,
     fontWeight: "bold",
     width: "8rem",
-    marginRight: "3px"
+    marginRight: "3px",
   },
   muiButtonSubmit: {
-    // background: budgetRed,
     margin: "5px auto",
   },
 }));
 
 export default function Budget({ budget, onSubmitBudget }) {
   const classes = useStyles();
-  const annualBudget = budget[budget.length -1]
+  const annualBudget = budget[budget.length - 1];
   const [calculatingTax, setCalculatingTax] = useState(false);
   const [calculatingSpending, setCalculatingSpending] = useState(true);
   const [totalTax, setTotalTax] = useState(349);
@@ -65,18 +61,20 @@ export default function Budget({ budget, onSubmitBudget }) {
 
   return (
     <>
-
-
       <Paper className={classes.paperBudget}>
         <div className="btns-and-totals">
-        <div className={calculatingTax ? "btn-and-total clicked":"btn-and-total"} onClick={() => openTaxRevenue()}>
+          <div
+            className={
+              calculatingTax ? "btn-and-total clicked" : "btn-and-total"
+            }
+            onClick={() => openTaxRevenue()}
+          >
             <Button
               className={
                 calculatingTax ? classes.muiButtonActive : classes.muiButton
               }
               variant="contained"
               color="primary"
-              
             >
               Tax Revenue
             </Button>
@@ -84,7 +82,12 @@ export default function Budget({ budget, onSubmitBudget }) {
               Total: {totalTax || 349}
             </Typography>
           </div>
-          <div className={calculatingSpending ? "btn-and-total clicked":"btn-and-total"} onClick={() => openSpending()}>
+          <div
+            className={
+              calculatingSpending ? "btn-and-total clicked" : "btn-and-total"
+            }
+            onClick={() => openSpending()}
+          >
             <Button
               className={
                 calculatingSpending
@@ -93,7 +96,6 @@ export default function Budget({ budget, onSubmitBudget }) {
               }
               variant="contained"
               color="primary"
-              
             >
               Spending
             </Button>
@@ -113,7 +115,8 @@ export default function Budget({ budget, onSubmitBudget }) {
             Expenditure: £{annualBudget.expenditure} bn
           </Typography>
           <Typography variant="subtitle1" align="left">
-            {annualBudget.deficit > 0 ? "Surplus" : "Deficit"}: £{annualBudget.deficit} bn
+            {annualBudget.deficit > 0 ? "Surplus" : "Deficit"}: £
+            {annualBudget.deficit} bn
           </Typography>
         </div>
         <Button
@@ -124,7 +127,6 @@ export default function Budget({ budget, onSubmitBudget }) {
           Submit Budget
         </Button>
       </Paper>
-
 
       <div className="calculator-container">
         <div>
