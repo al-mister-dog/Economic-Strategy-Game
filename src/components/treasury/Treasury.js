@@ -10,19 +10,16 @@ const FIRST_YEAR = [
     revenue: 349,
     expenditure: 349,
     deficit: 0,
+    long_term_deficit: 0,
   },
 ];
 export default function Treasury() {
   const [annualBudget, setAnnualBudget] = useState(FIRST_YEAR);
-  const [longTermBudget, setLongTermBudget] = useState(FIRST_YEAR);
 
   const newYear = () => {
     return annualBudget[annualBudget.length - 1].year + 1;
   };
-  const prevLongTermYear = () => {
-    return longTermBudget[longTermBudget.length - 1];
-  };
-  const prevAnnualYear = () => {
+  const prevYear = () => {
     return annualBudget[annualBudget.length - 1];
   };
 
@@ -33,28 +30,15 @@ export default function Treasury() {
 
   function calculateLongTermDeficit(revenue, expenditure) {
     let deficit = calculateDeficit(revenue, expenditure);
-    deficit >= prevAnnualYear().deficit
-      ? (deficit += prevLongTermYear().deficit)
-      : (deficit -= prevLongTermYear().deficit);
+    deficit >= prevYear().deficit
+      ? (deficit += prevYear().long_term_deficit)
+      : (deficit -= prevYear().long_term_deficit);
     return deficit;
-  }
-
-  function submitLongTermBudget(year, revenue, expenditure) {
-    const deficit = calculateLongTermDeficit(revenue, expenditure);
-    const newLongTermBudget = [
-      ...longTermBudget,
-      {
-        year,
-        revenue,
-        expenditure,
-        deficit,
-      },
-    ];
-    setLongTermBudget(newLongTermBudget);
   }
 
   function submitAnnualBudget(year, revenue, expenditure) {
     const deficit = calculateDeficit(revenue, expenditure);
+    const long_term_deficit = calculateLongTermDeficit(revenue, expenditure)
     const newAnnualBudget = [
       ...annualBudget,
       {
@@ -62,6 +46,7 @@ export default function Treasury() {
         revenue,
         expenditure,
         deficit,
+        long_term_deficit,
       },
     ];
     setAnnualBudget(newAnnualBudget);
@@ -69,7 +54,6 @@ export default function Treasury() {
 
   function onSubmitBudget(totalTax, totalSpending) {
     submitAnnualBudget(newYear(), totalTax, totalSpending);
-    submitLongTermBudget(newYear(), totalTax, totalSpending);
   }
 
 
@@ -85,7 +69,7 @@ export default function Treasury() {
 
       <div className="body">
         <div className="graph">
-          <Graph budget={longTermBudget} />
+          <Graph budget={annualBudget} />
         </div>
         <div className="budget">
           <Budget budget={annualBudget} onSubmitBudget={onSubmitBudget} />
