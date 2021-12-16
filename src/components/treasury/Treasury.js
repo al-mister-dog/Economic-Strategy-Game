@@ -2,6 +2,7 @@ import { useState } from "react";
 import Graph from "./Graph";
 import Budget from "./Budget";
 import ExchequerIcon from "./ExchequerIcon";
+import { Box, Toolbar, Typography, makeStyles } from "@material-ui/core";
 import "./Treasury.css";
 
 const FIRST_YEAR = [
@@ -13,7 +14,17 @@ const FIRST_YEAR = [
     long_term_deficit: 0,
   },
 ];
+
+const useStyles = makeStyles(() => ({
+  toolbar: {
+    marginTop: "5px"
+  },
+  title: {
+    margin: "10px 50px 10px 10px",
+  },
+}));
 export default function Treasury() {
+  const classes = useStyles();
   const [annualBudget, setAnnualBudget] = useState(FIRST_YEAR);
 
   const newYear = () => {
@@ -38,7 +49,7 @@ export default function Treasury() {
 
   function submitAnnualBudget(year, revenue, expenditure) {
     const deficit = calculateDeficit(revenue, expenditure);
-    const long_term_deficit = calculateLongTermDeficit(revenue, expenditure)
+    const long_term_deficit = calculateLongTermDeficit(revenue, expenditure);
     const newAnnualBudget = [
       ...annualBudget,
       {
@@ -56,25 +67,18 @@ export default function Treasury() {
     submitAnnualBudget(newYear(), totalTax, totalSpending);
   }
 
-
-
   return (
-    <div className="treasury">
-      <div className="nav">
-        <div className="title">
-          <ExchequerIcon />
-          <h2>HM Treasury</h2>
-        </div>
-      </div>
-
-      <div className="body">
-        <div className="graph">
-          <Graph budget={annualBudget} />
-        </div>
-        <div className="budget">
-          <Budget budget={annualBudget} onSubmitBudget={onSubmitBudget} />
-        </div>
-      </div>
-    </div>
+    <Box>
+      <Toolbar className={classes.toolbar}>
+        <ExchequerIcon />
+        <Typography variant="h6" className={classes.title}>
+          HM Treasury
+        </Typography>
+      </Toolbar>
+      <body className="treasury-body">
+      <Graph budget={annualBudget} />
+      <Budget budget={annualBudget} onSubmitBudget={onSubmitBudget} />  
+      </body>
+    </Box>
   );
 }

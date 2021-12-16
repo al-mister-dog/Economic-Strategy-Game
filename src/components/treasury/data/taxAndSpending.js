@@ -17,9 +17,9 @@ const data = {
     { name: "Housing & Environment", amount: 13 },
     { name: "Industry, Agriculture, Employment", amount: 15 },
     { name: "Law & Order", amount: 19 },
-    { name: "Other", amount: 41 },
     { name: "Social Security", amount: 102 },
     { name: "Transport", amount: 9 },
+    { name: "Other", amount: 41 },
   ],
 };
 

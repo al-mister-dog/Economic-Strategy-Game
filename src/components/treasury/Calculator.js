@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
-import { Typography, Slider, FormGroup, makeStyles } from "@material-ui/core";
+import { Paper, Typography, Slider, FormGroup, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
-  form: {
-    borderRadius: "20px",
-    border: "3px solid black",
-    boxSizing: "border-box",
-    padding: "5px",
-    width: "320px",
+  calculatorContainer: {  
+    padding: "20px",
+    width: "17rem",
+    height: "36.8rem",
+    margin: "0 10px 0 10px",
   },
   label: {
     textAlign: "left",
@@ -33,8 +32,8 @@ export default function Calculator({ data, budgetType, calculateTotalAmount }) {
 
   const classes = useStyles();
   return (
-    <div className={classes.form}>
-      <FormGroup>
+    <Paper className={classes.calculatorContainer}>
+      <FormGroup >
         {amount.map((object, index) => {
           const { name, amount } = object;
           return (
@@ -56,6 +55,6 @@ export default function Calculator({ data, budgetType, calculateTotalAmount }) {
           );
         })}
       </FormGroup>
-    </div>
+    </Paper>
   );
 }

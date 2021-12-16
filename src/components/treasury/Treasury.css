@@ -1,17 +1,6 @@
-.treasury {
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-}
-
-.nav {
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.title {
-  display: flex;
+.treasury-body {
+  margin: 20px 30px 0px 30px;
+  display: flex;  
 }
 
 .buttons {
@@ -19,26 +8,7 @@
   justify-content: baseline;
 }
 
-.body {
-  display: flex;
-  height: 88vh;
-}
-.graph {
-  width: 45vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.budget {
-  width: 55vw;
-  display: flex;
-  /* justify-content: center; */
-  align-items: center;
-  /* border-top: 2px solid black; */
-}
-
 .calculator-container {
-  width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,13 +21,16 @@
   justify-content: center;
   align-items: center;
 }
-.dashboard-buttons {
+
+.btns-and-totals {
   margin: 7px auto;
   display: flex;
-}
-.dashboard-button {
-  display: flex;
   flex-direction: column;
+}
+.btn-and-total {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
 }
 .chart-container {
   display: flex;
@@ -68,4 +41,10 @@
 .button-group {
   display: flex;
   justify-self: flex-start;
+}
+
+@media screen and (max-width: 768px) {
+  .treasury-body {
+    flex-direction: column;
+  } 
 }
