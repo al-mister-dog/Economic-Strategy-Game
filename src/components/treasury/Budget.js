@@ -69,14 +69,14 @@ export default function Budget({ budget, onSubmitBudget }) {
 
       <Paper className={classes.paperBudget}>
         <div className="btns-and-totals">
-          <div className="btn-and-total">
+        <div className={calculatingTax ? "btn-and-total clicked":"btn-and-total"} onClick={() => openTaxRevenue()}>
             <Button
               className={
                 calculatingTax ? classes.muiButtonActive : classes.muiButton
               }
               variant="contained"
               color="primary"
-              onClick={() => openTaxRevenue()}
+              
             >
               Tax Revenue
             </Button>
@@ -84,7 +84,7 @@ export default function Budget({ budget, onSubmitBudget }) {
               Total: {totalTax || 349}
             </Typography>
           </div>
-          <div className="btn-and-total">
+          <div className={calculatingSpending ? "btn-and-total clicked":"btn-and-total"} onClick={() => openSpending()}>
             <Button
               className={
                 calculatingSpending
@@ -93,7 +93,7 @@ export default function Budget({ budget, onSubmitBudget }) {
               }
               variant="contained"
               color="primary"
-              onClick={() => openSpending()}
+              
             >
               Spending
             </Button>

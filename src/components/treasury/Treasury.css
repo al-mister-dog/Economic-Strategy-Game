@@ -32,6 +32,12 @@
   justify-content: space-between;
   margin-top: 20px;
 }
+
+.clicked {
+  background: rgb(229, 228, 236);
+  border-radius: 5px;
+  padding-right: 3px;
+}
 .chart-container {
   display: flex;
   flex-direction: column;
