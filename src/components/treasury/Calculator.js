@@ -1,24 +1,31 @@
 import { useState, useEffect } from "react";
 import { Paper, Typography, Slider, FormGroup, makeStyles } from "@material-ui/core";
-
+import "./Treasury.css"
 const useStyles = makeStyles(() => ({
-  calculatorContainer: {  
-    padding: "20px",
-    width: "17rem",
-    height: "36.8rem",
-    margin: "0 10px 0 10px",
+  calculatorContainer: { 
+    height: "22rem", 
+    padding: "25px",
+    margin: "10px",
+    paddingBottom: "1px"
   },
   label: {
+    fontSize: "0.8rem",
+    fontWeight: "bold",
+    color: "#808080",
     textAlign: "left",
+    width: "50%",
+  },
+  sliders: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
   },
   slider: {
-    width: "80%",
+    width: "50%",
   },
 }));
-export default function Calculator({ data, budgetType, calculateTotalAmount }) {
+export default function Calculator({ data, settingBudget, budgetType, calculateTotalAmount }) {
   const [amount, setAmount] = useState(data);
-  // const [totalAmount, setTotalAmount] = useState();
-
 
   const handleChangeSlider = (index) => (e, value) => {
     const newArr = [...amount];
@@ -33,17 +40,18 @@ export default function Calculator({ data, budgetType, calculateTotalAmount }) {
   const classes = useStyles();
   return (
     <Paper className={classes.calculatorContainer}>
-      <FormGroup >
+      <FormGroup className={classes.sliders}>
         {amount.map((object, index) => {
           const { name, amount } = object;
           return (
-            <div key={index}>
-              <Typography className={classes.label} gutterBottom>
-                {name}
+            <div key={index} className="slider">
+              <Typography className={classes.label} variant="body2">
+                {name}:
               </Typography>
               <Slider
                 className={classes.slider}
                 aria-label="Temperature"
+                disabled={!settingBudget}
                 defaultValue={amount}
                 onChange={handleChangeSlider(index)}
                 valueLabelDisplay="auto"

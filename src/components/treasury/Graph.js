@@ -14,9 +14,8 @@ import colorScheme from "./data/colorScheme";
 
 const useStyles = makeStyles(() => ({
   paper: {
-    margin: "0 10px 0 10px",
-    height: "20rem",
-    width: "35rem",
+    width: "70%",
+    margin: "10px",
   },
 }));
 
@@ -29,8 +28,8 @@ export default function Treasury({ budget }) {
       <Typography variant="subtitle1">
         UK revenue, expenditure and deficit/surplus (Billion GBP)
       </Typography>
-      <ResponsiveContainer width="90%" height="90%">
-        <LineChart data={budget}>
+      <ResponsiveContainer width="93%" height="80%">
+      <LineChart data={budget} height="" width="">
           <CartesianGrid strokeDasharray="3 3" strokeWidth={2} />
           <XAxis dataKey="year" strokeWidth={2} />
           <YAxis strokeWidth={2} />
@@ -69,7 +68,9 @@ export default function Treasury({ budget }) {
             activeDot={{ r: 8 }}
           />
         </LineChart>
+
       </ResponsiveContainer>
+              
     </Paper>
   );
 }

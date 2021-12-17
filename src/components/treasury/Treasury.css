@@ -1,6 +1,17 @@
 .treasury-body {
-  margin: 20px 30px 0px 30px;
-  display: flex;  
+  height: 67vh;
+  margin: 1rem 10rem 10rem 10rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottom-row {
+  display: flex;
 }
 
 .buttons {
@@ -14,14 +25,17 @@
   align-items: center;
 }
 .dashboard {
-  height: 100%;
-  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-
+.dashboard-totals {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-around;
+}
 .btns-and-totals {
   margin: 7px auto;
   display: flex;
@@ -33,11 +47,6 @@
   margin-top: 20px;
 }
 
-.clicked {
-  background: rgb(229, 228, 236);
-  border-radius: 5px;
-  padding-right: 3px;
-}
 .chart-container {
   display: flex;
   flex-direction: column;
@@ -52,5 +61,15 @@
 @media screen and (max-width: 768px) {
   .treasury-body {
     flex-direction: column;
-  } 
+  }
+}
+
+.slider {
+  display: flex;
+}
+
+.totals {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
