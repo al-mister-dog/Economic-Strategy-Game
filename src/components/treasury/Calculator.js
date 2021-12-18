@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Typography, Slider, FormGroup, makeStyles } from "@material-ui/core";
-import "./Treasury.css"
 const useStyles = makeStyles(() => ({
-
+  title: {
+    marginBottom: "5px"
+  },
   label: {
     fontSize: "0.8rem",
     fontWeight: "bold",
@@ -16,10 +17,12 @@ const useStyles = makeStyles(() => ({
     justifyContent: "center",
   },
   slider: {
-    width: "50%",
+    display: "flex",
+    // width: "50%"
   },
+
 }));
-export default function Calculator({ data, settingBudget, budgetType, calculateTotalAmount }) {
+export default function Calculator({ data, settingBudget, title, budgetType, calculateTotalAmount }) {
   const [amount, setAmount] = useState(data);
 
   const handleChangeSlider = (index) => (e, value) => {
@@ -35,16 +38,16 @@ export default function Calculator({ data, settingBudget, budgetType, calculateT
   const classes = useStyles();
   return (
     <>
+    <Typography align="left" variant="h6" className={classes.title}>{title}</Typography>
       <FormGroup className={classes.sliders}>
         {amount.map((object, index) => {
           const { name, amount } = object;
           return (
-            <div key={index} className="slider">
+            <div key={index} className={classes.slider}>
               <Typography className={classes.label} variant="body2">
                 {name}:
               </Typography>
               <Slider
-                className={classes.slider}
                 aria-label="Temperature"
                 disabled={!settingBudget}
                 defaultValue={amount}

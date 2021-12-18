@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
+import taxAndSpending from "./data/taxAndSpending";
 import HmReport from "./HmReport";
 import Graph from "./Graph";
 import SetBudget from "./SetBudget";
 import Calculator from "./Calculator";
 import { Paper, Box, makeStyles } from "@material-ui/core";
-import "./Treasury.css";
-import taxAndSpending from "./data/taxAndSpending";
 
 const FIRST_YEAR = [
   {
@@ -19,17 +18,18 @@ const FIRST_YEAR = [
 
 const useStyles = makeStyles(() => ({
   body: {
-    // height: "100vh",
     backgroundColor: "#ebe1e1",
+    height: "100vh",
+    width: "100vw",
   },
-  treasuryContainer: {
-    height: "82vh",
+  wrapper: {
+    height: "90vh",
     margin: "3rem 10rem 5rem 10rem",
     display: "flex",
     "@media (max-width: 620px)": {
       height: "200vh",
+      margin: "0.3rem",
       flexDirection: "column",
-      margin: "1rem",
     },
   },
   boxOne: {
@@ -58,40 +58,38 @@ const useStyles = makeStyles(() => ({
     padding: "10px",
     height: "20%",
     display: "flex",
-
-    // justifyContent: "center",
+    "@media (max-width: 620px)": {
+      height: "25%",
+    },
   },
   paperGraph: {
     margin: "10px",
+    padding: "10px",
     height: "80%",
+    "@media (max-width: 620px)": {
+      padding: "0px"
+    },
   },
   paperCalculator: {
-    padding: "25px",
     margin: "10px",
+    padding: "10px",
     height: "70%",
     "@media (max-width: 620px)": {
-     
-    height: "80%",
-    }
+      height: "80%",
+    },
   },
   paperSetBudget: {
     margin: "10px",
     padding: "10px",
-
-    height: "26%",
+    height: "20%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-evenly",
     "@media (max-width: 620px)": {
-    height: "20%",
-    justifyContent: "space-evenly",
-    alignItems: "space-evenly"
-    }
-  },
-
-  paperTabs: {
-    margin: "10px",
-    padding: "10px",
+      height: "20%",
+      justifyContent: "space-evenly",
+      alignItems: "space-evenly",
+    },
   },
 }));
 
@@ -177,14 +175,11 @@ export default function Treasury() {
 
   return (
     <Box className={classes.body}>
-      <Box className={classes.treasuryContainer}>
+      <Box className={classes.wrapper}>
         <Box className={classes.boxOne}>
           <Paper className={classes.paperHmReport}>
             <HmReport
               budget={budget}
-              // totalTax={totalTax}
-              // totalSpending={totalSpending}
-              // deficit={deficit}
               settingBudget={settingBudget}
               setAnnualBudget={setAnnualBudget}
             />
@@ -193,7 +188,6 @@ export default function Treasury() {
             <Graph budget={budget} />
           </Paper>
         </Box>
-
         <Box className={classes.boxTwo}>
           <Paper className={classes.paperSetBudget}>
             <SetBudget
@@ -211,6 +205,7 @@ export default function Treasury() {
               <Calculator
                 data={taxAndSpending.taxRevenueData}
                 settingBudget={settingBudget}
+                title={"Tax Revenues"}
                 budgetType={"TAX"}
                 calculateTotalAmount={calculateTotalAmount}
               />
@@ -219,6 +214,7 @@ export default function Treasury() {
               <Calculator
                 data={taxAndSpending.spendingData}
                 settingBudget={settingBudget}
+                title={"Expenditures"}
                 budgetType={"SPENDING"}
                 calculateTotalAmount={calculateTotalAmount}
               />

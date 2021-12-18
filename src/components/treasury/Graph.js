@@ -1,4 +1,4 @@
-import { Paper, Typography, makeStyles } from "@material-ui/core";
+import { Typography, makeStyles } from "@material-ui/core";
 import {
   ResponsiveContainer,
   LineChart,
@@ -9,20 +9,28 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import "./Treasury.css";
+
 import colorScheme from "./data/colorScheme";
 
+const useStyles = makeStyles(() => ({
+  title: {
+    "@media (max-width: 620px)": {
+      fontSize: "0.6rem",
+    },
+  },
+}));
+
 export default function Treasury({ budget }) {
-  
+  const classes = useStyles();
   const duration = 300;
 
   return (
     <>
-      <Typography variant="subtitle1">
+      <Typography className={classes.title} variant="subtitle1">
         UK revenue, expenditure and deficit/surplus (Billion GBP)
       </Typography>
       <ResponsiveContainer width="93%" height="80%">
-      <LineChart data={budget} height="" width="">
+        <LineChart data={budget} height="" width="">
           <CartesianGrid strokeDasharray="3 3" strokeWidth={2} />
           <XAxis dataKey="year" strokeWidth={2} />
           <YAxis strokeWidth={2} />
@@ -61,9 +69,7 @@ export default function Treasury({ budget }) {
             activeDot={{ r: 8 }}
           />
         </LineChart>
-
       </ResponsiveContainer>
-              
     </>
   );
 }

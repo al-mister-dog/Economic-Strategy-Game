@@ -1,5 +1,4 @@
 import { Box, Typography, Button, makeStyles } from "@material-ui/core";
-import "./Treasury.css";
 
 const useStyles = makeStyles(() => ({
   totals: {
@@ -14,7 +13,7 @@ const useStyles = makeStyles(() => ({
   },
   totalBtn: {
     fontSize: "0.8rem",
-    width: "3rem",
+    // width: "3rem",
     marginRight: "5px",
   },
   totalBtnTitle: {
@@ -40,7 +39,7 @@ export default function SetBudget({
     <>
       <Box className={classes.totals}>
         <Box className={classes.total}>
-        <Button
+          <Button
             color="secondary"
             variant="contained"
             className={classes.totalBtn}
@@ -53,7 +52,7 @@ export default function SetBudget({
           </Typography>
         </Box>
         <Box className={classes.total}>
-        <Button
+          <Button
             color="secondary"
             variant="contained"
             className={classes.totalBtn}
@@ -66,7 +65,9 @@ export default function SetBudget({
           </Typography>
         </Box>
       </Box>
-      <Typography variant="h6" align="left">{deficit > 0 ? "Surplus" : "Deficit"}: £{deficit}bn</Typography>
+      <Typography variant="h6" align="left">
+        {deficit > 0 ? "Surplus" : "Deficit"}: £{deficit}bn
+      </Typography>
       <Button
         variant="contained"
         color="primary"
