@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
     width: "100vw",
   },
   wrapper: {
-    height: "90vh",
+    height: "80vh",
     margin: "3rem 10rem 5rem 10rem",
     display: "flex",
     "@media (max-width: 620px)": {
