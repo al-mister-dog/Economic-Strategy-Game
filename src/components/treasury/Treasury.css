@@ -1,41 +1,4 @@
-.treasury-body {
-  height: 67vh;
-  margin: 1rem 10rem 10rem 10rem;
-  display: flex;
-  flex-direction: column;
-}
 
-.top-row {
-  display: flex;
-  justify-content: space-between;
-}
-
-.bottom-row {
-  display: flex;
-}
-
-.buttons {
-  display: flex;
-  justify-content: baseline;
-}
-
-.calculator-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.dashboard {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.dashboard-totals {
-  margin-top: 15px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-around;
-}
 .btns-and-totals {
   margin: 7px auto;
   display: flex;

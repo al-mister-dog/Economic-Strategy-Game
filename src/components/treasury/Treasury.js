@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
+import HmReport from "./HmReport";
 import Graph from "./Graph";
-import Dashboard from "./Dashboard";
+import SetBudget from "./SetBudget";
 import Calculator from "./Calculator";
-import ExchequerIcon from "./ExchequerIcon";
-import { Paper, Box, Typography, Button, makeStyles } from "@material-ui/core";
+import { Paper, Box, makeStyles } from "@material-ui/core";
 import "./Treasury.css";
 import taxAndSpending from "./data/taxAndSpending";
 
@@ -19,47 +19,79 @@ const FIRST_YEAR = [
 
 const useStyles = makeStyles(() => ({
   body: {
-    height: "100vh",
+    // height: "100vh",
     backgroundColor: "#ebe1e1",
   },
-
-  title: {
-    margin: "0px 50px 10px 10px",
-    fontWeight: "bold",
-    fontSize: "1.6rem",
+  treasuryContainer: {
+    height: "82vh",
+    margin: "3rem 10rem 5rem 10rem",
+    display: "flex",
+    "@media (max-width: 620px)": {
+      height: "200vh",
+      flexDirection: "column",
+      margin: "1rem",
+    },
   },
-  paperHmReport: {
-    margin: "10px",
-    padding: "12px",
-    width: "50%",
+  boxOne: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
+    width: "70%",
+    height: "100%",
+    "@media (max-width: 620px)": {
+      width: "100%",
+      height: "50%",
+    },
   },
-  hmReportTitle: {
+  boxTwo: {
     display: "flex",
-    marginTop: "10px",
-    marginLeft: "25px",
+    flexDirection: "column",
+    width: "30%",
+    height: "100%",
+    "@media (max-width: 620px)": {
+      width: "100%",
+      height: "50%",
+    },
   },
+
+  paperHmReport: {
+    margin: "10px",
+    padding: "10px",
+    height: "20%",
+    display: "flex",
+
+    // justifyContent: "center",
+  },
+  paperGraph: {
+    margin: "10px",
+    height: "80%",
+  },
+  paperCalculator: {
+    padding: "25px",
+    margin: "10px",
+    height: "70%",
+    "@media (max-width: 620px)": {
+     
+    height: "80%",
+    }
+  },
+  paperSetBudget: {
+    margin: "10px",
+    padding: "10px",
+
+    height: "26%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-evenly",
+    "@media (max-width: 620px)": {
+    height: "20%",
+    justifyContent: "space-evenly",
+    alignItems: "space-evenly"
+    }
+  },
+
   paperTabs: {
     margin: "10px",
     padding: "10px",
-  },
-  totalBtn: {
-    width: "7rem",
-    margin: "5px",
-  },
-  totalBtnTitle: {
-    color: "#808080",
-  },
-  totalBtnNum: {
-    fontWeight: "bold",
-    fontSize: "1.5rem",
-  },
-  buttonSubmit: {
-    maxWidth: "50%",
-    position: "relative",
-    left: "50%",
   },
 }));
 
@@ -93,7 +125,7 @@ export default function Treasury() {
       setTotalSpending(total.amount);
     }
   }
-  
+
   function calculateAnnualDeficit() {
     const deficit = totalTax - totalSpending;
     setDeficit(deficit);
@@ -145,69 +177,36 @@ export default function Treasury() {
 
   return (
     <Box className={classes.body}>
-      <body className="treasury-body">
-        <div className="top-row">
+      <Box className={classes.treasuryContainer}>
+        <Box className={classes.boxOne}>
           <Paper className={classes.paperHmReport}>
-            <Box className={classes.hmReportTitle}>
-              <ExchequerIcon className="exchequer-icon" />
-              <Typography variant="h5" className={classes.title} align="left">
-                HM Treasury Report: {budget[budget.length - 1].year}
-              </Typography>
-            </Box>
-            <Button
-              className={classes.buttonSubmit}
-              variant="contained"
-              color="primary"
-              onClick={() => setAnnualBudget(totalTax, totalSpending)}
-            >
-              {settingBudget ? "Cancel" : "Set Annual Budget"}
-            </Button>
+            <HmReport
+              budget={budget}
+              // totalTax={totalTax}
+              // totalSpending={totalSpending}
+              // deficit={deficit}
+              settingBudget={settingBudget}
+              setAnnualBudget={setAnnualBudget}
+            />
           </Paper>
+          <Paper className={classes.paperGraph}>
+            <Graph budget={budget} />
+          </Paper>
+        </Box>
 
-          <Dashboard
-            totalTax={totalTax}
-            totalSpending={totalSpending}
-            deficit={deficit}
-            budget={budget}
-            settingBudget={settingBudget}
-            onSubmitBudget={onSubmitBudget}
-          />
-        </div>
-
-        <div className="bottom-row">
-          <Graph budget={budget} />
-          <div className="calculator-and-buttons">
-            <Paper className={classes.paperTabs}>
-              <div className="totals">
-                <div className="total">
-                  <Typography className={classes.totalBtnNum}>
-                    £{totalTax} bn
-                  </Typography>
-                  <Button
-                    color="secondary"
-                    variant="contained"
-                    className={classes.totalBtn}
-                    onClick={openTaxCalculator}
-                  >
-                    Tax
-                  </Button>
-                </div>
-                <div class="total">
-                  <Typography className={classes.totalBtnNum}>
-                    £{totalSpending} bn
-                  </Typography>
-                  <Button
-                    color="secondary"
-                    variant="contained"
-                    className={classes.totalBtn}
-                    onClick={openSpendingCalculator}
-                  >
-                    Spend
-                  </Button>
-                </div>
-              </div>
-            </Paper>
-
+        <Box className={classes.boxTwo}>
+          <Paper className={classes.paperSetBudget}>
+            <SetBudget
+              openSpendingCalculator={openSpendingCalculator}
+              openTaxCalculator={openTaxCalculator}
+              totalTax={totalTax}
+              totalSpending={totalSpending}
+              deficit={deficit}
+              settingBudget={settingBudget}
+              onSubmitBudget={onSubmitBudget}
+            />
+          </Paper>
+          <Paper className={classes.paperCalculator}>
             {calcToggle && (
               <Calculator
                 data={taxAndSpending.taxRevenueData}
@@ -224,9 +223,9 @@ export default function Treasury() {
                 calculateTotalAmount={calculateTotalAmount}
               />
             )}
-          </div>
-        </div>
-      </body>
+          </Paper>
+        </Box>
+      </Box>
     </Box>
   );
 }

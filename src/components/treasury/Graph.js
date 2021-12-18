@@ -12,19 +12,12 @@ import {
 import "./Treasury.css";
 import colorScheme from "./data/colorScheme";
 
-const useStyles = makeStyles(() => ({
-  paper: {
-    width: "70%",
-    margin: "10px",
-  },
-}));
-
 export default function Treasury({ budget }) {
-  const classes = useStyles();
+  
   const duration = 300;
 
   return (
-    <Paper className={classes.paper}>
+    <>
       <Typography variant="subtitle1">
         UK revenue, expenditure and deficit/surplus (Billion GBP)
       </Typography>
@@ -71,6 +64,6 @@ export default function Treasury({ budget }) {
 
       </ResponsiveContainer>
               
-    </Paper>
+    </>
   );
 }

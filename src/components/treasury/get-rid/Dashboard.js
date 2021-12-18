@@ -1,5 +1,5 @@
 import "./Treasury.css";
-import colorScheme from "./data/colorScheme";
+import colorScheme from "../data/colorScheme";
 import { Paper, Button, makeStyles, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
@@ -28,7 +28,7 @@ export default function Dashboard({
   const classes = useStyles();
   const annualBudget = budget[budget.length - 1];
   return (
-    <Paper className={classes.paperBudget}>
+    <>
       <div className="dashboard-totals">
         <div className="dashboard-total">
           <Typography variant="h6" >
@@ -56,15 +56,7 @@ export default function Dashboard({
         </div>
       </div>
 
-      <Button
-        className={classes.buttonSubmit}
-        variant="contained"
-        color="primary"
-        disabled={!settingBudget}
-        onClick={() => onSubmitBudget(totalTax, totalSpending)}
-      >
-        Submit Annual Budget
-      </Button>
-    </Paper>
+
+    </>
   );
 }

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Dashboard from "./Dashboard";
-import Calculator from "./Calculator";
-import taxAndSpending from "./data/taxAndSpending";
+import Calculator from "../Calculator";
+import taxAndSpending from "../data/taxAndSpending";
 import "./Treasury.css";
 
 export default function Budget({ budget, onSubmitBudget }) {

@@ -1,13 +1,8 @@
 import { useState, useEffect } from "react";
-import { Paper, Typography, Slider, FormGroup, makeStyles } from "@material-ui/core";
+import { Typography, Slider, FormGroup, makeStyles } from "@material-ui/core";
 import "./Treasury.css"
 const useStyles = makeStyles(() => ({
-  calculatorContainer: { 
-    height: "22rem", 
-    padding: "25px",
-    margin: "10px",
-    paddingBottom: "1px"
-  },
+
   label: {
     fontSize: "0.8rem",
     fontWeight: "bold",
@@ -39,7 +34,7 @@ export default function Calculator({ data, settingBudget, budgetType, calculateT
 
   const classes = useStyles();
   return (
-    <Paper className={classes.calculatorContainer}>
+    <>
       <FormGroup className={classes.sliders}>
         {amount.map((object, index) => {
           const { name, amount } = object;
@@ -63,6 +58,6 @@ export default function Calculator({ data, settingBudget, budgetType, calculateT
           );
         })}
       </FormGroup>
-    </Paper>
+    </>
   );
 }
