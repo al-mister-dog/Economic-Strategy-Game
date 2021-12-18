@@ -1,16 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Graph from "./Graph";
 import Dashboard from "./Dashboard";
 import Calculator from "./Calculator";
 import ExchequerIcon from "./ExchequerIcon";
-import {
-  Paper,
-  Box,
-  Toolbar,
-  Typography,
-  Button,
-  makeStyles,
-} from "@material-ui/core";
+import { Paper, Box, Typography, Button, makeStyles } from "@material-ui/core";
 import "./Treasury.css";
 import taxAndSpending from "./data/taxAndSpending";
 
@@ -76,10 +69,11 @@ export default function Treasury() {
   const [budget, setBudget] = useState(FIRST_YEAR);
   const [totalTax, setTotalTax] = useState(349);
   const [totalSpending, setTotalSpending] = useState(349);
+  const [deficit, setDeficit] = useState(0);
   const [calcToggle, setCalcToggle] = useState(true);
-  const [settingBudget, setSettingBudget] = useState(false)
+  const [settingBudget, setSettingBudget] = useState(false);
   function setAnnualBudget() {
-    setSettingBudget(!settingBudget)
+    setSettingBudget(!settingBudget);
   }
   function openTaxCalculator() {
     setCalcToggle(true);
@@ -99,7 +93,11 @@ export default function Treasury() {
       setTotalSpending(total.amount);
     }
   }
-
+  
+  function calculateAnnualDeficit() {
+    const deficit = totalTax - totalSpending;
+    setDeficit(deficit);
+  }
   const newYear = () => {
     return budget[budget.length - 1].year + 1;
   };
@@ -141,6 +139,10 @@ export default function Treasury() {
     submitBudget(newYear(), totalTax, totalSpending);
   }
 
+  useEffect(() => {
+    calculateAnnualDeficit();
+  }, [totalTax, totalSpending]);
+
   return (
     <Box className={classes.body}>
       <body className="treasury-body">
@@ -158,13 +160,14 @@ export default function Treasury() {
               color="primary"
               onClick={() => setAnnualBudget(totalTax, totalSpending)}
             >
-              {settingBudget ? "Cancel":"Set Annual Budget"}
+              {settingBudget ? "Cancel" : "Set Annual Budget"}
             </Button>
           </Paper>
 
           <Dashboard
             totalTax={totalTax}
             totalSpending={totalSpending}
+            deficit={deficit}
             budget={budget}
             settingBudget={settingBudget}
             onSubmitBudget={onSubmitBudget}

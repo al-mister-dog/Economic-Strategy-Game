@@ -20,6 +20,7 @@ const useStyles = makeStyles(() => ({
 export default function Dashboard({
   totalTax,
   totalSpending,
+  deficit,
   budget,
   settingBudget,
   onSubmitBudget,
@@ -47,10 +48,10 @@ export default function Dashboard({
         </div>
         <div className="dashboard-total">
           <Typography variant="h6" >
-            {annualBudget.deficit > 0 ? "Surplus" : "Deficit"}
+            {deficit > 0 ? "Surplus" : "Deficit"}
           </Typography>
           <Typography variant="h6" >
-            £{annualBudget.deficit} bn
+            £{deficit} bn
           </Typography>
         </div>
       </div>
