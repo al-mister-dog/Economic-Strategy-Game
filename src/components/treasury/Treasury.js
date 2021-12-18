@@ -54,6 +54,7 @@ const useStyles = makeStyles(() => ({
   },
 
   paperHmReport: {
+    borderRadius: "20px",
     margin: "10px",
     padding: "10px",
     height: "20%",
@@ -63,22 +64,16 @@ const useStyles = makeStyles(() => ({
     },
   },
   paperGraph: {
+    borderRadius: "20px",
     margin: "10px",
     padding: "10px",
     height: "80%",
     "@media (max-width: 620px)": {
-      padding: "0px"
-    },
-  },
-  paperCalculator: {
-    margin: "10px",
-    padding: "10px",
-    height: "70%",
-    "@media (max-width: 620px)": {
-      height: "80%",
+      padding: "0px",
     },
   },
   paperSetBudget: {
+    borderRadius: "20px",
     margin: "10px",
     padding: "10px",
     height: "20%",
@@ -89,6 +84,15 @@ const useStyles = makeStyles(() => ({
       height: "20%",
       justifyContent: "space-evenly",
       alignItems: "space-evenly",
+    },
+  },
+  paperCalculator: {
+    borderRadius: "20px",
+    margin: "10px",
+    padding: "10px",
+    height: "70%",
+    "@media (max-width: 620px)": {
+      height: "80%",
     },
   },
 }));
@@ -177,19 +181,19 @@ export default function Treasury() {
     <Box className={classes.body}>
       <Box className={classes.wrapper}>
         <Box className={classes.boxOne}>
-          <Paper className={classes.paperHmReport}>
+          <Paper elevation={0} className={classes.paperHmReport}>
             <HmReport
               budget={budget}
               settingBudget={settingBudget}
               setAnnualBudget={setAnnualBudget}
             />
           </Paper>
-          <Paper className={classes.paperGraph}>
+          <Paper elevation={0} className={classes.paperGraph}>
             <Graph budget={budget} />
           </Paper>
         </Box>
         <Box className={classes.boxTwo}>
-          <Paper className={classes.paperSetBudget}>
+          <Paper elevation={0} className={classes.paperSetBudget}>
             <SetBudget
               openSpendingCalculator={openSpendingCalculator}
               openTaxCalculator={openTaxCalculator}
@@ -200,7 +204,7 @@ export default function Treasury() {
               onSubmitBudget={onSubmitBudget}
             />
           </Paper>
-          <Paper className={classes.paperCalculator}>
+          <Paper elevation={0} className={classes.paperCalculator}>
             {calcToggle && (
               <Calculator
                 data={taxAndSpending.taxRevenueData}

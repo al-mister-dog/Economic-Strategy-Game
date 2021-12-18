@@ -14,6 +14,8 @@ import colorScheme from "./data/colorScheme";
 
 const useStyles = makeStyles(() => ({
   title: {
+    color: "#808080",
+    fontWeight: "bold",
     "@media (max-width: 620px)": {
       fontSize: "0.6rem",
     },

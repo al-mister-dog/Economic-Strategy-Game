@@ -34,6 +34,16 @@ const useStyles = makeStyles(() => ({
     },
   },
   text: {
+    fontWeight: "bold",
+    color: "#808080",
+    "@media (max-width: 620px)": {
+      justifyContent: "space-between",
+      fontSize: "0.5rem"
+    },
+  },
+  textNum: {
+    fontWeight: "bold",
+    fontSize: "1.2rem",
     "@media (max-width: 620px)": {
       justifyContent: "space-between",
       fontSize: "0.5rem"
@@ -63,7 +73,7 @@ export default function HmReport({ budget, settingBudget, setAnnualBudget }) {
               Tax Revenue
             </Typography>
             <Typography
-              className={classes.text}
+              className={classes.textNum}
               variant="subtitle1"
               align="left"
             >
@@ -79,7 +89,7 @@ export default function HmReport({ budget, settingBudget, setAnnualBudget }) {
               Expenditure
             </Typography>
             <Typography
-              className={classes.text}
+              className={classes.textNum}
               variant="subtitle1"
               align="left"
             >
@@ -95,7 +105,7 @@ export default function HmReport({ budget, settingBudget, setAnnualBudget }) {
               {deficit > 0 ? "Surplus" : "Deficit"}
             </Typography>
             <Typography
-              className={classes.text}
+              className={classes.textNum}
               variant="subtitle1"
               align="left"
             >
@@ -113,7 +123,7 @@ export default function HmReport({ budget, settingBudget, setAnnualBudget }) {
                 : "Long Term Deficit"}
             </Typography>
             <Typography
-              className={classes.text}
+              className={classes.textNum}
               variant="subtitle1"
               align="left"
             >
