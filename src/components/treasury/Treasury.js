@@ -43,10 +43,13 @@ const useStyles = makeStyles(() => ({
     },
   },
   boxTwo: {
+    background: "white",
+    borderRadius: "20px",
+    margin: "10px",
     display: "flex",
     flexDirection: "column",
     width: "30%",
-    height: "100%",
+    height: "97%",
     "@media (max-width: 620px)": {
       width: "100%",
       height: "50%",
@@ -74,7 +77,7 @@ const useStyles = makeStyles(() => ({
   },
   paperSetBudget: {
     borderRadius: "20px",
-    margin: "10px",
+    // margin: "10px",
     padding: "10px",
     height: "20%",
     display: "flex",
@@ -88,7 +91,7 @@ const useStyles = makeStyles(() => ({
   },
   paperCalculator: {
     borderRadius: "20px",
-    margin: "10px",
+    // margin: "10px",
     padding: "10px",
     height: "70%",
     "@media (max-width: 620px)": {
@@ -202,6 +205,7 @@ export default function Treasury() {
               deficit={deficit}
               settingBudget={settingBudget}
               onSubmitBudget={onSubmitBudget}
+              calcToggle={calcToggle}
             />
           </Paper>
           <Paper elevation={0} className={classes.paperCalculator}>

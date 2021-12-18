@@ -23,6 +23,11 @@ const useStyles = makeStyles(() => ({
     fontWeight: "bold",
     fontSize: "0.8rem",
   },
+  totalBtnSelected: {
+    fontWeight: "bold",
+    fontSize: "0.8rem",
+    backgroundColor: "pink"
+  }
 }));
 
 export default function SetBudget({
@@ -33,6 +38,7 @@ export default function SetBudget({
   deficit,
   settingBudget,
   onSubmitBudget,
+  calcToggle
 }) {
   const classes = useStyles();
   return (
@@ -41,7 +47,7 @@ export default function SetBudget({
         <Box className={classes.total}>
           <Button
             color="secondary"
-            variant="contained"
+            variant={calcToggle ? `contained` : `outlined`}
             className={classes.totalBtn}
             onClick={openTaxCalculator}
           >
@@ -54,7 +60,7 @@ export default function SetBudget({
         <Box className={classes.total}>
           <Button
             color="secondary"
-            variant="contained"
+            variant={!calcToggle ? `contained` : `outlined`}
             className={classes.totalBtn}
             onClick={openSpendingCalculator}
           >
