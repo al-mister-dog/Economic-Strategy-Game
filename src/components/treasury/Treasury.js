@@ -23,11 +23,11 @@ const useStyles = makeStyles(() => ({
     width: "100vw",
   },
   wrapper: {
-    height: "80vh",
-    margin: "3rem 10rem 5rem 10rem",
+    height: "90vh",
+    margin: "3rem 9rem 5rem 9rem",
     display: "flex",
     "@media (max-width: 620px)": {
-      height: "200vh",
+      height: "210vh",
       margin: "0.3rem",
       flexDirection: "column",
     },
@@ -35,7 +35,7 @@ const useStyles = makeStyles(() => ({
   boxOne: {
     display: "flex",
     flexDirection: "column",
-    width: "70%",
+    width: "68%",
     height: "100%",
     "@media (max-width: 620px)": {
       width: "100%",
@@ -43,13 +43,10 @@ const useStyles = makeStyles(() => ({
     },
   },
   boxTwo: {
-    background: "white",
-    borderRadius: "20px",
-    margin: "10px",
     display: "flex",
     flexDirection: "column",
-    width: "30%",
-    height: "97%",
+    width: "32%",
+    height: "100%",
     "@media (max-width: 620px)": {
       width: "100%",
       height: "50%",
@@ -75,10 +72,19 @@ const useStyles = makeStyles(() => ({
       padding: "0px",
     },
   },
-  paperSetBudget: {
+  setBudgetAndCalculator: {
     borderRadius: "20px",
-    // margin: "10px",
+    height: "100%",
+    margin: "10px",
     padding: "10px",
+    display: "flex",
+    flexDirection: "column",
+    "@media (max-width: 620px)": {
+      width: "88%",
+      height: "100%",
+    },
+  },
+  setBudget: {
     height: "20%",
     display: "flex",
     flexDirection: "column",
@@ -89,10 +95,7 @@ const useStyles = makeStyles(() => ({
       alignItems: "space-evenly",
     },
   },
-  paperCalculator: {
-    borderRadius: "20px",
-    // margin: "10px",
-    padding: "10px",
+  calculator: {
     height: "70%",
     "@media (max-width: 620px)": {
       height: "80%",
@@ -196,37 +199,39 @@ export default function Treasury() {
           </Paper>
         </Box>
         <Box className={classes.boxTwo}>
-          <Paper elevation={0} className={classes.paperSetBudget}>
-            <SetBudget
-              openSpendingCalculator={openSpendingCalculator}
-              openTaxCalculator={openTaxCalculator}
-              totalTax={totalTax}
-              totalSpending={totalSpending}
-              deficit={deficit}
-              settingBudget={settingBudget}
-              onSubmitBudget={onSubmitBudget}
-              calcToggle={calcToggle}
-            />
-          </Paper>
-          <Paper elevation={0} className={classes.paperCalculator}>
-            {calcToggle && (
-              <Calculator
-                data={taxAndSpending.taxRevenueData}
+          <Paper elevation={0} className={classes.setBudgetAndCalculator}>
+            <Box className={classes.setBudget}>
+              <SetBudget
+                openSpendingCalculator={openSpendingCalculator}
+                openTaxCalculator={openTaxCalculator}
+                totalTax={totalTax}
+                totalSpending={totalSpending}
+                deficit={deficit}
                 settingBudget={settingBudget}
-                title={"Tax Revenues"}
-                budgetType={"TAX"}
-                calculateTotalAmount={calculateTotalAmount}
+                onSubmitBudget={onSubmitBudget}
+                calcToggle={calcToggle}
               />
-            )}
-            {!calcToggle && (
-              <Calculator
-                data={taxAndSpending.spendingData}
-                settingBudget={settingBudget}
-                title={"Expenditures"}
-                budgetType={"SPENDING"}
-                calculateTotalAmount={calculateTotalAmount}
-              />
-            )}
+            </Box>
+            <Box className={classes.calculator}>
+              {calcToggle && (
+                <Calculator
+                  data={taxAndSpending.taxRevenueData}
+                  settingBudget={settingBudget}
+                  title={"Tax Revenues"}
+                  budgetType={"TAX"}
+                  calculateTotalAmount={calculateTotalAmount}
+                />
+              )}
+              {!calcToggle && (
+                <Calculator
+                  data={taxAndSpending.spendingData}
+                  settingBudget={settingBudget}
+                  title={"Expenditures"}
+                  budgetType={"SPENDING"}
+                  calculateTotalAmount={calculateTotalAmount}
+                />
+              )}
+            </Box>
           </Paper>
         </Box>
       </Box>
