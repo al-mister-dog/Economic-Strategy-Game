@@ -1,4 +1,4 @@
-import ExchequerIcon from "./ExchequerIcon";
+import ExchequerIcon from "./data/ExchequerIcon";
 import { Box, Typography, Button, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
@@ -60,7 +60,7 @@ export default function HmReport({ budget, settingBudget, setAnnualBudget }) {
   return (
     <>
       <Box className={classes.hmReportTitle}>
-        <Typography variant="h5" className={classes.title}>
+        <Typography variant="h5" className={classes.title} align="left">
           HM Treasury Report: {year}
         </Typography>
         <Box className={classes.totals}>

@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import taxAndSpending from "./data/taxAndSpending";
-import HmReport from "./HmReport";
-import Graph from "./Graph";
-import SetBudget from "./SetBudget";
-import Calculator from "./Calculator";
+import taxAndSpending from "../components/treasury/data/taxAndSpending";
+import HmReport from "../components/treasury/HmReport";
+import Graph from "../components/treasury/Graph";
+import SetBudget from "../components/treasury/SetBudget";
+import Calculator from "../components/treasury/Calculator";
 import { Paper, Box, makeStyles } from "@material-ui/core";
 
 const FIRST_YEAR = [
@@ -18,7 +18,7 @@ const FIRST_YEAR = [
 
 const useStyles = makeStyles(() => ({
   body: {
-    backgroundColor: "#ebe1e1",
+    backgroundColor: "#ECDBBA",
     height: "100vh",
     width: "100vw",
   },
@@ -54,6 +54,7 @@ const useStyles = makeStyles(() => ({
   },
 
   paperHmReport: {
+    backgroundColor: "#fffefc",
     borderRadius: "20px",
     margin: "10px",
     padding: "10px",
@@ -64,6 +65,7 @@ const useStyles = makeStyles(() => ({
     },
   },
   paperGraph: {
+    backgroundColor: "#fffefc",
     borderRadius: "20px",
     margin: "10px",
     padding: "10px",
@@ -73,6 +75,7 @@ const useStyles = makeStyles(() => ({
     },
   },
   setBudgetAndCalculator: {
+    backgroundColor: "#fffefc",
     borderRadius: "20px",
     height: "100%",
     margin: "10px",

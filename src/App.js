@@ -1,26 +1,23 @@
-import Treasury from "./components/treasury/Treasury";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/nav/Navbar";
+import Bloc from "./pages/Bloc";
+import CentralBank from "./pages/CentralBank";
+import Performance from "./pages/Performance";
+import Treasury from "./pages/Treasury";
 import "./App.css";
 
-import { AppBar, Toolbar, Typography, makeStyles } from "@material-ui/core";
-
-const useStyles = makeStyles(() => ({
-  nav: {
-    background: "black",
-    color: "white",
-    boxShadow: "none"
-  }
-}))
 function App() {
-  const classes = useStyles()
   return (
     <div className="App">
-      <AppBar className={classes.nav} position="sticky">
-        <Toolbar>
-          <Typography variant="h6">Trial of the Pyx</Typography>
-        </Toolbar>
-      </AppBar>
-
-      <Treasury />
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/bloc" element={<Bloc />} />
+          <Route path="/central-bank" element={<CentralBank />} />
+          <Route path="/performance" element={<Performance />} />
+          <Route path="/treasury" element={<Treasury />} />
+        </Routes>
+      </Router>
     </div>
   );
 }

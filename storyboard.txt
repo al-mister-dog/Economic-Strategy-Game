@@ -1,0 +1,53 @@
+when user starts a game they start in a particular year with various pre-established budgets, gdp etc
+this can happen in two stages
+first idea
+later on user can choose a time period
+for now they will start on a pre determined year
+
+onCreateAccount
+add following into tables WHERE user_id = 
+budget
+bank rate
+gdp
+etc
+
+The Bank's Monetary Policy Committee has a devolved responsibility for managing monetary 
+policy. The Treasury has reserve powers to give orders to the committee 
+"if they are required in the public interest and by extreme economic circumstances", 
+but such orders must be endorsed by Parliament within 28 days.[11] The Bank's Financial 
+Policy Committee held its first meeting in June 2011 as a macroprudential regulator 
+to oversee regulation of the UK's financial sector.
+
+Stable prices and confidence in the currency
+PRICE_STABILITY | CONFIDENCE
+88%             | 95%
+
+GOVERNMENT INFLATION TARGET
+
+LOWER INTEREST RATE:
+
+reduce interest rates when they wish 
+to increase investment and consumption 
+in the country's economy:
+may lead to the creation of an economic bubble, 
+in which large amounts of investments are poured 
+into the real-estate market and stock market
+
+As interest rate lowers, predicted consumption and investment levels go up (on a chart)
+As interest rate goes higher, predicted levels go down
+
+FISHER EQUATION
+real interest rate ≈ nominal interest rate − inflation rate
+
+r = (1 + i) (1 + π)
+i – the nominal interest rate
+r – the real interest rate
+π – the inflation rate
+
+What Is Nominal Interest Rate?
+Nominal interest rate refers to the interest rate before taking inflation into account.
+The interest rate set by a central bank is the nominal interest rate.
+Simple Interest (also known as nominal interest)
+Simple interest is interest based on the original loan or saving amount.
+
+For example, if you deposit £1,000 into a bank account and earn 2% interest per annum, after one year you will have £1,020. The same applies if you borrow money. If you borrow £1,000 at 2% interest per annum, after a year you would owe £1,020.
