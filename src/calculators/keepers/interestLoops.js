@@ -1,5 +1,6 @@
 const interestRate = 0.05
 const inflationRate = 0.02
+const principal = 1000
 
 function simpleInterestDecimal(amount, rate) {
   return amount * rate
@@ -47,7 +48,7 @@ const interests = {
 }
 
 
-const principal = 1000
+
 const interestDecimal = simpleInterestDecimal(principal, interestRate)
 const interestPercent = simpleInterestPercent(principal, interestRate)
 const realInterestDecimal = simpleInterestDecimal(principal, realInterestRate(interestRate, inflationRate))
