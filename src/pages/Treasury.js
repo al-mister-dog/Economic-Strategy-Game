@@ -5,7 +5,6 @@ import Graph from "../components/treasury/Graph";
 import SetBudget from "../components/treasury/SetBudget";
 import Calculator from "../components/treasury/Calculator";
 import { Paper, Box, makeStyles } from "@material-ui/core";
-import InterestCalculator from "../calculators/keepers/interestClass";
 
 const FIRST_YEAR = [
   {
@@ -109,29 +108,6 @@ const useStyles = makeStyles(() => ({
 
 export default function Treasury() {
   const classes = useStyles();
-  const principal = 1000;
-  const interestRate = 0.05;
-  const inflationRate = 0.02;
-  const numOfTimes = 10;
-
-  const futures = new InterestCalculator(
-    principal,
-    interestRate,
-    inflationRate,
-    numOfTimes
-  );
-
-  const compoundInterestDecimal = futures.getCompoundInterestDecimal();
-  const compoundInterestPercent = futures.getCompoundInterestPercent();
-  const compoundRealInterestDecimal = futures.getRealCompoundInterestDecimal();
-  const compoundRealInterestPercent = futures.getRealCompoundInterestPercent();
-
-  console.log(
-    compoundInterestDecimal,
-    compoundInterestPercent,
-    compoundRealInterestDecimal,
-    compoundRealInterestPercent,
-  );
 
   const [budget, setBudget] = useState(FIRST_YEAR);
   const [totalTax, setTotalTax] = useState(349);

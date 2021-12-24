@@ -22,6 +22,8 @@ export default class InterestCalculator {
     return simpleInterestDecimal(amount, realInterestRate);
   }
   realInterestPercent(amount, rate, inflationRate) {
+    
+    
     function simpleInterestPercent(amount, rate) {
       return (amount * rate) / 100;
     }
@@ -33,14 +35,16 @@ export default class InterestCalculator {
     let returns = [];
     for (let i = 0; i < frequency; i++) {
       principal += interest;
-      returns = [...returns, principal.toFixed(2)];
+      returns = [...returns, parseFloat(principal).toFixed(2)];
     }
     return returns;
   }
 
   getCompoundInterest(principal, interest, frequency, callback) {
     let futures = [];
+    
     for (let i = 0; i < frequency; i++) {
+      
       principal += interest;
       futures = [...futures, principal.toFixed(2)];
       interest = callback(principal, this.interestRate, this.inflationRate);
@@ -48,20 +52,21 @@ export default class InterestCalculator {
     return futures;
   }
 
-  // getNominalInterestDecimal() {
-  //   const interest = this.simpleInterestDecimal(
-  //     this.principal,
-  //     this.interestRate
-  //   );
-  //   return this.getCompoundInterest(this.principal, interest, this.times);
-  // }
-  // getNominalInterestPercent() {
-  //   const interest = this.simpleInterestPercent(
-  //     this.principal,
-  //     this.interestRate
-  //   );
-  //   return this.getCompoundInterest(this.principal, interest, this.times);
-  // }
+  getNominalInterestDecimal() {
+    const interest = this.simpleInterestDecimal(
+      this.principal,
+      this.interestRate
+    );
+    return this.getCompoundInterest(this.principal, interest, this.times);
+  }
+  getNominalInterestPercent() {
+    const interest = this.simpleInterestPercent(
+      this.principal,
+      this.interestRate
+    );
+    return this.getCompoundInterest(this.principal, interest, this.times);
+  }
+  
   getRealInterestDecimal() {
     const interest = this.simpleInterestDecimal(
       this.principal,
@@ -117,7 +122,8 @@ export default class InterestCalculator {
     const interest = this.simpleInterestPercent(
       this.principal,
       this.realInterestRate(this.interestRate, this.inflationRate)
-    );
+    )
+    
     return this.getCompoundInterest(
       this.principal,
       interest,

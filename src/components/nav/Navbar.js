@@ -47,7 +47,7 @@ export default function Navbar() {
     <AppBar className={classes.nav} position="sticky">
       <Toolbar>
         <IconButton
-          size="large"
+          // size="large"
           edge="start"
           color="inherit"
           aria-label="menu"
