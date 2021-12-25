@@ -1,5 +1,5 @@
 import { useState } from "react";
-import InterestCalculator from "../calculators/keepers/interestClass";
+import InterestCalculator from "../calculators/interest/interestClass";
 import {
   ResponsiveContainer,
   LineChart,
@@ -123,7 +123,7 @@ export default function CentralBank() {
             <XAxis dataKey="year" strokeWidth={2} />
             <YAxis
               type="number"
-              domain={["dataMin", "dataMax"]}
+              domain={["dataMin", dataMax => (Math.round(dataMax))]}
               strokeWidth={2}
             />
             <Tooltip />
