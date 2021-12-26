@@ -75,7 +75,7 @@ export default function SetBudget({
         {deficit > 0 ? "Surplus" : "Deficit"}: £{deficit}bn
       </Typography>
       <Button
-        variant="contained"
+        variant="outlined"
         color="primary"
         disabled={!settingBudget}
         onClick={() => onSubmitBudget(totalTax, totalSpending)}

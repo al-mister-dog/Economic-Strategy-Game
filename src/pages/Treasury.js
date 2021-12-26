@@ -54,7 +54,8 @@ const useStyles = makeStyles(() => ({
   },
 
   paperHmReport: {
-    backgroundColor: "#fffefc",
+    // backgroundColor: "#fffefc",
+    backgroundColor: "#fdfbf7",
     borderRadius: "20px",
     margin: "10px",
     padding: "10px",
@@ -65,7 +66,8 @@ const useStyles = makeStyles(() => ({
     },
   },
   paperGraph: {
-    backgroundColor: "#fffefc",
+    // backgroundColor: "#fffefc",
+    backgroundColor: "#fdfbf7",
     borderRadius: "20px",
     margin: "10px",
     padding: "10px",
@@ -75,7 +77,8 @@ const useStyles = makeStyles(() => ({
     },
   },
   setBudgetAndCalculator: {
-    backgroundColor: "#fffefc",
+    // backgroundColor: "#fffefc",
+    backgroundColor: "#fdfbf7",
     borderRadius: "20px",
     height: "100%",
     margin: "10px",
@@ -188,6 +191,7 @@ export default function Treasury() {
 
   return (
     <Box className={classes.body}>
+      <h1>Treasury</h1>
       <Box className={classes.wrapper}>
         <Box className={classes.boxOne}>
           <Paper elevation={0} className={classes.paperHmReport}>

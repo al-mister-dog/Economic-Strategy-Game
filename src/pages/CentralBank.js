@@ -10,9 +10,19 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { Box, TextField, Button, makeStyles } from "@material-ui/core";
+import { Paper, Box, TextField, MenuItem, Button, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
+  paper: {
+    backgroundColor: "#fdfbf7",
+    borderRadius: "20px",
+    width: "70vw",
+    height: "80vh",
+    padding: "25px",
+    margin: "auto",
+    display: "flex",
+    alignItems: "flex-start"
+  },
   form: {
     width: 300,
     margin: "auto",
@@ -29,9 +39,27 @@ export default function CentralBank() {
   const [principal, setPrincipal] = useState("1000");
   const [interestRate, setInterestRate] = useState("0.05");
   const [inflationRate, setInflationRate] = useState("0.02");
+  const [compoundPeriod, setCompoundPeriod] = useState("0");
   const [years, setYears] = useState("10");
-
   const [graphResult, setGraphResult] = useState([]);
+  const compoundPeriods = [
+    {
+      value: 0,
+      label: "Annually",
+    },
+    {
+      value: 1,
+      label: "Semi-annually",
+    },
+    {
+      value: 2,
+      label: "Quarterly",
+    },
+    {
+      value: 3,
+      label: "Monthly",
+    },
+  ];
 
   function handleChangePrincipal(e) {
     setPrincipal(e.target.value);
@@ -45,27 +73,29 @@ export default function CentralBank() {
   function handleChangeYears(e) {
     setYears(e.target.value);
   }
+  function handleChangeCompoundPeriod(e) {
+    setCompoundPeriod(e.target.value);
+  }
 
   function getCompoundInterest() {
-    let numPrincipal = parseFloat(principal);
-    let numInterestRate = parseFloat(interestRate);
-    let numInflationRate = parseFloat(inflationRate);
-    let numYears = parseFloat(years);
-
+    console.log(parseFloat(compoundPeriod))
     const futures = new InterestCalculator(
-      numPrincipal,
-      numInterestRate,
-      numInflationRate,
-      numYears
+      parseFloat(principal),
+      parseFloat(interestRate),
+      parseFloat(inflationRate),      
+      parseFloat(years),
+      parseFloat(compoundPeriod),
     );
     const eachYear = Array.from({ length: years }, (_, i) => i + 2020);
     const compoundRealInterest = futures.getRealCompoundInterestPercent();
     const compoundInterest = futures.getCompoundInterestPercent();
+    const simpleInterest = futures.getNominalInterestPercent()
     const graphData = eachYear.map((_, index) => {
       return {
         year: eachYear[index],
         "real interest": parseFloat(compoundRealInterest[index]),
         interest: parseFloat(compoundInterest[index]),
+        "simple interest": parseFloat(simpleInterest[index])
       };
     });
     console.log(graphData);
@@ -74,6 +104,7 @@ export default function CentralBank() {
   return (
     <>
       <h1>Central Bank</h1>
+      <Paper className={classes.paper}>
       <Box
         sx={{
           width: 300,
@@ -114,7 +145,19 @@ export default function CentralBank() {
           onChange={handleChangeYears}
           inputProps={{ min: 1, max: 10 }}
         />
-        <Button onClick={getCompoundInterest}>Calculate</Button>
+        <TextField
+          className={classes.textField}
+          select
+          label="Select compound period"
+          onChange={handleChangeCompoundPeriod}
+        >
+          {compoundPeriods.map((option, index) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+        <Button color="primary" onClick={getCompoundInterest}>Calculate</Button>
       </Box>
       <Box sx={{ height: 600, width: 600, margin: "auto" }}>
         <ResponsiveContainer width="93%" height="80%">
@@ -123,7 +166,7 @@ export default function CentralBank() {
             <XAxis dataKey="year" strokeWidth={2} />
             <YAxis
               type="number"
-              domain={["dataMin", dataMax => (Math.round(dataMax))]}
+              domain={[(dataMin) => Math.round(dataMin) + 10, (dataMax) => Math.round(dataMax) + 10]}
               strokeWidth={2}
             />
             <Tooltip />
@@ -142,9 +185,18 @@ export default function CentralBank() {
               stroke="blue"
               activeDot={{ r: 8 }}
             />
+            <Line
+              type="monotone"
+              // animationDuration={duration}
+              dataKey="simple interest"
+              stroke="orange"
+              activeDot={{ r: 8 }}
+            />
           </LineChart>
         </ResponsiveContainer>
       </Box>
+      </Paper>
+      
     </>
   );
 }

@@ -16,7 +16,8 @@ const useStyles = makeStyles(() => ({
   },
   title: {
     fontWeight: "bold",
-    fontSize: "1.6rem",
+    // fontSize: "1.6rem",
+    marginLeft: 10,
     overflow: "hidden",
     "@media (max-width: 620px)": {
       fontSize: "1rem",
@@ -60,8 +61,8 @@ export default function HmReport({ budget, settingBudget, setAnnualBudget }) {
   return (
     <>
       <Box className={classes.hmReportTitle}>
-        <Typography variant="h5" className={classes.title} align="left">
-          HM Treasury Report: {year}
+        <Typography variant="h4" className={classes.title} align="left">
+          {year}
         </Typography>
         <Box className={classes.totals}>
           <Box>
@@ -133,10 +134,10 @@ export default function HmReport({ budget, settingBudget, setAnnualBudget }) {
         </Box>
       </Box>
       <Box className={classes.logoAndButton}>
-        <ExchequerIcon className="exchequer-icon" />
+        {/* <ExchequerIcon className="exchequer-icon" /> */}
         <Button
           className={classes.submitBtn}
-          variant="contained"
+          variant="outlined"
           color="primary"
           onClick={() => setAnnualBudget()}
         >
