@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "@material-ui/styles";
+import theme from "./styles/Theme";
 import Navbar from "./components/nav/Navbar";
 import Bloc from "./pages/Bloc";
 import CentralBank from "./pages/CentralBank";
@@ -8,6 +10,7 @@ import "./App.css";
 
 function App() {
   return (
+    <ThemeProvider theme={theme}>
     <div className="App">
       <Router>
         <Navbar />
@@ -19,6 +22,7 @@ function App() {
         </Routes>
       </Router>
     </div>
+    </ThemeProvider>
   );
 }
 

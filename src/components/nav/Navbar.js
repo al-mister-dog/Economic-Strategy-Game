@@ -10,13 +10,23 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-
+const lightPrimary = "#ECDBBA";
+const lightSecondary = "#C84B31";
+const darkPrimary = "#191919";
+const darkSecondary = "#2D4263";
 const useStyles = makeStyles(() => ({
   nav: {
-    background: "#191919",
+    background: darkPrimary,
     color: "white",
     boxShadow: "none",
   },
+  mainMenu: {
+    background: darkSecondary,
+    color: "white",
+  },
+  title: {
+    fontFamily: "Open Sans"
+  }
 }));
 
 export default function Navbar() {
@@ -38,7 +48,7 @@ export default function Navbar() {
       role="presentation"
       onClick={toggleDrawer()}
       onKeyDown={toggleDrawer()}
-      sx={{width: 200}}
+      sx={{ width: 200 }}
     >
       <MainMenu />
     </Box>
@@ -55,7 +65,7 @@ export default function Navbar() {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6">Trial of the Pyx</Typography>
+        <Typography variant="h6" className={classes.title}>Trial of the Pyx</Typography>
       </Toolbar>
       <SwipeableDrawer
         anchor={"left"}

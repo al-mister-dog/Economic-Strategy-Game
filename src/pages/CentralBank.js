@@ -10,28 +10,55 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { Paper, Box, TextField, MenuItem, Button, makeStyles } from "@material-ui/core";
+import {
+  Paper,
+  Box,
+  TextField,
+  MenuItem,
+  Button,
+  IconButton,
+  makeStyles,
+  Typography,
+} from "@material-ui/core";
+import MenuIcon from "@material-ui/icons/Menu";
 
 const useStyles = makeStyles(() => ({
+  title: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "1rem",
+    height: "5rem",
+  },
+  titleMenu: {
+    color: "black",
+    fontSize: "2rem",
+    width: "2rem",
+    height: "2rem",
+  },
   paper: {
     backgroundColor: "#fdfbf7",
-    borderRadius: "20px",
     width: "70vw",
     height: "80vh",
     padding: "25px",
     margin: "auto",
+    marginTop: "2rem",
     display: "flex",
-    alignItems: "flex-start"
+    alignItems: "flex-start",
   },
   form: {
     width: 300,
-    margin: "auto",
-
+    // margin: "auto",
     padding: 25,
   },
   textField: {
     width: 200,
+    marginBottom: 10
   },
+  calculateBtn: {
+    width: 200,
+    marginTop: 25
+  }
 }));
 export default function CentralBank() {
   const classes = useStyles();
@@ -78,24 +105,24 @@ export default function CentralBank() {
   }
 
   function getCompoundInterest() {
-    console.log(parseFloat(compoundPeriod))
+    console.log(parseFloat(compoundPeriod));
     const futures = new InterestCalculator(
       parseFloat(principal),
       parseFloat(interestRate),
-      parseFloat(inflationRate),      
+      parseFloat(inflationRate),
       parseFloat(years),
-      parseFloat(compoundPeriod),
+      parseFloat(compoundPeriod)
     );
     const eachYear = Array.from({ length: years }, (_, i) => i + 2020);
     const compoundRealInterest = futures.getRealCompoundInterestPercent();
     const compoundInterest = futures.getCompoundInterestPercent();
-    const simpleInterest = futures.getNominalInterestPercent()
+    const simpleInterest = futures.getNominalInterestPercent();
     const graphData = eachYear.map((_, index) => {
       return {
         year: eachYear[index],
         "real interest": parseFloat(compoundRealInterest[index]),
         interest: parseFloat(compoundInterest[index]),
-        "simple interest": parseFloat(simpleInterest[index])
+        "simple interest": parseFloat(simpleInterest[index]),
       };
     });
     console.log(graphData);
@@ -103,100 +130,118 @@ export default function CentralBank() {
   }
   return (
     <>
-      <h1>Central Bank</h1>
+      <Box className={classes.title}>
+        <Typography variant="h3">Central Bank</Typography>
+        <IconButton>
+          <MenuIcon className={classes.titleMenu} />
+        </IconButton>
+      </Box>
       <Paper className={classes.paper}>
-      <Box
-        sx={{
-          width: 300,
-          margin: "auto",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <TextField
-          className={classes.textField}
-          type="number"
-          placeholder={principal}
-          label="principal"
-          onChange={handleChangePrincipal}
-          inputProps={{ min: 0 }}
-        />
-        <TextField
-          className={classes.textField}
-          type="number"
-          placeholder={interestRate}
-          label="interest rate (%)"
-          onChange={handleChangeInterestRate}
-          inputProps={{ min: -100, max: 100 }}
-        />
-        <TextField
-          className={classes.textField}
-          type="number"
-          placeholder={inflationRate}
-          label="inflation rate (%)"
-          onChange={handleChangeInflationRate}
-          inputProps={{ min: -100, max: 100 }}
-        />
-        <TextField
-          className={classes.textField}
-          type="number"
-          placeholder={years}
-          label="years"
-          onChange={handleChangeYears}
-          inputProps={{ min: 1, max: 10 }}
-        />
-        <TextField
-          className={classes.textField}
-          select
-          label="Select compound period"
-          onChange={handleChangeCompoundPeriod}
+        <Box
+          sx={{
+            width: "30%",
+            margin: "auto",
+            marginBottom: 190,
+            display: "flex",
+            flexDirection: "column",
+          }}
         >
-          {compoundPeriods.map((option, index) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-        <Button color="primary" onClick={getCompoundInterest}>Calculate</Button>
-      </Box>
-      <Box sx={{ height: 600, width: 600, margin: "auto" }}>
-        <ResponsiveContainer width="93%" height="80%">
-          <LineChart data={graphResult}>
-            <CartesianGrid strokeDasharray="3 3" strokeWidth={2} />
-            <XAxis dataKey="year" strokeWidth={2} />
-            <YAxis
-              type="number"
-              domain={[(dataMin) => Math.round(dataMin) + 10, (dataMax) => Math.round(dataMax) + 10]}
-              strokeWidth={2}
-            />
-            <Tooltip />
-            <Legend />
-            <Line
-              type="monotone"
-              // animationDuration={duration}
-              dataKey="real interest"
-              stroke="red"
-              activeDot={{ r: 8 }}
-            />
-            <Line
-              type="monotone"
-              // animationDuration={duration}
-              dataKey="interest"
-              stroke="blue"
-              activeDot={{ r: 8 }}
-            />
-            <Line
-              type="monotone"
-              // animationDuration={duration}
-              dataKey="simple interest"
-              stroke="orange"
-              activeDot={{ r: 8 }}
-            />
-          </LineChart>
-        </ResponsiveContainer>
-      </Box>
+          <TextField
+            className={classes.textField}
+            type="number"
+            placeholder={principal}
+            label="principal"
+            onChange={handleChangePrincipal}
+            inputProps={{ min: 0 }}
+          />
+          <TextField
+            className={classes.textField}
+            type="number"
+            placeholder={interestRate}
+            label="interest rate (%)"
+            onChange={handleChangeInterestRate}
+            inputProps={{ min: -100, max: 100 }}
+          />
+          <TextField
+            className={classes.textField}
+            type="number"
+            placeholder={inflationRate}
+            label="inflation rate (%)"
+            onChange={handleChangeInflationRate}
+            inputProps={{ min: -100, max: 100 }}
+          />
+          <TextField
+            className={classes.textField}
+            type="number"
+            placeholder={years}
+            label="years"
+            onChange={handleChangeYears}
+            inputProps={{ min: 1, max: 10 }}
+          />
+          <TextField
+            className={classes.textField}
+            select
+            label="Select compound period"
+            onChange={handleChangeCompoundPeriod}
+          >
+            {compoundPeriods.map((option, index) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+          <Button
+            color="secondary"
+            variant="contained"
+            className={classes.calculateBtn}
+            onClick={getCompoundInterest}
+          >
+            Calculate
+          </Button>
+        </Box>
+        <Box sx={{ height: 600, width: "70%", margin: "auto" }}>
+          <ResponsiveContainer width="93%" height="80%">
+            <LineChart data={graphResult}>
+              <CartesianGrid strokeDasharray="3 3" strokeWidth={2} />
+              <XAxis dataKey="year" strokeWidth={2} />
+              <YAxis
+                type="number"
+                domain={[
+                  (dataMin) => Math.round(dataMin) - 10,
+                  (dataMax) => Math.round(dataMax) + 10,
+                ]}
+                strokeWidth={2}
+              />
+              <Tooltip />
+              <Legend />
+              <Line
+                type="monotone"
+                // animationDuration={duration}
+                dataKey="real interest"
+                stroke="red"
+                strokeWidth={2}
+                activeDot={{ r: 8 }}
+              />
+              <Line
+                type="monotone"
+                // animationDuration={duration}
+                dataKey="interest"
+                stroke="blue"
+                strokeWidth={2}
+                activeDot={{ r: 8 }}
+              />
+              <Line
+                type="monotone"
+                // animationDuration={duration}
+                dataKey="simple interest"
+                stroke="orange"
+                strokeWidth={2}
+                activeDot={{ r: 8 }}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </Box>
       </Paper>
-      
     </>
   );
 }

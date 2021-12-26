@@ -4,7 +4,8 @@ import HmReport from "../components/treasury/HmReport";
 import Graph from "../components/treasury/Graph";
 import SetBudget from "../components/treasury/SetBudget";
 import Calculator from "../components/treasury/Calculator";
-import { Paper, Box, makeStyles } from "@material-ui/core";
+import { Paper, Box, IconButton, Typography, makeStyles } from "@material-ui/core";
+import MenuIcon from "@material-ui/icons/Menu";
 
 const FIRST_YEAR = [
   {
@@ -16,11 +17,23 @@ const FIRST_YEAR = [
   },
 ];
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   body: {
-    backgroundColor: "#ECDBBA",
-    height: "100vh",
+    height: "150vh",
     width: "100vw",
+  },
+  title: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "1rem",
+    height: "5rem"
+  },
+  titleMenu: {
+    color: "black",
+    fontSize: "2.3rem",
+    width: "3rem",
+    height: "3rem"
   },
   wrapper: {
     height: "90vh",
@@ -54,9 +67,7 @@ const useStyles = makeStyles(() => ({
   },
 
   paperHmReport: {
-    // backgroundColor: "#fffefc",
     backgroundColor: "#fdfbf7",
-    borderRadius: "20px",
     margin: "10px",
     padding: "10px",
     height: "20%",
@@ -66,9 +77,7 @@ const useStyles = makeStyles(() => ({
     },
   },
   paperGraph: {
-    // backgroundColor: "#fffefc",
     backgroundColor: "#fdfbf7",
-    borderRadius: "20px",
     margin: "10px",
     padding: "10px",
     height: "80%",
@@ -77,9 +86,7 @@ const useStyles = makeStyles(() => ({
     },
   },
   setBudgetAndCalculator: {
-    // backgroundColor: "#fffefc",
     backgroundColor: "#fdfbf7",
-    borderRadius: "20px",
     height: "100%",
     margin: "10px",
     padding: "10px",
@@ -191,7 +198,13 @@ export default function Treasury() {
 
   return (
     <Box className={classes.body}>
-      <h1>Treasury</h1>
+      <Box className={classes.title}>
+      <Typography variant="h3">Treasury</Typography>
+        <IconButton>
+        <MenuIcon className={classes.titleMenu}/>
+        </IconButton>
+        </Box>
+      
       <Box className={classes.wrapper}>
         <Box className={classes.boxOne}>
           <Paper elevation={0} className={classes.paperHmReport}>
