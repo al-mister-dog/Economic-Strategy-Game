@@ -1,15 +1,12 @@
 import { Link } from "react-router-dom";
 
-import { List, ListItem, ListItemText, makeStyles } from "@material-ui/core";
+import { List, ListItem, ListItemText } from "@material-ui/core";
 
-const useStyles = makeStyles(() => ({}));
 export default function CentralBankMenu() {
-  // let { url } = useMatch();
-  // console.log({path, url})
   const departments = [
     {
-      name: "Monetary Policy",
-      path: "monetarypolicy",
+      name: "Budget",
+      path: "budget",
     },
     {
       name: "Financial Policy",
@@ -36,11 +33,6 @@ export default function CentralBankMenu() {
           );
         })}
       </List>
-
-      {/* {departments.map((department, index) => {
-          const { path, element } = department;
-          return <Route key={index} path={`${path}`} element={element} />;
-        })} */}
     </>
   );
 }

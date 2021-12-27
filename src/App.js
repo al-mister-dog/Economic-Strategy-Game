@@ -4,12 +4,14 @@ import theme from "./styles/Theme";
 import Navbar from "./components/nav/Navbar";
 import Bloc from "./pages/Bloc";
 import CentralBank from "./pages/CentralBank";
+import Budget from "../components/treasury/BudgetPage/BudgetMain";
 import Performance from "./pages/Performance";
+
 import Treasury from "./pages/Treasury";
 import MonetaryPolicy from "./components/central-bank/MonetaryPolicy";
 import FinancialPolicy from "./components/central-bank/FinancialPolicy";
-import Regulation from "./components/central-bank/Regulation"
-import Reserves from "./components/central-bank/Reserves"
+import Regulation from "./components/central-bank/Regulation";
+import Reserves from "./components/central-bank/Reserves";
 import "./App.css";
 
 function App() {
@@ -27,7 +29,9 @@ function App() {
               <Route path="reserves" element={<Reserves />} />
             </Route>
             <Route path="performance" element={<Performance />} />
-            <Route path="treasury" element={<Treasury />} />
+            <Route path="treasury" element={<Treasury />}>
+              <Route path="budget" element={<Budget />} />
+            </Route>
           </Routes>
         </Router>
       </div>
