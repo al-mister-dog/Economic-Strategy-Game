@@ -43,7 +43,7 @@ export default function Treasury({ budget }) {
             animationDuration={duration}
             dataKey="revenue"
             stroke={colorScheme.red}
-            strokeWidth={2}
+            strokeWidth={3}
             activeDot={{ r: 8 }}
           />
           <Line
@@ -51,7 +51,7 @@ export default function Treasury({ budget }) {
             animationDuration={duration}
             dataKey="deficit"
             stroke={colorScheme.green}
-            strokeWidth={2}
+            strokeWidth={3}
             activeDot={{ r: 8 }}
           />
           <Line
@@ -59,7 +59,7 @@ export default function Treasury({ budget }) {
             animationDuration={duration}
             dataKey="long_term_deficit"
             stroke={colorScheme.blue}
-            strokeWidth={2}
+            strokeWidth={3}
             activeDot={{ r: 8 }}
           />
           <Line
@@ -67,7 +67,7 @@ export default function Treasury({ budget }) {
             animationDuration={duration}
             dataKey="expenditure"
             stroke={colorScheme.orange}
-            strokeWidth={2}
+            strokeWidth={3}
             activeDot={{ r: 8 }}
           />
         </LineChart>
