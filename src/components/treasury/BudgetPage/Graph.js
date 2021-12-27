@@ -10,7 +10,7 @@ import {
   Legend,
 } from "recharts";
 
-import colorScheme from "./data/colorScheme";
+import colorScheme from "../__data__/colorScheme";
 
 const useStyles = makeStyles(() => ({
   title: {

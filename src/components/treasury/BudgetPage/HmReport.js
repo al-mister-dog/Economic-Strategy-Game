@@ -1,4 +1,3 @@
-import ExchequerIcon from "./data/ExchequerIcon";
 import { Box, Typography, Button, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
@@ -134,7 +133,6 @@ export default function HmReport({ budget, settingBudget, setAnnualBudget }) {
         </Box>
       </Box>
       <Box className={classes.logoAndButton}>
-        {/* <ExchequerIcon className="exchequer-icon" /> */}
         <Button
           className={classes.submitBtn}
           variant="outlined"

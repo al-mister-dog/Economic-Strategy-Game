@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import taxAndSpending from "../components/treasury/data/taxAndSpending";
-import HmReport from "../components/treasury/HmReport";
-import Graph from "../components/treasury/Graph";
-import SetBudget from "../components/treasury/SetBudget";
-import Calculator from "../components/treasury/BudgetPage/Calculator";
+import taxAndSpending from "../__data__/taxAndSpending";
+import HmReport from "./HmReport";
+import Graph from "./Graph";
+import SetBudget from "./SetBudget";
+import Calculator from "./Calculator";
 import { Paper, Box, IconButton, Typography, makeStyles } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 
@@ -198,13 +198,6 @@ export default function Treasury() {
 
   return (
     <Box className={classes.body}>
-      <Box className={classes.title}>
-      <Typography variant="h3">Treasury</Typography>
-        <IconButton>
-        <MenuIcon className={classes.titleMenu}/>
-        </IconButton>
-        </Box>
-      
       <Box className={classes.wrapper}>
         <Box className={classes.boxOne}>
           <Paper elevation={0} className={classes.paperHmReport}>

@@ -4,7 +4,7 @@ import theme from "./styles/Theme";
 import Navbar from "./components/nav/Navbar";
 import Bloc from "./pages/Bloc";
 import CentralBank from "./pages/CentralBank";
-import Budget from "../components/treasury/BudgetPage/BudgetMain";
+import Budget from "./components/treasury/BudgetPage/Budget";
 import Performance from "./pages/Performance";
 
 import Treasury from "./pages/Treasury";

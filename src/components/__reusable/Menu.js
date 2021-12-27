@@ -2,24 +2,12 @@ import { Link } from "react-router-dom";
 
 import { List, ListItem, ListItemText } from "@material-ui/core";
 
-export default function CentralBankMenu() {
-  const departments = [
-    {
-      name: "Budget",
-      path: "budget",
-    },
-    {
-      name: "Financial Policy",
-      path: "financialpolicy",
-    },
-    { name: "Regulation", path: "regulation" },
-    { name: "Reserves", path: "reserves" },
-  ];
+export default function CentralBankMenu({menuItems}) {
   return (
     <>
       <List>
-        {departments.map((department, index) => {
-          const { path, name } = department;
+        {menuItems.map((menuItem, index) => {
+          const { path, name } = menuItem;
           return (
             <Link
               key={index}
