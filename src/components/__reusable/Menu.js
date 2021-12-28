@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import { List, ListItem, ListItemText } from "@material-ui/core";
 
-export default function CentralBankMenu({menuItems}) {
+export default function Menu({menuItems}) {
   return (
     <>
       <List>

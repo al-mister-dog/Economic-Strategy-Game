@@ -16,6 +16,10 @@ export default function MonetaryPolicy() {
     console.log(newValue);
     setValue(newValue);
   };
+  function TabPanel(props) {
+    const { children, value, index } = props;
+    return <>{value === index && <>{children}</>}</>;
+  }
   return (
     <Box className={classes.container}>
       <Typography variant="h2">Monetary Policy</Typography>
@@ -45,9 +49,4 @@ export default function MonetaryPolicy() {
       </TabPanel>
     </Box>
   );
-  function TabPanel(props) {
-    const { children, value, index } = props;
-
-    return <>{value === index && <>{children}</>}</>;
-  }
 }

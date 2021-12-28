@@ -5,15 +5,15 @@ export default function Treasury() {
   const title = "Treasury";
   const menuItems = [
     {
-      name: "Budget",
+      title: "Budget",
       path: "budget",
     },
     {
-      name: "Bond Market",
+      title: "Bond Market",
       path: "bondmarket",
     },
-    { name: "Regulation", path: "regulation" },
-    { name: "Reserves", path: "reserves" },
+    { title: "Regulation", path: "regulation" },
+    { title: "Reserves", path: "reserves" },
   ];
 
   return (

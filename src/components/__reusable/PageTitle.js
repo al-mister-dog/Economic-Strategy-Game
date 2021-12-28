@@ -1,15 +1,7 @@
 import { useState } from "react";
-import Menu from "./Menu";
+import { Link } from "react-router-dom";
 
-import {
-  Box,
-  IconButton,
-  makeStyles,
-  Typography,
-  SwipeableDrawer,
-} from "@material-ui/core";
-
-import MenuIcon from "@material-ui/icons/Menu";
+import { Box, makeStyles, Typography, Tabs, Tab } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
   title: {
@@ -22,54 +14,40 @@ const useStyles = makeStyles(() => ({
   label: {
     overflow: "hidden",
   },
-  titleMenu: {
-    color: "black",
-    fontSize: "2rem",
-    width: "2rem",
-    height: "2rem",
-  },
 }));
 
-export default function PageTitle({title, menuItems}) {
+export default function PageTitle({ title, menuItems }) {
   const classes = useStyles();
-  const [isOpen, setIsOpen] = useState(false);
-  const toggleDrawer = (bool) => (event) => {
-    if (
-      event &&
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
-    setIsOpen(bool);
+  const [value, setValue] = useState(0);
+  const handleChange = (event, newValue) => {
+    console.log(newValue);
+    setValue(newValue);
   };
-  const mainMenu = () => (
-    <Box
-      role="presentation"
-      onClick={toggleDrawer()}
-      onKeyDown={toggleDrawer()}
-      sx={{ width: 200 }}
-    >
-      <Menu menuItems={menuItems}/>
-    </Box>
-  );
+
   return (
     <Box className={classes.title}>
       <Typography className={classes.label} variant="h4">
         {title}
       </Typography>
-      <IconButton onClick={toggleDrawer(true)}>
-        <MenuIcon className={classes.titleMenu} />
-      </IconButton>
-      <SwipeableDrawer
-        anchor={"right"}
-        open={isOpen}
-        onClose={toggleDrawer(false)}
-        onOpen={toggleDrawer(true)}
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        aria-label="page title tabs"
+        indicatorColor="#ECDBBA"
       >
-        {mainMenu("right")}
-      </SwipeableDrawer>
+        {menuItems.map((menuItem, index) => {
+          const { title, path } = menuItem;
+          return (
+            <Link
+              key={index}
+              style={{ textDecoration: "none", color: "black" }}
+              to={`${path}`}
+            >
+              <Tab label={title} />
+            </Link>
+          );
+        })}
+      </Tabs>
     </Box>
   );
 }

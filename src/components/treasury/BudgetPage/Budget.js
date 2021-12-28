@@ -4,8 +4,7 @@ import HmReport from "./HmReport";
 import Graph from "./Graph";
 import SetBudget from "./SetBudget";
 import Calculator from "./Calculator";
-import { Paper, Box, IconButton, Typography, makeStyles } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
+import { Paper, Box, Typography, makeStyles } from "@material-ui/core";
 
 const FIRST_YEAR = [
   {
@@ -18,10 +17,6 @@ const FIRST_YEAR = [
 ];
 
 const useStyles = makeStyles((theme) => ({
-  body: {
-    height: "150vh",
-    width: "100vw",
-  },
   title: {
     display: "flex",
     justifyContent: "center",
@@ -37,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
   wrapper: {
     height: "90vh",
-    margin: "3rem 9rem 5rem 9rem",
+    margin: "0rem 9rem 5rem 9rem",
     display: "flex",
     "@media (max-width: 620px)": {
       height: "210vh",
@@ -197,7 +192,8 @@ export default function Treasury() {
   }, [totalTax, totalSpending]);
 
   return (
-    <Box className={classes.body}>
+    <Box>
+      <Typography variant="h2">Budget</Typography>
       <Box className={classes.wrapper}>
         <Box className={classes.boxOne}>
           <Paper elevation={0} className={classes.paperHmReport}>

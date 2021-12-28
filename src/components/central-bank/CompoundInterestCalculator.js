@@ -128,7 +128,7 @@ export default function CentralBank() {
             className={classes.textField}
             type="number"
             placeholder={principal}
-            label="principal"
+            label="Principal"
             onChange={handleChangePrincipal}
             inputProps={{ min: 0 }}
           />
@@ -136,7 +136,7 @@ export default function CentralBank() {
             className={classes.textField}
             type="number"
             placeholder={interestRate}
-            label="interest rate (%)"
+            label="Interest Rate (%)"
             onChange={handleChangeInterestRate}
             inputProps={{ min: -100, max: 100 }}
           />
@@ -144,7 +144,7 @@ export default function CentralBank() {
             className={classes.textField}
             type="number"
             placeholder={inflationRate}
-            label="inflation rate (%)"
+            label="Inflation Rate (%)"
             onChange={handleChangeInflationRate}
             inputProps={{ min: -100, max: 100 }}
           />
@@ -152,14 +152,14 @@ export default function CentralBank() {
             className={classes.textField}
             type="number"
             placeholder={years}
-            label="years"
+            label="Years"
             onChange={handleChangeYears}
             inputProps={{ min: 1, max: 10 }}
           />
           <TextField
             className={classes.textField}
             select
-            label="Select compound period"
+            label="Select Compound Period"
             onChange={handleChangeCompoundPeriod}
           >
             {compoundPeriods.map((option, index) => (
