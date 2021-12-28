@@ -41,7 +41,7 @@ export default function PageTitle({ title, menuItems }) {
         value={value}
         onChange={handleChange}
         aria-label="page title tabs"
-        indicatorColor="#ECDBBA"
+        // indicatorColor="#ECDBBA"
       >
         {menuItems.map((menuItem, index) => {
           const { title, path } = menuItem;
@@ -51,7 +51,7 @@ export default function PageTitle({ title, menuItems }) {
               style={{ textDecoration: "none", color: "black" }}
               to={`${path}`}
             >
-              <Tab className={classes.tab} label={title} />
+              <Tab className={classes.tab} label={title}/>
             </Link>
           );
         })}

@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { connect } from "react-redux";
 import encyclopedia from "./_encyclopedia";
+import { SET_BANK_RATE } from "../../../state/actions";
 import InterestCalculator from "../../../calculators/interest/interestClass";
 import {
   ResponsiveContainer,
@@ -22,7 +24,7 @@ import {
   Tooltip,
 } from "@material-ui/core";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(({ bankRate }) => ({
   paper: {
     backgroundColor: "#fdfbf7",
     width: "70vw",
@@ -51,21 +53,21 @@ const useStyles = makeStyles(() => ({
     marginTop: 25,
   },
 }));
-export default function CentralBank() {
+function InterestRate({ bankRate, submitBankRate }) {
   const classes = useStyles();
-  const [bankRate, setBankRate] = useState(0.25);
+  const [formBankRate, setFormBankRate] = useState(0.25);
   const minBankRate = 0.01;
   const maxBankRate = 0.5;
   const step = 0.1;
   function handleChangeBankRate(e, value) {
-    setBankRate(e.target.value);
+    setFormBankRate(e.target.value);
   }
 
   return (
     <>
       <Paper className={classes.paper}>
         <Tooltip title={encyclopedia.bankrate}>
-          <Typography>Bank Rate</Typography>
+          <Typography>Bank Rate: {bankRate}</Typography>
         </Tooltip>
         <TextField
           className={classes.textField}
@@ -74,9 +76,21 @@ export default function CentralBank() {
           placeholder={0.1}
           // label="Principal"
           onChange={handleChangeBankRate}
-          inputProps={{ min: minBankRate, max: maxBankRate, step: {step} }}
+          inputProps={{ min: minBankRate, max: maxBankRate, step: { step } }}
         />
+        <Button onClick={() => submitBankRate(formBankRate)}>submit</Button>
       </Paper>
     </>
   );
 }
+const mapStateToProps = (state) => {
+  return { bankRate: state.bankRate };
+};
+const mapDispatchToProps = (dispatch, ownProps) => {
+  // const { bankRate } = ownProps;
+  return {
+    submitBankRate: (formBankRate) =>
+      dispatch({ type: SET_BANK_RATE, payload: { bankRate: formBankRate } }),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(InterestRate);

@@ -1,4 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { createStore } from "redux";
+import reducer from "./state/reducer";
+import { Provider } from "react-redux";
+
 import { ThemeProvider } from "@material-ui/styles";
 import theme from "./styles/Theme";
 import Navbar from "./components/nav/Navbar";
@@ -14,10 +18,15 @@ import Regulation from "./components/central-bank/regulation/__Regulation";
 import Reserves from "./components/central-bank/reserves/__Reserves";
 import "./App.css";
 
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <div className="App">
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
         <Router>
           <Navbar />
           <Routes>
@@ -34,8 +43,8 @@ function App() {
             </Route>
           </Routes>
         </Router>
-      </div>
-    </ThemeProvider>
+      </ThemeProvider>
+    </Provider>
   );
 }
 
