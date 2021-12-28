@@ -1,5 +1,5 @@
 import { useState } from "react";
-import InterestCalculator from "../../calculators/interest/interestClass";
+import InterestCalculator from "../../../calculators/interest/interestClass";
 import {
   ResponsiveContainer,
   LineChart,
@@ -17,6 +17,7 @@ import {
   MenuItem,
   Button,
   makeStyles,
+  Typography,
 } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
@@ -47,75 +48,17 @@ const useStyles = makeStyles(() => ({
 export default function CentralBank() {
   const classes = useStyles();
 
-  const [principal, setPrincipal] = useState("1000");
-  const [interestRate, setInterestRate] = useState("0.05");
-  const [inflationRate, setInflationRate] = useState("0.02");
-  const [compoundPeriod, setCompoundPeriod] = useState("0");
-  const [years, setYears] = useState("10");
-  const [graphResult, setGraphResult] = useState([]);
-  const compoundPeriods = [
-    {
-      value: 0,
-      label: "Annually",
-    },
-    {
-      value: 1,
-      label: "Semi-annually",
-    },
-    {
-      value: 2,
-      label: "Quarterly",
-    },
-    {
-      value: 3,
-      label: "Monthly",
-    },
-  ];
+  // const [principal, setPrincipal] = useState("1000");
+  // const [interestRate, setInterestRate] = useState("0.05");
+  // const [inflationRate, setInflationRate] = useState("0.02");
+  // const [compoundPeriod, setCompoundPeriod] = useState("0");
+  // const [years, setYears] = useState("10");
 
-  function handleChangePrincipal(e) {
-    setPrincipal(e.target.value);
-  }
-  function handleChangeInterestRate(e) {
-    setInterestRate(e.target.value);
-  }
-  function handleChangeInflationRate(e) {
-    setInflationRate(e.target.value);
-  }
-  function handleChangeYears(e) {
-    setYears(e.target.value);
-  }
-  function handleChangeCompoundPeriod(e) {
-    setCompoundPeriod(e.target.value);
-  }
-
-  function getCompoundInterest() {
-    console.log(parseFloat(compoundPeriod));
-    const futures = new InterestCalculator(
-      parseFloat(principal),
-      parseFloat(interestRate),
-      parseFloat(inflationRate),
-      parseFloat(years),
-      parseFloat(compoundPeriod)
-    );
-    const eachYear = Array.from({ length: years }, (_, i) => i + 2020);
-    const compoundRealInterest = futures.getRealCompoundInterestPercent();
-    const compoundInterest = futures.getCompoundInterestPercent();
-    const simpleInterest = futures.getNominalInterestPercent();
-    const graphData = eachYear.map((_, index) => {
-      return {
-        year: eachYear[index],
-        "real interest": parseFloat(compoundRealInterest[index]),
-        interest: parseFloat(compoundInterest[index]),
-        "simple interest": parseFloat(simpleInterest[index]),
-      };
-    });
-    console.log(graphData);
-    setGraphResult(graphData);
-  }
   return (
     <>
       <Paper className={classes.paper}>
-        <Box
+        <Typography>Quantitative Easing</Typography>
+        {/* <Box
           sx={{
             width: "30%",
             margin: "auto",
@@ -218,7 +161,7 @@ export default function CentralBank() {
               />
             </LineChart>
           </ResponsiveContainer>
-        </Box>
+        </Box> */}
       </Paper>
     </>
   );

@@ -8,10 +8,10 @@ import Budget from "./components/treasury/BudgetPage/Budget";
 import Performance from "./pages/Performance";
 
 import Treasury from "./pages/Treasury";
-import MonetaryPolicy from "./components/central-bank/MonetaryPolicy";
-import FinancialPolicy from "./components/central-bank/FinancialPolicy";
-import Regulation from "./components/central-bank/Regulation";
-import Reserves from "./components/central-bank/Reserves";
+import MonetaryPolicy from "./components/central-bank/monetary-policy/__MonetaryPolicy";
+import FinancialPolicy from "./components/central-bank/financial-policy/__FinancialPolicy";
+import Regulation from "./components/central-bank/regulation/__Regulation";
+import Reserves from "./components/central-bank/reserves/__Reserves";
 import "./App.css";
 
 function App() {

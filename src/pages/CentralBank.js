@@ -1,6 +1,6 @@
 
 import { Outlet } from "react-router-dom";
-import PageTitle from "../components/__reusable/PageTitle";
+import PageTitle from "../components/__reusable/layout/PageTitle";
 
 export default function CentralBank() {
   const title = "Central Bank";

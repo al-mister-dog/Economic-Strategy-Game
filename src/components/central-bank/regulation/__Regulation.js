@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Box, Tabs, Tab, Typography, makeStyles } from "@material-ui/core";
-import CompoundInterestCalculator from "./CompoundInterestCalculator";
+import CompoundInterestCalculator from "../../__reusable/tools/CompoundInterestCalculator";
 const useStyles = makeStyles(() => ({
   container: {
     display: "flex",
@@ -8,8 +8,11 @@ const useStyles = makeStyles(() => ({
     justifyContent: "center",
     alignItems: "center",
   },
+  title: {
+    overflow: "hidden",
+  },
 }));
-export default function MonetaryPolicy() {
+export default function Regulation() {
   const classes = useStyles();
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
@@ -22,7 +25,9 @@ export default function MonetaryPolicy() {
   }
   return (
     <Box className={classes.container}>
-      <Typography variant="h2">Monetary Policy</Typography>
+      <Typography variant="h2" className={classes.title}>
+        Monetary Policy
+      </Typography>
       <Box sx={{ borderBottom: 1, borderColor: "divider", margin: "auto" }}>
         <Tabs
           value={value}
@@ -36,7 +41,7 @@ export default function MonetaryPolicy() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        interest rate
+        inter
       </TabPanel>
       <TabPanel value={value} index={1}>
         <CompoundInterestCalculator />

@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     margin: "auto",
-    marginTop: "1rem",
+    marginTop: ".3rem",
     height: "5rem",
   },
   label: {
