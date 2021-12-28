@@ -3,17 +3,25 @@ import { Link } from "react-router-dom";
 
 import { Box, makeStyles, Typography, Tabs, Tab } from "@material-ui/core";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   title: {
+    backgroundColor: theme.palette.common.darkSecondary,
+    color: "white",
+    borderRadius: "5px",
+    width: "75vw",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    margin: "auto",
     marginTop: "1rem",
     height: "5rem",
   },
   label: {
     overflow: "hidden",
   },
+  tab: {
+    color: "white"
+  }
 }));
 
 export default function PageTitle({ title, menuItems }) {
@@ -43,7 +51,7 @@ export default function PageTitle({ title, menuItems }) {
               style={{ textDecoration: "none", color: "black" }}
               to={`${path}`}
             >
-              <Tab label={title} />
+              <Tab className={classes.tab} label={title} />
             </Link>
           );
         })}
