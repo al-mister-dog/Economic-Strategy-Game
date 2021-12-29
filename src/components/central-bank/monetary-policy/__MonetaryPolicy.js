@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Box, Tabs, Tab, Typography, makeStyles } from "@material-ui/core";
 import InterestRate from "./InterestRate";
+import Inflation from "./Inflation"
 import QuantitativeEasing from "./QuantitativeEasing"
-import CompoundInterestCalculator from "../../__reusable/tools/CompoundInterestCalculator";
+// import CompoundInterestCalculator from "../../__reusable/tools/CompoundInterestCalculator";
 const useStyles = makeStyles(() => ({
   container: {
     display: "flex",
@@ -46,7 +47,7 @@ export default function MonetaryPolicy() {
         <InterestRate />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <CompoundInterestCalculator />
+        <Inflation />
       </TabPanel>
       <TabPanel value={value} index={2}>
         <QuantitativeEasing/>

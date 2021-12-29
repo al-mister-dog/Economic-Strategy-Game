@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Typography, Slider, FormGroup, makeStyles } from "@material-ui/core";
 const useStyles = makeStyles(() => ({
   title: {
-    marginBottom: "5px",
+    marginBottom: "5px"
   },
   label: {
     fontSize: "0.8rem",
@@ -16,21 +16,13 @@ const useStyles = makeStyles(() => ({
     flexDirection: "column",
     justifyContent: "center",
   },
-  sliderContainer: {
+  slider: {
     display: "flex",
     // width: "50%"
   },
-  slider: {
-    
-  },
+
 }));
-export default function Calculator({
-  data,
-  settingBudget,
-  title,
-  budgetType,
-  calculateTotalAmount,
-}) {
+export default function Calculator({ data, settingBudget, title, budgetType, calculateTotalAmount }) {
   const [amount, setAmount] = useState(data);
 
   const handleChangeSlider = (index) => (e, value) => {
@@ -46,23 +38,22 @@ export default function Calculator({
   const classes = useStyles();
   return (
     <>
-      <Typography align="left" variant="h6" className={classes.title}>
-        {title}
-      </Typography>
+    <Typography align="left" variant="h6" className={classes.title}>{title}</Typography>
       <FormGroup className={classes.sliders}>
         {amount.map((object, index) => {
           const { name, amount } = object;
           return (
-            <div key={index} className={classes.sliderContainer}>
+            <div key={index} className={classes.slider}>
               <Typography className={classes.label} variant="body2">
                 {name}:
               </Typography>
               <Slider
-                className={classes.slider}
                 aria-label="Temperature"
                 disabled={!settingBudget}
                 defaultValue={amount}
                 onChange={handleChangeSlider(index)}
+                // getAriaValueText={amount}
+                aria-labelledby="discrete-slider-custom"
                 valueLabelDisplay="auto"
                 marks
                 min={0}
