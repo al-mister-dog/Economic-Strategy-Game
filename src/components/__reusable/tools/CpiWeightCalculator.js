@@ -86,13 +86,10 @@ export default function CpiWeightCalculator() {
   const [value, setValue] = useState(0);
   const max = 100;
 
-  function valuetext(value) {
-    // return `${parseFloat(value.toFixed(2))}`
-    return 'A'
-  }
   function total() {
     return data.reduce((acc, cur) => ({ weight: acc.weight + cur.weight }));
   }
+
   function handleChange(index, value) {
     const newArr = [...data];
     newArr[index].weight = value;
@@ -103,18 +100,18 @@ export default function CpiWeightCalculator() {
     } else {
       slidersToChange.sort((a, b) => a.weight - b.weight);
     }
-    let sliderCount = data.length;
+    let sliderCount = data.length -1;
 
-    newArr.map((item, index) => {
+    slidersToChange.forEach((item, index) => {
       let targetAllocation = unallocated / sliderCount;
-      let result = item.weight + targetAllocation;
+      let result = newArr[index].weight + targetAllocation;
       if (result < 0) {
         targetAllocation -= result;
       }
-      item.weight += targetAllocation;
+      newArr[index].weight += targetAllocation;
       unallocated -= targetAllocation;
       sliderCount -= 1;
-      return item
+      
     });
     setItems(newArr)
   }
@@ -147,7 +144,6 @@ export default function CpiWeightCalculator() {
                 value={parseFloat(weight.toFixed(2))}
                 onChange={handleChangeSlider(index)}
                 aria-labelledby="discrete-slider-custom"
-                getAriaValueText={valuetext}
                 valueLabelDisplay="auto"
                 marks
                 min={0}
