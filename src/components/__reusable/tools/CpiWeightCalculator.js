@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from "react";
+import { connect } from "react-redux";
+import { SET_CPI } from "../../../state/actions"
 import {
   Box,
   Typography,
@@ -40,51 +42,11 @@ const useStyles = makeStyles(() => ({
 
   sliderTrack: {
     width: "50%",
-    // height: "100px"
-    // margin: "20px"
   },
 }));
-export default function CpiWeightCalculator() {
-  const data = [
-    {
-      category: "Food & non-alcoholic beverages",
-      weight: 10,
-      change: 5,
-    },
-    { category: "Alcohol & tobacco", weight: 10, change:10 },
-    { category: "Clothing & footwear", weight: 6, change: 6 },
-    {
-      category: "Housing & household services",
-      weight: 4,
-      change: 6,
-    },
-    {
-      category: "Furniture & household goods",
-      weight: 4,
-      change: 3
-    },
-    { category: "Health", weight: 4, change: 0 },
-    { category: "Transport", weight: 2, change: 15 },
-    { category: "Communication", weight: 10, change: 8 },
-    {
-      category: "Recreation & culture",
-      weight: 12,
-      change: 10
-    },
-    { category: "Education", weight: 8, change: 3 },
-    {
-      category: "Restaurants & hotels",
-      weight: 14,
-      change: 6
-    },
-    {
-      category: "Miscellaneous goods & services",
-      weight: 16,
-      change: 2
-    },
-  ];
-  const [cpi, setItems] = useState(data);
-  const [inflationIndex, setInflationIndex] = useState(0)
+function CpiWeightCalculator({cpiData, submitCpi}) {
+  const [cpi, setCpi] = useState(cpiData);
+  const [inflationIndex, setInflationIndex] = useState(0);
   const [inflationRate, setInflationRate] = useState(0);
   const [index, setIndex] = useState(0);
   const [value, setValue] = useState(0);
@@ -135,7 +97,7 @@ export default function CpiWeightCalculator() {
       unallocated -= targetAllocation;
       sliderCount -= 1;
     });
-    setItems(newCpi);
+    setCpi(newCpi);
   }
   const handleChangeSlider = (index) => (e, value) => {
     setIndex(index);
@@ -143,8 +105,7 @@ export default function CpiWeightCalculator() {
   };
   function getInflationRate() {
     let weightedIndex = [];
-
-    let priceIndex = cpi.map((i) => {
+    const priceIndex = cpi.map((i) => {
       return 100 + i.change;
     });
 
@@ -154,15 +115,13 @@ export default function CpiWeightCalculator() {
         (item.weight / 10) * priceIndex[index],
       ];
     });
-
-    let weightedIndexSum = weightedIndex.reduce((a, b) => a + b) / 10;
+    const weightedIndexSum = weightedIndex.reduce((a, b) => a + b) / 10;
 
     const newInflationIndex = weightedIndexSum;
     const newInflationRate = newInflationIndex - 100;
-    
-      setInflationIndex(newInflationIndex.toFixed(2))
-      setInflationRate(newInflationRate.toFixed(2))
-    
+
+    setInflationIndex(newInflationIndex.toFixed(2));
+    setInflationRate(newInflationRate.toFixed(2));
   }
 
   const firstUpdate = useRef(true);
@@ -193,7 +152,9 @@ export default function CpiWeightCalculator() {
                 <Typography className={classes.labelCategory} variant="body2">
                   {category}:
                 </Typography>
-                <Typography className={classes.labelChange}>%{change}</Typography>
+                <Typography className={classes.labelChange}>
+                  %{change}
+                </Typography>
                 <Typography className={classes.labelWeight}>
                   {parseFloat(weight.toFixed(2))}
                 </Typography>
@@ -211,8 +172,19 @@ export default function CpiWeightCalculator() {
             );
           })}
         </FormGroup>
-        <Button variant="outlined">Submit New Weights</Button>
+        <Button variant="outlined" onClick={() => submitCpi(cpi)}>Submit New Weights</Button>
       </Box>
     </>
   );
 }
+
+const mapStateToProps = (state) => {
+  return { cpiData: state.cpi };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    submitCpi: (cpi) =>
+      dispatch({ type: SET_CPI, payload: { cpi } }),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(CpiWeightCalculator);

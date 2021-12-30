@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Box, Tabs, Tab, Typography, makeStyles } from "@material-ui/core";
+import Desk from "./__Desk"
 import InterestRate from "./InterestRate";
 import Inflation from "./Inflation"
 import QuantitativeEasing from "./QuantitativeEasing"
@@ -37,6 +38,7 @@ export default function MonetaryPolicy() {
           onChange={handleChange}
           aria-label="basic tabs example"
         >
+          <Tab label="Desk" />
           <Tab label="Interest Rate" />
           <Tab label="Inflation" />
           <Tab label="Quantitative Easing" />
@@ -44,15 +46,18 @@ export default function MonetaryPolicy() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <InterestRate />
+        <Desk />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Inflation />
+        <InterestRate />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <QuantitativeEasing/>
+        <Inflation />
       </TabPanel>
       <TabPanel value={value} index={3}>
+        <QuantitativeEasing/>
+      </TabPanel>
+      <TabPanel value={value} index={4}>
         forward guidance
       </TabPanel>
     </Box>
