@@ -11,7 +11,7 @@ import CentralBank from "./pages/CentralBank";
 import Budget from "./components/treasury/BudgetPage/Budget";
 import Performance from "./pages/Performance";
 
-import CpiWeightCalculator from "./components/__reusable/tools/CpiWeightCalculator"
+// import CpiWeightCalculator from "./components/__reusable/tools/CpiWeightCalculator"
 import Treasury from "./pages/Treasury";
 import MonetaryPolicy from "./components/central-bank/monetary-policy/__MonetaryPolicy";
 import FinancialPolicy from "./components/central-bank/financial-policy/__FinancialPolicy";
@@ -31,7 +31,7 @@ function App() {
         <Router>
           <Navbar />
           <Routes>
-            <Route path="cpi" element={<CpiWeightCalculator />} />
+            {/* <Route path="cpi" element={<CpiWeightCalculator />} /> */}
             <Route path="bloc" element={<Bloc />} />
             <Route path="central-bank" element={<CentralBank />}>
               <Route path="monetarypolicy" element={<MonetaryPolicy />} />

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
-import { SET_CPI } from "../../../state/actions"
+import { SET_CPI } from "../../../../state/actions"
 import {
   Box,
   Typography,

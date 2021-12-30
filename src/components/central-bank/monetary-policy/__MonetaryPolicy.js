@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Box, Tabs, Tab, Typography, makeStyles } from "@material-ui/core";
 import Desk from "./__Desk"
 import InterestRate from "./InterestRate";
-import Inflation from "./Inflation"
+import Inflation from "./inflation/Inflation"
 import QuantitativeEasing from "./QuantitativeEasing"
 // import CompoundInterestCalculator from "../../__reusable/tools/CompoundInterestCalculator";
 const useStyles = makeStyles(() => ({
