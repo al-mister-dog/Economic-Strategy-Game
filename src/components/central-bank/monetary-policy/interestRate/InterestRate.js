@@ -84,6 +84,9 @@ function InterestRate({
     <>
       <Paper className={classes.paper}>
         <Box className={classes.container}>
+        <Typography align="center" variant="h4">
+              Interest Rate
+            </Typography>
           <Typography align="left">
             {encyclopedia.interestRate.objective}
           </Typography>

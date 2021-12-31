@@ -39,6 +39,7 @@ const data = [
 export default function InflationChart() {
   return (
     <Box sx={{ width: 500, height: 300 }}>
+      <p>% Rate of Change</p>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           width={500}
@@ -52,7 +53,7 @@ export default function InflationChart() {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
+          <XAxis dataKey="year" />
           <YAxis />
           <Tooltip />
           <Legend />

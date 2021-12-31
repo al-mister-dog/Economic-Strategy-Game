@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
-import { SET_CPI } from "../../../../state/actions"
+import { SET_CPI } from "../../../../state/actions";
 import {
   Box,
   Typography,
@@ -12,15 +12,24 @@ import {
 const useStyles = makeStyles(() => ({
   title: {
     marginBottom: "5px",
+    fontWeight: "bold"
   },
   boxCpi: {
-    padding: 25,
+    padding: "20px",
+    border: "1px solid #d7d7d7",
+    borderRadius: "5px",
+
     width: "60%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     margin: "auto",
   },
+  inflationLabels: {
+    display: "flex",
+    justifyContent: "space-around",
+  },
+  containerCalculator: {},
   sliders: {
     display: "flex",
     flexDirection: "column",
@@ -44,7 +53,7 @@ const useStyles = makeStyles(() => ({
     width: "50%",
   },
 }));
-function CpiWeightCalculator({cpiData, submitCpi}) {
+function CpiWeightCalculator({ cpiData, submitCpi }) {
   const [cpi, setCpi] = useState(cpiData);
   const [inflationIndex, setInflationIndex] = useState(0);
   const [inflationRate, setInflationRate] = useState(0);
@@ -139,40 +148,49 @@ function CpiWeightCalculator({cpiData, submitCpi}) {
   return (
     <>
       <Box className={classes.boxCpi}>
-        <Typography variant="h6">Inflation index: {inflationIndex}</Typography>
-        <Typography variant="h6">Inflation rate: %{inflationRate}</Typography>
-        <Typography align="left" variant="h6" className={classes.title}>
-          Weight allocation of items to Consumer Prices Index
-        </Typography>
-        <FormGroup className={classes.sliders}>
-          {cpi.map((object, index) => {
-            const { category, weight, change } = object;
-            return (
-              <div key={index} className={classes.slider}>
-                <Typography className={classes.labelCategory} variant="body2">
-                  {category}:
-                </Typography>
-                <Typography className={classes.labelChange}>
-                  %{change}
-                </Typography>
-                <Typography className={classes.labelWeight}>
-                  {parseFloat(weight.toFixed(2))}
-                </Typography>
-                <Slider
-                  className={classes.sliderTrack}
-                  value={parseFloat(weight.toFixed(2))}
-                  onChange={handleChangeSlider(index)}
-                  aria-labelledby="discrete-slider-custom"
-                  valueLabelDisplay="auto"
-                  marks
-                  min={0}
-                  max={100}
-                />
-              </div>
-            );
-          })}
-        </FormGroup>
-        <Button variant="outlined" onClick={() => submitCpi(cpi)}>Submit New Weights</Button>
+        <Box className={classes.inflationLabels}>
+          <Typography variant="h6">
+            Inflation index: {inflationIndex}
+          </Typography>
+          <Typography variant="h6">Inflation rate: %{inflationRate}</Typography>
+        </Box>
+        <Box className={classes.containerCalculator}>
+          <Typography variant="subtitle1" align="center" className={classes.title}>
+            Weight allocation of items to Consumer Prices Index
+          </Typography>
+          <FormGroup className={classes.sliders}>
+            {cpi.map((object, index) => {
+              const { category, weight, change } = object;
+              return (
+                <div key={index} className={classes.slider}>
+                  <Typography className={classes.labelCategory} variant="body2">
+                    {category}:
+                  </Typography>
+                  <Typography className={classes.labelChange}>
+                    %{change}
+                  </Typography>
+                  <Typography className={classes.labelWeight}>
+                    {parseFloat(weight.toFixed(2))}
+                  </Typography>
+                  <Slider
+                    className={classes.sliderTrack}
+                    value={parseFloat(weight.toFixed(2))}
+                    onChange={handleChangeSlider(index)}
+                    aria-labelledby="discrete-slider-custom"
+                    valueLabelDisplay="auto"
+                    marks
+                    min={0}
+                    max={100}
+                  />
+                </div>
+              );
+            })}
+          </FormGroup>
+        </Box>
+
+        <Button variant="outlined" onClick={() => submitCpi(cpi)}>
+          Submit New Weights
+        </Button>
       </Box>
     </>
   );
@@ -183,8 +201,10 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    submitCpi: (cpi) =>
-      dispatch({ type: SET_CPI, payload: { cpi } }),
+    submitCpi: (cpi) => dispatch({ type: SET_CPI, payload: { cpi } }),
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(CpiWeightCalculator);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CpiWeightCalculator);

@@ -3,7 +3,7 @@ const encyclopedia = {
     "At the Monetary Policy Committee we are responsible for directing the government’s monetary policy. Our task is to set the interest rate and keep inflation close to the government’s inflation target. We also deal with quantitative easing and forward guidance.",
   objective: "The government's target is bla bla",
   interestRate: {
-    objective: "The inflation target is currently set at %2. If the inflation rate is above this number it may be wise to set the interest rate higher.",
+    objective: "The interest rate (or bank rate) is the interest rate that banks and lenders pay when they borrow from the Bank of England. It influences most interest rates, including savings accounts, credit cards, loans and mortgages. Usually mortgage rates go up or down quite soon after the base rate changes. The inflation target is currently set at %2. If the inflation rate is above this number it may be wise to set the interest rate higher.",
     bankrate:
     "The rate that the Central Bank willl charge other banks and financial institutions for loans with a maturity of 1 day.",
     inflationRate: "The total increase percentage of prices in the Consumer Product Index (CPI). Click INFLATION tab for more details.",
