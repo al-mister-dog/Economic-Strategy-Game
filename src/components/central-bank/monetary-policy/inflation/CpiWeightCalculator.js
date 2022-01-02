@@ -9,10 +9,10 @@ import {
   Button,
   makeStyles,
 } from "@material-ui/core";
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   title: {
     marginBottom: "5px",
-    fontWeight: "bold",
+    // fontWeight: "bold",
   },
   boxCpi: {
     padding: "20px",
@@ -31,52 +31,51 @@ const useStyles = makeStyles(() => ({
   },
   containerCalculator: {},
 
-  containerSliders: {
-    display: "flex",
-    flexDirection: "column",
-  },
   sliderLabels: {
     display: "grid",
     gridTemplateColumns: "3.5fr 1.5fr 5fr",
-    gridTemplateRows: "1fr 1fr 1fr",
+    backgroundColor: theme.palette.common.darkSecondary,
+    color: "white",
+    padding: "5px",
+    borderRadius: "5px",
   },
   sliderLabelCategory: {
     fontSize: "0.8rem",
     fontWeight: "bold",
-    textAlign: "left",  
-  },
-  sliderLabelWeight: {
-    fontSize: "0.8rem",
-    fontWeight: "bold",
+    textAlign: "left",
   },
   sliderLabelChange: {
     fontSize: "0.8rem",
     fontWeight: "bold",
     // width: "40%",
   },
+  sliderLabelWeight: {
+    fontSize: "0.8rem",
+    fontWeight: "bold",
+    paddingLeft: "15px",
+  },
+
   slider: {
     display: "grid",
     gridTemplateColumns: "3.5fr 1.5fr 1.5fr 3.5fr",
-    gridTemplateRows: "1fr 1fr 1fr",
+    paddingBottom: "5px",
   },
   category: {
     fontSize: "0.8rem",
     fontWeight: "bold",
     color: "#808080",
     textAlign: "left",
-    // width: "40%",
-    // borderRight: "1px solid black",
   },
-  // weight: {
-  //   width: "15%",
-  // },
-  // change: {
-  //   width: "15%",
-  // },
-
-  // sliderTrack: {
-  //   width: "40%",
-  // },
+  change: {
+    fontSize: "0.8rem",
+    fontWeight: "bold",
+    color: "#808080",
+  },
+  weight: {
+    fontSize: "0.8rem",
+    fontWeight: "bold",
+    color: "#808080",
+  },
 }));
 function CpiWeightCalculator({ cpiData, submitCpi }) {
   const [cpi, setCpi] = useState(cpiData);
@@ -174,15 +173,19 @@ function CpiWeightCalculator({ cpiData, submitCpi }) {
     <>
       <Box className={classes.boxCpi}>
         <Box className={classes.inflationLabels}>
-          <Typography variant="h6">
-            Inflation index: {inflationIndex}
+          <Typography variant="h6" className={classes.inflationLabelIndex}>
+            Inflation index:{" "}
+            <span style={{ fontWeight: "bold" }}>%{inflationRate}</span>
           </Typography>
-          <Typography variant="h6">Inflation rate: %{inflationRate}</Typography>
+          <Typography variant="h6" className={classes.inflationLabelRate}>
+            Inflation rate:{" "}
+            <span style={{ fontWeight: "bold" }}>%{inflationRate}</span>
+          </Typography>
         </Box>
         <Box className={classes.containerCalculator}>
           <Typography
             variant="subtitle1"
-            align="center"
+            align="left"
             className={classes.title}
           >
             Weight allocation of items to Consumer Prices Index
@@ -198,7 +201,11 @@ function CpiWeightCalculator({ cpiData, submitCpi }) {
               <Typography className={classes.sliderLabelChange} variant="body1">
                 Price Change
               </Typography>
-              <Typography className={classes.sliderLabelWeight} variant="body1">
+              <Typography
+                className={classes.sliderLabelWeight}
+                variant="body1"
+                align="left"
+              >
                 Weight
               </Typography>
             </Box>
@@ -209,9 +216,11 @@ function CpiWeightCalculator({ cpiData, submitCpi }) {
                   <Typography className={classes.category} variant="body2">
                     {category}:
                   </Typography>
-                  <Typography className={classes.change}>%{change}</Typography>
-                  <Typography className={classes.weight}>
-                    {parseFloat(weight.toFixed(2))}
+                  <Typography className={classes.change} variant="body2">
+                    %{change}
+                  </Typography>
+                  <Typography className={classes.weight} variant="body2">
+                    %{parseFloat(weight.toFixed(2))}
                   </Typography>
                   <Slider
                     className={classes.sliderTrack}
