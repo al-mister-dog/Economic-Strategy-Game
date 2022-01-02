@@ -4,24 +4,27 @@ import { Link } from "react-router-dom";
 import { Box, makeStyles, Typography, Tabs, Tab } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  title: {
+  toolbar: {
     backgroundColor: theme.palette.common.darkSecondary,
     color: "white",
-    borderRadius: "5px",
-    width: "75vw",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     margin: "auto",
-    marginTop: ".3rem",
-    height: "5rem",
+    marginTop: "1px",
   },
-  label: {
+  title: {
     overflow: "hidden",
+    "@media (max-width: 620px)": {
+      fontSize: "0.8rem",
+    },
   },
   tab: {
-    color: "white"
-  }
+    color: "white",
+    "@media (max-width: 620px)": {
+      fontSize: "0.4rem",
+    },
+  },
 }));
 
 export default function PageTitle({ title, menuItems }) {
@@ -33,8 +36,8 @@ export default function PageTitle({ title, menuItems }) {
   };
 
   return (
-    <Box className={classes.title}>
-      <Typography className={classes.label} variant="h4">
+    <Box className={classes.toolbar}>
+      <Typography className={classes.title} variant="h4">
         {title}
       </Typography>
       <Tabs
@@ -51,7 +54,7 @@ export default function PageTitle({ title, menuItems }) {
               style={{ textDecoration: "none", color: "black" }}
               to={`${path}`}
             >
-              <Tab className={classes.tab} label={title}/>
+              <Tab className={classes.tab} label={title} />
             </Link>
           );
         })}

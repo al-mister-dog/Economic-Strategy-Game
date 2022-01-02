@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Box, Tabs, Tab, Typography, makeStyles } from "@material-ui/core";
+import {
+  Paper,
+  Box,
+  Tabs,
+  Tab,
+  Typography,
+  makeStyles,
+} from "@material-ui/core";
 import Desk from "./__Desk";
 import InflationHome from "./inflation/InflationHome";
 import InterestRate from "./interestRate/InterestRate";
@@ -11,9 +18,35 @@ const useStyles = makeStyles(() => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    overflowX: "hidden",
   },
   title: {
     overflow: "hidden",
+    "@media (max-width: 620px)": {
+      fontSize: "1.7rem",
+    },
+  },
+  tab: {
+    "@media (max-width: 620px)": {
+      width: "0.5rem",
+      fontSize: "0.4rem",
+    },
+  },
+  paper: {
+    backgroundColor: "#fdfbf7",
+    width: "70vw",
+    margin: "auto",
+    marginTop: "2rem",
+    padding: "25px",
+    "@media (max-width: 620px)": {
+      width: "100vw",
+      padding: "5px",
+    },
+  },
+  box: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
   },
 }));
 export default function MonetaryPolicy() {
@@ -38,21 +71,42 @@ export default function MonetaryPolicy() {
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="Desk" />
-          <Tab label="Interest Rate" />
-          <Tab label="Inflation" />
-          <Tab label="Quantitative Easing" />
-          <Tab label="Forward Guidance" />
+          <Tab className={classes.tab} label="Desk" />
+          <Tab className={classes.tab} label="Interest Rate" />
+          <Tab className={classes.tab} label="Inflation" />
+          <Tab className={classes.tab} label="Quantitative Easing" />
+          <Tab className={classes.tab} label="Forward Guidance" />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <Desk />
+        <Paper className={classes.paper}>
+          <Box className={classes.box}>
+            <Typography align="center" variant="h4">
+              Desk
+            </Typography>
+            <Desk />
+          </Box>
+        </Paper>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <InterestRate />
+        <Paper className={classes.paper}>
+          <Box className={classes.box}>
+            <Typography align="center" variant="h4">
+              Interest Rate
+            </Typography>
+            <InterestRate />
+          </Box>
+        </Paper>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <InflationHome />
+        <Paper className={classes.paper}>
+          <Box className={classes.box}>
+            <Typography align="center" variant="h4">
+              Inflation
+            </Typography>
+            <InflationHome />
+          </Box>
+        </Paper>
       </TabPanel>
       <TabPanel value={value} index={3}>
         <QuantitativeEasing />

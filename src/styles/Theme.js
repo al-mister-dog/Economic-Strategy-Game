@@ -1,4 +1,4 @@
-import { createTheme } from '@material-ui/core/styles';
+import { createTheme } from "@material-ui/core/styles";
 
 const lightPrimary = "#ECDBBA";
 const lightSecondary = "#C84B31";
@@ -10,20 +10,33 @@ export default createTheme({
       lightPrimary: `${lightPrimary}`,
       darkPrimary: `${darkPrimary}`,
       lightSecondary: `${lightSecondary}`,
-      darkSecondary: `${darkSecondary}`
+      darkSecondary: `${darkSecondary}`,
     },
     primary: {
-      main: `${darkPrimary}`
+      main: `${darkPrimary}`,
     },
     secondary: {
-      main: `${darkSecondary}`
+      main: `${darkSecondary}`,
     },
     active: {
-      primary: 'rgba(192, 202, 51, 0.1)',
-      secondary: 'rgba(255, 179, 0, 0.1)'
-    }
+      primary: "rgba(192, 202, 51, 0.1)",
+      secondary: "rgba(255, 179, 0, 0.1)",
+    },
   },
   typography: {
-    fontFamily: 'Open Sans',
-  }
-})
+    fontFamily: "Open Sans",
+  },
+  components: {
+    styleOverrides: {
+      paper: {
+        root: {
+          backgroundColor: "#fdfbf7",
+          width: "70vw",
+          margin: "auto",
+          marginTop: "2rem",
+          padding: "20px",
+        },
+      },
+    },
+  },
+});

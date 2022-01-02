@@ -4,15 +4,17 @@ import CpiWeightCalculator from "./CpiWeightCalculator";
 import InflationChange from "./InflationChange";
 import InflationRate from "./InflationRate";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     backgroundColor: "#fdfbf7",
     width: "70vw",
     margin: "auto",
     marginTop: "2rem",
-    display: "flex",
-    alignItems: "flex-start",
-    padding: "20px",
+    padding: "25px",
+    "@media (max-width: 620px)": {
+      width: "100vw",
+      padding: "5px",
+    },
   },
   box: {
     width: "100%",
@@ -23,38 +25,31 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     border: "1px solid #d7d7d7",
     borderRadius: "5px",
-    paddingBottom: "70px"
+    paddingBottom: "70px",
   },
   containerCpiWeight: {
     // marginTop: "30px",
     display: "flex",
-    flexDirection: "column"
-  }
+    flexDirection: "column",
+  },
 }));
 export default function CentralBank() {
   const classes = useStyles();
   return (
     <>
-      <Paper className={classes.paper}>
-        <Box className={classes.box}>
-        <Typography align="center" variant="h4">
-              Inflation
-            </Typography>
-          <Box className={classes.containerCharts}>
-            <InflationChange />
-            <InflationRate />
-          </Box>
-          <Box className={classes.containerCpiWeight}>
-            <Typography align="left" variant="h4">
-              CPI Weight
-            </Typography>
-            <Typography align="left" variant="body">
-              {encyclopedia.inflationRate.cpiWeight}
-            </Typography>
-            <CpiWeightCalculator />
-          </Box>
-        </Box>
-      </Paper>
+      <Box className={classes.containerCharts}>
+        <InflationChange />
+        <InflationRate />
+      </Box>
+      <Box className={classes.containerCpiWeight}>
+        <Typography align="left" variant="h4">
+          CPI Weight
+        </Typography>
+        <Typography align="left" variant="body">
+          {encyclopedia.inflationRate.cpiWeight}
+        </Typography>
+        <CpiWeightCalculator />
+      </Box>
     </>
   );
 }

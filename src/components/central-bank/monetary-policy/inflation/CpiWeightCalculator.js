@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     padding: "5px",
     borderRadius: "5px",
+    marginBottom: "15px"
   },
   sliderLabelCategory: {
     fontSize: "0.8rem",
@@ -175,7 +176,7 @@ function CpiWeightCalculator({ cpiData, submitCpi }) {
         <Box className={classes.inflationLabels}>
           <Typography variant="h6" className={classes.inflationLabelIndex}>
             Inflation index:{" "}
-            <span style={{ fontWeight: "bold" }}>%{inflationRate}</span>
+            <span style={{ fontWeight: "bold" }}>%{inflationIndex}</span>
           </Typography>
           <Typography variant="h6" className={classes.inflationLabelRate}>
             Inflation rate:{" "}

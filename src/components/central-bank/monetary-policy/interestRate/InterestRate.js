@@ -5,7 +5,6 @@ import Chart from "./Chart";
 import { SET_BANK_RATE } from "../../../../state/actions";
 
 import {
-  Paper,
   Box,
   TextField,
   Button,
@@ -14,7 +13,7 @@ import {
   Tooltip,
 } from "@material-ui/core";
 
-const useStyles = makeStyles(({ bankRate }) => ({
+const useStyles = makeStyles(() => ({
   paper: {
     backgroundColor: "#fdfbf7",
     width: "70vw",
@@ -37,23 +36,37 @@ const useStyles = makeStyles(({ bankRate }) => ({
     borderRadius: "5px",
     padding: "20px",
     display: "flex",
+    "@media (max-width: 620px)": {
+      margin: 0,
+      flexDirection: "column",
+      width: "100%"
+    },
   },
   containerSetRate: {
     width: "30%",
     height: "80%",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    "@media (max-width: 620px)": {
+      // width: "100vw",
+    },
   },
   containerChart: {
     width: "70%",
+    height: "30vh",
+    marginLeft: "20px",
+    "@media (max-width: 620px)": {
+      height: "40vh",
+      width: "100vw",
+      marginLeft: "0px",
+    },
   },
   tooltip: {
     fontSize: "2rem",
   },
   form: {
     width: 300,
-    // margin: "auto",
     padding: 25,
   },
   textField: {
@@ -82,11 +95,11 @@ function InterestRate({
 
   return (
     <>
-      <Paper className={classes.paper}>
+      {/* <Paper className={classes.paper}>
         <Box className={classes.container}>
         <Typography align="center" variant="h4">
               Interest Rate
-            </Typography>
+            </Typography> */}
           <Typography align="left">
             {encyclopedia.interestRate.objective}
           </Typography>
@@ -130,8 +143,8 @@ function InterestRate({
               <Chart />
             </Box>
           </Box>
-        </Box>
-      </Paper>
+        {/* </Box>
+      </Paper> */}
     </>
   );
 }
