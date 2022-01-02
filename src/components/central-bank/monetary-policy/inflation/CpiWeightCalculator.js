@@ -30,27 +30,53 @@ const useStyles = makeStyles(() => ({
     justifyContent: "space-around",
   },
   containerCalculator: {},
+  sliderLabels: {
+    display: "flex",
+  },
   sliders: {
     display: "flex",
     flexDirection: "column",
+  },
+  sliderLabelCategory: {
+    fontSize: "0.8rem",
+    fontWeight: "bold",
+    textAlign: "left",
+    width: "36.3%",
+    borderRight: "1px solid black"
+  },
+  sliderLabelWeight: {
+    fontSize: "0.8rem",
+    fontWeight: "bold",
+    textAlign: "left",
+    // width: "10%",
+  },
+  sliderLabelChange: {
+    fontSize: "0.8rem",
+    fontWeight: "bold",
+    textAlign: "left",
+    // width: "40%",
   },
   slider: {
     display: "flex",
     height: "40px",
   },
-  labelCategory: {
+  category: {
     fontSize: "0.8rem",
     fontWeight: "bold",
     color: "#808080",
     textAlign: "left",
     width: "40%",
+    borderRight: "1px solid black"
   },
-  labelWeight: {
-    width: "10%",
+  weight: {
+    width: "15%",
+  },
+  change: {
+    width: "15%",
   },
 
   sliderTrack: {
-    width: "50%",
+    width: "40%",
   },
 }));
 function CpiWeightCalculator({ cpiData, submitCpi }) {
@@ -159,17 +185,28 @@ function CpiWeightCalculator({ cpiData, submitCpi }) {
             Weight allocation of items to Consumer Prices Index
           </Typography>
           <FormGroup className={classes.sliders}>
+            <Box className={classes.sliderLabels}>
+            <Typography className={classes.sliderLabelCategory} variant="body1">
+                    Category
+                  </Typography>
+                  <Typography className={classes.sliderLabelChange} variant="body1">
+                    Price Change
+                  </Typography>
+                  <Typography className={classes.sliderLabelWeight} variant="body1">
+                    Weight
+                  </Typography>
+            </Box>
             {cpi.map((object, index) => {
               const { category, weight, change } = object;
               return (
                 <div key={index} className={classes.slider}>
-                  <Typography className={classes.labelCategory} variant="body2">
+                  <Typography className={classes.category} variant="body2">
                     {category}:
                   </Typography>
-                  <Typography className={classes.labelChange}>
+                  <Typography className={classes.change}>
                     %{change}
                   </Typography>
-                  <Typography className={classes.labelWeight}>
+                  <Typography className={classes.weight}>
                     {parseFloat(weight.toFixed(2))}
                   </Typography>
                   <Slider
@@ -188,7 +225,7 @@ function CpiWeightCalculator({ cpiData, submitCpi }) {
           </FormGroup>
         </Box>
 
-        <Button variant="outlined" onClick={() => submitCpi(cpi)}>
+        <Button variant="contained" color="secondary" onClick={() => submitCpi(cpi)}>
           Submit New Weights
         </Button>
       </Box>
