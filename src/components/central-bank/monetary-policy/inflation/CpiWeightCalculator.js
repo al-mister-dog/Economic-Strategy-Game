@@ -12,7 +12,7 @@ import {
 const useStyles = makeStyles(() => ({
   title: {
     marginBottom: "5px",
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   boxCpi: {
     padding: "20px",
@@ -30,54 +30,53 @@ const useStyles = makeStyles(() => ({
     justifyContent: "space-around",
   },
   containerCalculator: {},
-  sliderLabels: {
-    display: "flex",
-  },
-  sliders: {
+
+  containerSliders: {
     display: "flex",
     flexDirection: "column",
+  },
+  sliderLabels: {
+    display: "grid",
+    gridTemplateColumns: "3.5fr 1.5fr 5fr",
+    gridTemplateRows: "1fr 1fr 1fr",
   },
   sliderLabelCategory: {
     fontSize: "0.8rem",
     fontWeight: "bold",
-    textAlign: "left",
-    width: "36.3%",
-    borderRight: "1px solid black"
+    textAlign: "left",  
   },
   sliderLabelWeight: {
     fontSize: "0.8rem",
     fontWeight: "bold",
-    textAlign: "left",
-    // width: "10%",
   },
   sliderLabelChange: {
     fontSize: "0.8rem",
     fontWeight: "bold",
-    textAlign: "left",
     // width: "40%",
   },
   slider: {
-    display: "flex",
-    height: "40px",
+    display: "grid",
+    gridTemplateColumns: "3.5fr 1.5fr 1.5fr 3.5fr",
+    gridTemplateRows: "1fr 1fr 1fr",
   },
   category: {
     fontSize: "0.8rem",
     fontWeight: "bold",
     color: "#808080",
     textAlign: "left",
-    width: "40%",
-    borderRight: "1px solid black"
+    // width: "40%",
+    // borderRight: "1px solid black",
   },
-  weight: {
-    width: "15%",
-  },
-  change: {
-    width: "15%",
-  },
+  // weight: {
+  //   width: "15%",
+  // },
+  // change: {
+  //   width: "15%",
+  // },
 
-  sliderTrack: {
-    width: "40%",
-  },
+  // sliderTrack: {
+  //   width: "40%",
+  // },
 }));
 function CpiWeightCalculator({ cpiData, submitCpi }) {
   const [cpi, setCpi] = useState(cpiData);
@@ -181,20 +180,27 @@ function CpiWeightCalculator({ cpiData, submitCpi }) {
           <Typography variant="h6">Inflation rate: %{inflationRate}</Typography>
         </Box>
         <Box className={classes.containerCalculator}>
-          <Typography variant="subtitle1" align="center" className={classes.title}>
+          <Typography
+            variant="subtitle1"
+            align="center"
+            className={classes.title}
+          >
             Weight allocation of items to Consumer Prices Index
           </Typography>
-          <FormGroup className={classes.sliders}>
+          <FormGroup className={classes.containerSliders}>
             <Box className={classes.sliderLabels}>
-            <Typography className={classes.sliderLabelCategory} variant="body1">
-                    Category
-                  </Typography>
-                  <Typography className={classes.sliderLabelChange} variant="body1">
-                    Price Change
-                  </Typography>
-                  <Typography className={classes.sliderLabelWeight} variant="body1">
-                    Weight
-                  </Typography>
+              <Typography
+                className={classes.sliderLabelCategory}
+                variant="body1"
+              >
+                Category
+              </Typography>
+              <Typography className={classes.sliderLabelChange} variant="body1">
+                Price Change
+              </Typography>
+              <Typography className={classes.sliderLabelWeight} variant="body1">
+                Weight
+              </Typography>
             </Box>
             {cpi.map((object, index) => {
               const { category, weight, change } = object;
@@ -203,9 +209,7 @@ function CpiWeightCalculator({ cpiData, submitCpi }) {
                   <Typography className={classes.category} variant="body2">
                     {category}:
                   </Typography>
-                  <Typography className={classes.change}>
-                    %{change}
-                  </Typography>
+                  <Typography className={classes.change}>%{change}</Typography>
                   <Typography className={classes.weight}>
                     {parseFloat(weight.toFixed(2))}
                   </Typography>
@@ -225,7 +229,11 @@ function CpiWeightCalculator({ cpiData, submitCpi }) {
           </FormGroup>
         </Box>
 
-        <Button variant="contained" color="secondary" onClick={() => submitCpi(cpi)}>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => submitCpi(cpi)}
+        >
           Submit New Weights
         </Button>
       </Box>
