@@ -30,9 +30,10 @@ const useStyles = makeStyles((theme) => ({
     width: "3rem",
     height: "3rem"
   },
-  wrapper: {
-    height: "90vh",
-    margin: "0rem 9rem 5rem 9rem",
+  paper: {
+    height: "80vh",
+    backgroundColor: "#fdfbf7",
+    margin: "1rem 9rem 5rem 9rem",
     display: "flex",
     "@media (max-width: 620px)": {
       height: "210vh",
@@ -61,8 +62,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 
-  paperHmReport: {
+  boxHmReport: {
     backgroundColor: "#fdfbf7",
+    border: "1px solid #d7d7d7",
+    borderRadius: "5px",
     margin: "10px",
     padding: "10px",
     height: "20%",
@@ -71,8 +74,10 @@ const useStyles = makeStyles((theme) => ({
       height: "25%",
     },
   },
-  paperGraph: {
+  boxGraph: {
     backgroundColor: "#fdfbf7",
+    border: "1px solid #d7d7d7",
+    borderRadius: "5px",
     margin: "10px",
     padding: "10px",
     height: "80%",
@@ -80,8 +85,10 @@ const useStyles = makeStyles((theme) => ({
       padding: "0px",
     },
   },
-  setBudgetAndCalculator: {
+  boxBudgetCalculator: {
     backgroundColor: "#fdfbf7",
+    border: "1px solid #d7d7d7",
+    borderRadius: "5px",
     height: "100%",
     margin: "10px",
     padding: "10px",
@@ -192,23 +199,23 @@ export default function Treasury() {
   }, [totalTax, totalSpending]);
 
   return (
-    <Box>
+    <>
       <Typography variant="h2">Budget</Typography>
-      <Box className={classes.wrapper}>
+      <Paper className={classes.paper}>
         <Box className={classes.boxOne}>
-          <Paper elevation={0} className={classes.paperHmReport}>
+          <Box className={classes.boxHmReport}>
             <HmReport
               budget={budget}
               settingBudget={settingBudget}
               setAnnualBudget={setAnnualBudget}
             />
-          </Paper>
-          <Paper elevation={0} className={classes.paperGraph}>
+          </Box>
+          <Box className={classes.boxGraph}>
             <Graph budget={budget} />
-          </Paper>
+          </Box>
         </Box>
         <Box className={classes.boxTwo}>
-          <Paper elevation={0} className={classes.setBudgetAndCalculator}>
+          <Box className={classes.boxBudgetCalculator}>
             <Box className={classes.setBudget}>
               <SetBudget
                 openSpendingCalculator={openSpendingCalculator}
@@ -241,9 +248,9 @@ export default function Treasury() {
                 />
               )}
             </Box>
-          </Paper>
+          </Box>
         </Box>
-      </Box>
-    </Box>
+      </Paper>
+    </>
   );
 }
