@@ -18,12 +18,14 @@ const useStyles = makeStyles((theme) => ({
     padding: "20px",
     border: "1px solid #d7d7d7",
     borderRadius: "5px",
-
     width: "60%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     margin: "auto",
+    "@media (max-width: 620px)": {
+      width: "100vw",
+    },
   },
   inflationLabels: {
     display: "flex",

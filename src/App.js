@@ -6,6 +6,9 @@ import { Provider } from "react-redux";
 import { ThemeProvider } from "@material-ui/styles";
 import theme from "./styles/Theme";
 import Navbar from "./components/nav/Navbar";
+
+import SignIn from "./pages/auth/SignIn"
+
 import Bloc from "./pages/Bloc";
 import CentralBank from "./pages/CentralBank";
 import Budget from "./components/treasury/BudgetPage/Budget";
@@ -17,6 +20,7 @@ import MonetaryPolicy from "./components/central-bank/monetary-policy/__Monetary
 import FinancialPolicy from "./components/central-bank/financial-policy/__FinancialPolicy";
 import Regulation from "./components/central-bank/regulation/__Regulation";
 import Reserves from "./components/central-bank/reserves/__Reserves";
+import SignUp from "./pages/auth/SignUp";
 
 
 const store = createStore(
@@ -28,9 +32,13 @@ function App() {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
+        
+          
         <Router>
           <Navbar />
           <Routes>
+          <Route path="signin" element={<SignIn />} />
+          <Route path="signup" element={<SignUp />} />
             {/* <Route path="cpi" element={<CpiWeightCalculator />} /> */}
             <Route path="bloc" element={<Bloc />} />
             <Route path="central-bank" element={<CentralBank />}>
@@ -45,6 +53,7 @@ function App() {
             </Route>
           </Routes>
         </Router>
+        
       </ThemeProvider>
     </Provider>
   );
