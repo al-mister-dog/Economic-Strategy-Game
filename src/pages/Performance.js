@@ -1,7 +1,25 @@
+
+import { Outlet } from "react-router-dom";
+import PageTitle from "../components/__reusable/layout/PageTitle";
+
 export default function Performance() {
-  return(
+  const title = "Performance";
+  const menuItems = [
+    {
+      title: "Debt",
+      path: "debt",
+    },
+    {
+      title: "GDP",
+      path: "gdp",
+    },
+    { title: "Regulation", path: "imf" },
+    { title: "IMF", path: "imf" },
+  ];
+  return (
     <>
-    <h1>Performance</h1>
+      <PageTitle title={title} menuItems={menuItems}/>
+      <Outlet/>
     </>
-  )
+  );
 }

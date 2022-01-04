@@ -13,6 +13,7 @@ import Bloc from "./pages/Bloc";
 import CentralBank from "./pages/CentralBank";
 import Budget from "./components/treasury/BudgetPage/Budget";
 import Performance from "./pages/Performance";
+import Debt from "./components/performance/debt/__Debt"
 
 // import CpiWeightCalculator from "./components/__reusable/tools/CpiWeightCalculator"
 import Treasury from "./pages/Treasury";
@@ -47,7 +48,9 @@ function App() {
               <Route path="regulation" element={<Regulation />} />
               <Route path="reserves" element={<Reserves />} />
             </Route>
-            <Route path="performance" element={<Performance />} />
+            <Route path="performance" element={<Performance />} >
+            <Route path="debt" element={<Debt/>} />
+            </Route>
             <Route path="treasury" element={<Treasury />}>
               <Route path="budget" element={<Budget />} />
             </Route>
