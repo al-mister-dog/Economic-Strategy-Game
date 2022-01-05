@@ -1,19 +1,12 @@
-import { useState } from "react";
 import {
   Paper,
   Box,
-  Tabs,
-  Tab,
   Typography,
   makeStyles,
 } from "@material-ui/core";
-import Desk from "./__Desk";
-import DebtToGdp from "../../__reusable/maps/components/DebtToGdp";
+
 import InteractiveMap from "../../__reusable/maps/components/InteractiveMap"
-// import InflationHome from "./inflation/InflationHome";
-// import InterestRate from "./interestRate/InterestRate";
-// import QuantitativeEasing from "./QuantitativeEasing";
-// import CompoundInterestCalculator from "../../__reusable/tools/CompoundInterestCalculator";
+
 const useStyles = makeStyles(() => ({
   container: {
     display: "flex",
@@ -56,12 +49,11 @@ export default function MonetaryPolicy() {
 
   return (
     <Box className={classes.container}>
-      <Typography variant="h2" className={classes.title}>
+      <Paper className={classes.paper}>
+      <Typography variant="h4" align="left" className={classes.title}>
         Debt
       </Typography>
-      <Paper className={classes.paper}>
         <Box className={classes.box}>
-          {/* <DebtToGdp /> */}
           <InteractiveMap />
         </Box>
       </Paper>
