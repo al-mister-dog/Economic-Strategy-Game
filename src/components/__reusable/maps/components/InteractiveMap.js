@@ -1,7 +1,8 @@
 import { useState, memo } from "react";
 import ReactTooltip from "react-tooltip";
-import countriesDebt from "../json/debt2gdp";
-import externalDebt from "../json/externalDebt";
+import countriesDebt from "../data/debt2gdp";
+import externalDebt from "../data/externalDebt";
+import ppp from "../data/ppp"
 import {
   Box,
   FormControl,
@@ -22,19 +23,22 @@ import { scaleLinear } from "d3-scale";
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
-const data = {
-  debtToGdp: countriesDebt,
-  externalDebt: externalDebt,
-};
-const domains = {
-  debtToGdp: [0, 240],
-  externalDebt: [0, 23000000],
-};
-const ranges = {
-  debtToGdp: ["#ffedea", "#ff5233"],
-  externalDebt: ["#ffedea", "#ff5233"],
-};
-const objectVars = { debtToGdp: "debt2gdpratio", externalDebt: "externalDebt" };
+  const data = {
+    debtToGdp: countriesDebt,
+    externalDebt: externalDebt,
+    ppp: ppp
+  };
+  const domains = {
+    debtToGdp: [0, 240],
+    externalDebt: [0, 23000000],
+    ppp: [0, 24143],
+  };
+  const ranges = {
+    debtToGdp: ["#ffedea", "#ff5233"],
+    externalDebt: ["#ffedea", "#ff5233"],
+    ppp: ["#ffedea", "#ff5233"],
+  };
+  const objectKeys = { debtToGdp: "debt2gdpratio", externalDebt: "externalDebt", ppp: "ppp" };
 
 const rounded = (num) => {
   if (num > 1000000000) {
@@ -45,7 +49,24 @@ const rounded = (num) => {
     return Math.round(num / 100) / 10 + "K";
   }
 };
-
+const roundedMil = (num) => {
+  if (num > 1000000) {
+    return Math.round(num / 100000) / 10 + "Tn";
+  } else if (num > 10000) {
+    return Math.round(num / 100) / 10 + "Bn";
+  } else {
+    return Math.round(num / 1000) / 10 + "Mn";
+  }
+};
+const roundedTril = (num) => {
+  if (num > 1000) {
+    return Math.round(num / 100) / 10 + "Tn";
+  } else if (num > 100) {
+    return Math.round(num / 10) / 10 + "Bn";
+  } else {
+    return Math.round(num / 100) / 10 + "Mn";
+  }
+};
 const MapChart = () => {
   const [value, setValue] = useState("female");
 
@@ -53,10 +74,21 @@ const MapChart = () => {
   const [countries, setCountries] = useState(data["debtToGdp"]);
   const [domain, setDomain] = useState(domains["debtToGdp"]);
   const [range, setRange] = useState(ranges["debtToGdp"]);
-  const [objectVar, setObjectVar] = useState(objectVars["debtToGdp"]);
-
+  const [objectKey, setObjectKey] = useState(objectKeys["debtToGdp"]);
+const min = Math.min(...countries.map((country) => country[objectKey]));
+const max = Math.max(...countries.map((country) => country[objectKey]))
+  // const min = Math.min.apply(Math, countries.map(country => country[objectKey]));
+  // const max = Math.max.apply(Math, countries.map(country => country[objectKey]));
+  // const colorScale = scaleLinear().domain([min, max]).range(range);
   const colorScale = scaleLinear().domain(domain).range(range);
-
+  function getExpression(mappedCountry) {
+    const expressions = {
+      debtToGdp: `%${parseFloat(mappedCountry[objectKey]).toFixed(2)}`,
+      externalDebt: `${roundedMil(parseFloat(mappedCountry[objectKey]).toFixed(2))}`,
+      ppp: `${roundedTril(parseFloat(mappedCountry[objectKey]).toFixed(2))}`
+    };
+    return expressions[objectKey]
+  }
   function handleChangeForm(event) {
     setValue(event.target.value);
     setMetric(event.target.value);
@@ -66,18 +98,18 @@ const MapChart = () => {
     setCountries(data[name]);
     setDomain(domains[name]);
     setRange(ranges[name]);
-    setObjectVar(objectVars[name]);
+    setObjectKey(objectKeys[name]);
   }
 
   function setFill(mappedCountry) {
-    return colorScale(mappedCountry[objectVar]);
+    return colorScale(mappedCountry[objectKey]);
   }
 
   function setToolTip(mappedCountry) {
+    const expression = getExpression(mappedCountry);
+    console.log("hello")
     setContent(
-      `${mappedCountry.NAME} %${parseFloat(mappedCountry[objectVar]).toFixed(
-        2
-      )}`
+      `${mappedCountry.NAME} ${expression}`
     );
   }
 
@@ -138,8 +170,8 @@ const MapChart = () => {
         <FormControl component="fieldset">
           <RadioGroup
             row
-            aria-label="debt"
-            name="debt1"
+            aria-label="radiogroupmap"
+            name="radiogroupmap1"
             value={value}
             onChange={handleChangeForm}
           >
@@ -157,9 +189,9 @@ const MapChart = () => {
             />
             <FormControlLabel
               labelPlacement="top"
-              value="other"
+              value="ppp"
               control={<Radio color="primary" />}
-              label="Other"
+              label="PPP"
             />
           </RadioGroup>
         </FormControl>
