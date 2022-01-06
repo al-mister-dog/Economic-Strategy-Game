@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
 export default function MainMenu() {
   const departments = [
     { name: "Treasury", path: "/treasury" },
-    { name: "Central Bank", path: "/central-bank" },
+    { name: "Central Bank", path: "/centralbank" },
     { name: "Bloc", path: "/bloc" },
     { name: "Performace", path: "/performance" },
   ];

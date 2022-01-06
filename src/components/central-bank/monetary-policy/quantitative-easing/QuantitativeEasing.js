@@ -1,5 +1,5 @@
 import { useState } from "react";
-import InterestCalculator from "../../../calculators/interest/interestClass";
+import InterestCalculator from "../../../../calculators/interest/interestClass";
 import {
   ResponsiveContainer,
   LineChart,

@@ -23,16 +23,17 @@ const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
 const MapChart = ({ countries, keys }) => {
-  const [value, setValue] = useState("gdp");
+  const [value, setValue] = useState(keys[0].name);
   const [content, setContent] = useState("");
-  const [objectKey, setObjectKey] = useState("gdp");
-  const [range, setRange] = useState(["#ffedea", "#ff5233"]);
+  const [objectKey, setObjectKey] = useState(keys[0].name);
+  const [range, setRange] = useState(["#ffe9e3", "#ff410d"]);
   const min = Math.min(...countries.map((country) => country[objectKey]));
   const max = Math.max(...countries.map((country) => country[objectKey]));
   const colorScale = scaleLinear().domain([min, max]).range(range);
-
+  console.log({min, max})
   function getExpression(mappedCountry) {
     const expressions = {
+      int: `${mappedCountry[objectKey]}`,
       percent: `${parseFloat(mappedCountry[objectKey]).toFixed(2)}%`,
       million: `${roundToMillion(
         parseFloat(mappedCountry[objectKey]).toFixed(2)

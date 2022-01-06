@@ -1,11 +1,12 @@
+import { connect } from "react-redux";
 import {
   Paper,
   Box,
   Typography,
   makeStyles,
 } from "@material-ui/core";
-import { countriesData, keysData } from "../../__reusable/maps/data/fullCountries";
-import PerformanceMapChart from "../../__reusable/maps/components/MapChart"
+
+import PerformanceMapChart from "../__reusable/maps/components/MapChart"
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -44,15 +45,15 @@ const useStyles = makeStyles(() => ({
     flexDirection: "column",
   },
 }));
-export default function MonetaryPolicy() {
+
+function NationalAccount({countries, keysData}) {
   const classes = useStyles();
-  const countries = countriesData;
   const keys = [keysData[0], keysData[1], keysData[2]]
   return (
     <Box className={classes.container}>
       <Paper className={classes.paper}>
       <Typography variant="h4" align="left" className={classes.title}>
-        Debt
+        National Accounts
       </Typography>
         <Box className={classes.box}>
           <PerformanceMapChart countries={countries} keys={keys}/>
@@ -61,3 +62,12 @@ export default function MonetaryPolicy() {
     </Box>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    countries: state.countriesData,
+    keysData: state.keysData,
+    inflationTarget: state.inflationTarget,
+  };
+};
+
+export default connect(mapStateToProps)(NationalAccount);

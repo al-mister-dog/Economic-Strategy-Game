@@ -7,22 +7,23 @@ import { ThemeProvider } from "@material-ui/styles";
 import theme from "./styles/Theme";
 import Navbar from "./components/nav/Navbar";
 
+import SignUp from "./pages/auth/SignUp";
 import SignIn from "./pages/auth/SignIn"
 
-import Bloc from "./pages/Bloc";
 import CentralBank from "./pages/CentralBank";
-import Budget from "./components/treasury/BudgetPage/Budget";
-import Performance from "./pages/Performance";
-import Debt from "./components/performance/debt/__Debt"
-
-// import CpiWeightCalculator from "./components/__reusable/tools/CpiWeightCalculator"
-import Treasury from "./pages/Treasury";
 import MonetaryPolicy from "./components/central-bank/monetary-policy/__MonetaryPolicy";
 import FinancialPolicy from "./components/central-bank/financial-policy/__FinancialPolicy";
 import Regulation from "./components/central-bank/regulation/__Regulation";
 import Reserves from "./components/central-bank/reserves/__Reserves";
-import SignUp from "./pages/auth/SignUp";
 
+import Treasury from "./pages/Treasury";
+import Budget from "./components/treasury/BudgetPage/Budget";
+
+import Performance from "./pages/Performance";
+import NationalAccounts from "./components/performance/NationalAccounts"
+import Monetary from "./components/performance/Monetary";
+
+import Bloc from "./pages/Bloc";
 
 const store = createStore(
   reducer,
@@ -42,14 +43,15 @@ function App() {
           <Route path="signup" element={<SignUp />} />
             {/* <Route path="cpi" element={<CpiWeightCalculator />} /> */}
             <Route path="bloc" element={<Bloc />} />
-            <Route path="central-bank" element={<CentralBank />}>
+            <Route path="centralbank" element={<CentralBank />}>
               <Route path="monetarypolicy" element={<MonetaryPolicy />} />
               <Route path="financialpolicy" element={<FinancialPolicy />} />
               <Route path="regulation" element={<Regulation />} />
               <Route path="reserves" element={<Reserves />} />
             </Route>
             <Route path="performance" element={<Performance />} >
-            <Route path="debt" element={<Debt/>} />
+            <Route path="nationalaccounts" element={<NationalAccounts/>} />
+            <Route path="monetary" element={<Monetary/>} />
             </Route>
             <Route path="treasury" element={<Treasury />}>
               <Route path="budget" element={<Budget />} />

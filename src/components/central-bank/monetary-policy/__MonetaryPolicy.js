@@ -10,7 +10,7 @@ import {
 import Desk from "./__Desk";
 import InflationHome from "./inflation/InflationHome";
 import InterestRate from "./interestRate/InterestRate";
-import QuantitativeEasing from "./QuantitativeEasing";
+import QuantitativeEasing from "./quantitative-easing/QuantitativeEasing";
 // import CompoundInterestCalculator from "../../__reusable/tools/CompoundInterestCalculator";
 const useStyles = makeStyles(() => ({
   container: {
