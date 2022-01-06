@@ -8,7 +8,7 @@ import theme from "./styles/Theme";
 import Navbar from "./components/nav/Navbar";
 
 import SignUp from "./pages/auth/SignUp";
-import SignIn from "./pages/auth/SignIn"
+import SignIn from "./pages/auth/SignIn";
 
 import CentralBank from "./pages/CentralBank";
 import MonetaryPolicy from "./components/central-bank/monetary-policy/__MonetaryPolicy";
@@ -20,10 +20,12 @@ import Treasury from "./pages/Treasury";
 import Budget from "./components/treasury/BudgetPage/Budget";
 
 import Performance from "./pages/Performance";
-import NationalAccounts from "./components/performance/NationalAccounts"
+import NationalAccounts from "./components/performance/NationalAccounts";
 import Monetary from "./components/performance/Monetary";
 
 import Bloc from "./pages/Bloc";
+import GovernmentFinance from "./components/performance/GovernmentFinance";
+import BalanceOfPayments from "./components/performance/BalanceOfPayments";
 
 const store = createStore(
   reducer,
@@ -34,13 +36,11 @@ function App() {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        
-          
         <Router>
           <Navbar />
           <Routes>
-          <Route path="signin" element={<SignIn />} />
-          <Route path="signup" element={<SignUp />} />
+            <Route path="signin" element={<SignIn />} />
+            <Route path="signup" element={<SignUp />} />
             {/* <Route path="cpi" element={<CpiWeightCalculator />} /> */}
             <Route path="bloc" element={<Bloc />} />
             <Route path="centralbank" element={<CentralBank />}>
@@ -49,16 +49,17 @@ function App() {
               <Route path="regulation" element={<Regulation />} />
               <Route path="reserves" element={<Reserves />} />
             </Route>
-            <Route path="performance" element={<Performance />} >
-            <Route path="nationalaccounts" element={<NationalAccounts/>} />
-            <Route path="monetary" element={<Monetary/>} />
+            <Route path="performance" element={<Performance />}>
+              <Route path="balanceofpayments" element={<BalanceOfPayments />} />
+              <Route path="governmentfinance" element={<GovernmentFinance />} />
+              <Route path="monetary" element={<Monetary />} />
+              <Route path="nationalaccounts" element={<NationalAccounts />} />
             </Route>
             <Route path="treasury" element={<Treasury />}>
               <Route path="budget" element={<Budget />} />
             </Route>
           </Routes>
         </Router>
-        
       </ThemeProvider>
     </Provider>
   );

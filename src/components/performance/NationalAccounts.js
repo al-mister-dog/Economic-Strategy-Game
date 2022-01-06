@@ -48,7 +48,7 @@ const useStyles = makeStyles(() => ({
 
 function NationalAccount({countries, keysData}) {
   const classes = useStyles();
-  const keys = [keysData[0], keysData[1], keysData[2]]
+  const keys = keysData.nationalAccounts
   return (
     <Box className={classes.container}>
       <Paper className={classes.paper}>

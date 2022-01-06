@@ -9,11 +9,11 @@ export default function Performance() {
       path: "nationalaccounts",
     },
     {
-      title: "Debt",
-      path: "debt",
+      title: "Balance of Payments",
+      path: "balanceofpayments",
     },
     { title: "Monetary", path: "monetary" },
-    { title: "Trade", path: "trade" },
+    { title: "GovernmentFinance", path: "governmentfinance" },
   ];
   return (
     <>

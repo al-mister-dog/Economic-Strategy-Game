@@ -46,14 +46,14 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function Monetary({countries, keysData}) {
+function GovernmentFinance({countries, keysData}) {
   const classes = useStyles();
-  const keys = keysData.monetary
+  const keys = keysData.govFinance
   return (
     <Box className={classes.container}>
       <Paper className={classes.paper}>
       <Typography variant="h4" align="left" className={classes.title}>
-        Monetary
+        Balance of Payments
       </Typography>
         <Box className={classes.box}>
           <PerformanceMapChart countries={countries} keys={keys}/>
@@ -70,4 +70,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Monetary);
+export default connect(mapStateToProps)(GovernmentFinance);
