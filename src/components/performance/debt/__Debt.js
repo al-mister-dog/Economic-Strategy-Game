@@ -5,8 +5,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import { countriesData, keysData } from "../../__reusable/maps/data/fullCountries";
-import InteractiveMap from "../../__reusable/maps/components/InteractiveMap"
-import ObjectMap from "../../__reusable/maps/components/ObjectMap";
+import PerformanceMapChart from "../../__reusable/maps/components/MapChart"
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -56,8 +55,7 @@ export default function MonetaryPolicy() {
         Debt
       </Typography>
         <Box className={classes.box}>
-          {/* <InteractiveMap /> */}
-          <ObjectMap countries={countries} keys={keys}/>
+          <PerformanceMapChart countries={countries} keys={keys}/>
         </Box>
       </Paper>
     </Box>
