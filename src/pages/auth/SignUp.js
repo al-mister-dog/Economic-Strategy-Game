@@ -13,23 +13,41 @@ import {
 } from "@material-ui/core";
 
 import LockIcon from "@material-ui/icons/Lock";
+import owl from "./owl.jpeg";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     backgroundColor: "#fdfbf7",
     maxWidth: "70vw",
+    maxHeight: "80vh",
     margin: "auto",
     marginTop: "2rem",
     padding: "25px",
+    display: "flex",
     "@media (max-width: 620px)": {
       width: "100vw",
       padding: "5px",
+      flexDirection: "column",
+      maxHeight: "200vh"
     },
   },
-}));
+  welcome: {
+    "@media (max-width: 620px)": {
+      display: "none"
+    },
+    
+  },
+  auth: {
+    width: "50%",
+    "@media (max-width: 620px)": {
+      width: "90%",
+      margin: "auto"
+    },
+  }
+}))
 
 export default function SignUp() {
-  const classes = useStyles();
+  const classes = useStyles()
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -42,16 +60,21 @@ export default function SignUp() {
 
   return (
     <>
-      <Typography variant="h2">Trial of the Pyx</Typography>
-      <Paper className={classes.paper}>
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
+    
+    <Paper className={classes.paper}>
+      <Box sx={{width: "50%"}} className={classes.welcome}>
+        <img src={owl} alt="owl"/>
+      <Typography variant="h3">Trial of the Pyx</Typography>
+      </Box>
+      <Box
+        sx={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+        className={classes.auth}
+      >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockIcon />
           </Avatar>
@@ -126,7 +149,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to="/signin">
+                <Link to="/login">
                   <Typography variant="body2">
                     Already have an account? Sign in
                   </Typography>

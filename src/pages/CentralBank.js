@@ -1,5 +1,4 @@
-
-import { Typography } from "@material-ui/core";
+import { Paper, Typography } from "@material-ui/core";
 import { Outlet } from "react-router-dom";
 import PageTitle from "../components/__reusable/layout/PageTitle";
 
@@ -19,9 +18,8 @@ export default function CentralBank() {
   ];
   return (
     <>
-      <PageTitle title={title} menuItems={menuItems}/>
-      <Outlet/>
-      <Typography></Typography>
+      <PageTitle title={title} menuItems={menuItems} />
+      <Outlet />
     </>
   );
 }

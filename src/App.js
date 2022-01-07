@@ -8,24 +8,29 @@ import theme from "./styles/Theme";
 import Navbar from "./components/nav/Navbar";
 
 import SignUp from "./pages/auth/SignUp";
-import SignIn from "./pages/auth/SignIn";
+import LogIn from "./pages/auth/LogIn";
 
 import CentralBank from "./pages/CentralBank";
-import MonetaryPolicy from "./components/central-bank/monetary-policy/__MonetaryPolicy";
-import FinancialPolicy from "./components/central-bank/financial-policy/__FinancialPolicy";
-import Regulation from "./components/central-bank/regulation/__Regulation";
-import Reserves from "./components/central-bank/reserves/__Reserves";
+import MonetaryPolicy from "./components/_central_bank/monetary-policy/__MonetaryPolicy";
+import FinancialPolicy from "./components/_central_bank/financial-policy/__FinancialPolicy";
+import Regulation from "./components/_central_bank/regulation/__Regulation";
+import Reserves from "./components/_central_bank/reserves/__Reserves";
 
 import Treasury from "./pages/Treasury";
-import Budget from "./components/treasury/BudgetPage/Budget";
+import Budget from "./components/_treasury/BudgetPage/Budget";
 
 import Performance from "./pages/Performance";
-import NationalAccounts from "./components/performance/NationalAccounts";
-import Monetary from "./components/performance/Monetary";
+import BalanceOfPayments from "./components/_performance/BalanceOfPayments";
+import GovernmentFinance from "./components/_performance/GovernmentFinance";
+import Monetary from "./components/_performance/Monetary";
+import NationalAccounts from "./components/_performance/NationalAccounts";
+import People from "./components/_performance/People";
+import Trade from "./components/_performance/Trade";
 
 import Bloc from "./pages/Bloc";
-import GovernmentFinance from "./components/performance/GovernmentFinance";
-import BalanceOfPayments from "./components/performance/BalanceOfPayments";
+import Overview from "./components/_bloc/Overview";
+import BlocTrade from "./components/_bloc/Trade";
+import Alliance from "./components/_bloc/Alliance";
 
 const store = createStore(
   reducer,
@@ -39,10 +44,13 @@ function App() {
         <Router>
           <Navbar />
           <Routes>
-            <Route path="signin" element={<SignIn />} />
+            <Route path="login" element={<LogIn />} />
             <Route path="signup" element={<SignUp />} />
-            {/* <Route path="cpi" element={<CpiWeightCalculator />} /> */}
-            <Route path="bloc" element={<Bloc />} />
+            <Route path="bloc" element={<Bloc />}>
+              <Route path="overview" element={<Overview />} />
+              <Route path="trade" element={<BlocTrade />} />
+              <Route path="alliance" element={<Alliance />} />
+            </Route>
             <Route path="centralbank" element={<CentralBank />}>
               <Route path="monetarypolicy" element={<MonetaryPolicy />} />
               <Route path="financialpolicy" element={<FinancialPolicy />} />
@@ -54,6 +62,8 @@ function App() {
               <Route path="governmentfinance" element={<GovernmentFinance />} />
               <Route path="monetary" element={<Monetary />} />
               <Route path="nationalaccounts" element={<NationalAccounts />} />
+              <Route path="people" element={<People />} />
+              <Route path="trade" element={<Trade />} />
             </Route>
             <Route path="treasury" element={<Treasury />}>
               <Route path="budget" element={<Budget />} />

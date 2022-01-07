@@ -1,7 +1,26 @@
+import { Outlet } from "react-router-dom";
+import PageTitle from "../components/__reusable/layout/PageTitle";
+
 export default function Bloc() {
-  return(
+  const title = "Bloc";
+  const menuItems = [
+    {
+      title: "Overview",
+      path: "overview",
+    },
+    {
+      title: "Trade",
+      path: "trade",
+    },
+    {
+      title: "Alliance",
+      path: "alliance",
+    },
+  ];
+  return (
     <>
-    <h1>Bloc</h1>
+      <PageTitle title={title} menuItems={menuItems} />
+      <Outlet />
     </>
-  )
+  );
 }

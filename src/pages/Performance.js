@@ -14,6 +14,7 @@ export default function Performance() {
     },
     { title: "Monetary", path: "monetary" },
     { title: "GovernmentFinance", path: "governmentfinance" },
+    { title: "Trade", path: "trade" },
   ];
   return (
     <>

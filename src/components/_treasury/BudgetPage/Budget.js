@@ -18,9 +18,6 @@ const FIRST_YEAR = [
 
 const useStyles = makeStyles((theme) => ({
   title: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
     marginTop: "1rem",
     height: "5rem"
   },
@@ -31,13 +28,18 @@ const useStyles = makeStyles((theme) => ({
     height: "3rem"
   },
   paper: {
-    height: "80vh",
+    
     backgroundColor: "#fdfbf7",
-    margin: "1rem 9rem 5rem 9rem",
-    display: "flex",
+    margin: "3rem 9rem 5rem 9rem",
     "@media (max-width: 620px)": {
       height: "210vh",
       margin: "0.3rem",
+    },
+  },
+  container: {
+    display: "flex",
+    height: "80vh",
+    "@media (max-width: 620px)": {
       flexDirection: "column",
     },
   },
@@ -200,9 +202,11 @@ export default function Treasury() {
 
   return (
     <>
-      <Typography variant="h2">Budget</Typography>
+      
       <Paper className={classes.paper}>
-        <Box className={classes.boxOne}>
+      <Typography variant="h4">Budget</Typography>
+      <Box className={classes.container}>
+      <Box className={classes.boxOne}>
           <Box className={classes.boxHmReport}>
             <HmReport
               budget={budget}
@@ -250,7 +254,9 @@ export default function Treasury() {
             </Box>
           </Box>
         </Box>
-      </Paper>
+
+      </Box>
+              </Paper>
     </>
   );
 }

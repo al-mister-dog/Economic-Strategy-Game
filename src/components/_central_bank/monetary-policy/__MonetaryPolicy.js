@@ -12,16 +12,26 @@ import InflationHome from "./inflation/InflationHome";
 import InterestRate from "./interestRate/InterestRate";
 import QuantitativeEasing from "./quantitative-easing/QuantitativeEasing";
 // import CompoundInterestCalculator from "../../__reusable/tools/CompoundInterestCalculator";
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "flex-start",
     overflowX: "hidden",
+  },
+  menuPanel: {
+    width: "100vw",
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "baseline",
+    backgroundColor: theme.palette.common.lightSecondary,
+    color: "white"
   },
   title: {
     overflow: "hidden",
+    marginLeft: "25px",
+    marginRight: "25px",
     "@media (max-width: 620px)": {
       fontSize: "1.7rem",
     },
@@ -62,14 +72,15 @@ export default function MonetaryPolicy() {
   }
   return (
     <Box className={classes.container}>
-      <Typography variant="h2" className={classes.title}>
+      <Box className={classes.menuPanel}>
+      <Typography variant="h5" className={classes.title}>
         Monetary Policy
       </Typography>
-      <Box sx={{ borderBottom: 1, borderColor: "divider", margin: "auto" }}>
         <Tabs
           value={value}
           onChange={handleChange}
-          aria-label="basic tabs example"
+          aria-label="tabs"
+          TabIndicatorProps={{ style: { background: "white" } }}
         >
           <Tab className={classes.tab} label="Desk" />
           <Tab className={classes.tab} label="Interest Rate" />

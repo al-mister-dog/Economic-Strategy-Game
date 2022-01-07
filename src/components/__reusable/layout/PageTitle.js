@@ -5,15 +5,17 @@ import { Box, makeStyles, Typography, Tabs, Tab } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
+    height: "9vh",
     backgroundColor: theme.palette.common.darkSecondary,
     color: "white",
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     margin: "auto",
-    marginTop: "1px",
   },
   title: {
+    marginLeft: "25px",
+    marginRight: "25px",
     overflow: "hidden",
     "@media (max-width: 620px)": {
       fontSize: "0.8rem",
@@ -44,7 +46,6 @@ export default function PageTitle({ title, menuItems }) {
         value={value}
         onChange={handleChange}
         aria-label="page title tabs"
-        // indicatorColor="#ECDBBA"
       >
         {menuItems.map((menuItem, index) => {
           const { title, path } = menuItem;
