@@ -18,7 +18,7 @@ export default function CentralBank() {
   ];
   return (
     <>
-      <PageTitle title={title} menuItems={menuItems} />
+      {/* <PageTitle title={title} menuItems={menuItems} /> */}
       <Outlet />
     </>
   );

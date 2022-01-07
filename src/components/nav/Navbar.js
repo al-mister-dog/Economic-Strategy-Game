@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import MainMenu from "./MainMenu";
 import {
   AppBar,
   Toolbar,
+  Button,
   Typography,
   IconButton,
   SwipeableDrawer,
@@ -13,6 +14,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 const lightPrimary = "#ECDBBA";
 const lightSecondary = "#C84B31";
 const darkPrimary = "#191919";
@@ -27,7 +29,7 @@ const useStyles = makeStyles(() => ({
     background: darkSecondary,
     color: "white",
   },
-  
+
   title: {
     fontFamily: "Open Sans",
   },
@@ -38,16 +40,21 @@ const useStyles = makeStyles(() => ({
   menuTitleSecondary: {
     marginLeft: "1.5rem",
   },
+  buttonMenu: {
+    color: "white",
+    // borderBottom: "1px solid white",
+    fontWeight: "bold",
+    fontSize: "1rem",
+  },
+  buttonMenuTwo: {
+    color: "white",
+    // borderBottom: "1px solid white",
+    // fontWeight: "bold",
+    fontSize: "1rem",
+  },
 }));
 
 export default function Navbar() {
-  const classes = useStyles();
-  const [department, setDepartment] = useState("");
-  const [departmentOperation, setDepartmentOperation] = useState("");
-
-  function getDepartment(department) {
-    setDepartment(department);
-  }
   const departments = [
     { name: "Treasury", path: "/treasury" },
     {
@@ -58,6 +65,13 @@ export default function Navbar() {
         {
           title: "Monetary Policy",
           path: "monetarypolicy",
+          menuItems: [
+            { title: "Desk", path: "desk" },
+            { title: "Interest", path: "interest" },
+            { title: "Inflation", path: "inflation" },
+            { title: "Quantitative Easing", path: "quantitativeeasing" },
+            { title: "Forward Guidance", path: "forwardguidance" },
+          ],
         },
         {
           title: "Financial Policy",
@@ -67,9 +81,17 @@ export default function Navbar() {
         { title: "Reserves", path: "reserves" },
       ],
     },
-    { name: "Bloc", path: "/bloc" },
+    { name: "Bloc", path: "/bloc", menuItems: [
+      { title: "Overview", path: "overview" },
+      { title: "Trade", path: "trade" },
+      { title: "Alliance", path: "alliance" },
+    ] },
     { name: "Performace", path: "/performance" },
   ];
+  const classes = useStyles();
+  const [department, setDepartment] = useState("");
+  const [departmentOperation, setDepartmentOperation] = useState("");
+
   const [isOpen, setIsOpen] = useState(false);
   const toggleDrawer = (bool) => (event) => {
     if (
@@ -82,19 +104,6 @@ export default function Navbar() {
 
     setIsOpen(bool);
   };
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleClickMenuItem = (menuItem )=> {
-handleClose()
-setDepartmentOperation(menuItem.title)
-  }
   const mainMenu = (anchor) => (
     <Box
       role="presentation"
@@ -105,6 +114,44 @@ setDepartmentOperation(menuItem.title)
       <MainMenu departments={departments} getDepartment={getDepartment} />
     </Box>
   );
+
+  const [anchorElDepartmentMenu, setAnchorElDepartmentMenu] = useState(null);
+  const openDepartmentMenu = Boolean(anchorElDepartmentMenu);
+  const handleClickDepartmentMenu = (event) => {
+    setAnchorElDepartmentMenu(event.currentTarget);
+  };
+  const handleCloseDepartmentMenu = () => {
+    setAnchorElDepartmentMenu(null);
+  };
+
+  const handleClickDepartmentMenuItem = (menuItem) => {
+    handleCloseDepartmentMenu();
+    setDepartmentOperation(menuItem);
+    console.log(menuItem.menuItems);
+  };
+
+  function getDepartment(department) {
+    setDepartment(department);
+  }
+
+  const [anchorElDepartmentOperationMenu, setAnchorElDepartmentOperationMenu] =
+    useState(null);
+  const openDepartmentOperationMenu = Boolean(anchorElDepartmentOperationMenu);
+  const handleClickDepartmentOperationMenu = (event) => {
+    setAnchorElDepartmentOperationMenu(event.currentTarget);
+  };
+  const handleCloseDepartmentOperationMenu = () => {
+    setAnchorElDepartmentOperationMenu(null);
+  };
+
+  const handleClickDepartmentOperationMenuItem = () => {
+    handleCloseDepartmentOperationMenu();
+  };
+
+  useEffect(() => {
+    setDepartmentOperation(null)
+  }, [department])
+
   return (
     <AppBar className={classes.nav} position="sticky">
       <Toolbar>
@@ -123,45 +170,91 @@ setDepartmentOperation(menuItem.title)
         {department && (
           <>
             <Typography variant="h6" className={classes.menuTitle}>
-              |
+              
             </Typography>
-            <Typography
-              variant="h6"
-              className={classes.menuTitle}
-              onClick={handleClick}
+            <Button
+              color="primary"
+              variant="outline"
+              className={classes.buttonMenu}
+              onClick={handleClickDepartmentMenu}
             >
               {department.name}
-            </Typography>
+              <ArrowDropDownIcon />
+            </Button>
+
             <Menu
-              id="menu"
+              id="menudepartment"
               className={classes.menu}
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
+              anchorEl={anchorElDepartmentMenu}
+              open={openDepartmentMenu}
+              onClose={handleCloseDepartmentMenu}
               MenuListProps={{
                 "aria-labelledby": "basic-button",
               }}
             >
               {department.menuItems.map((menuItem) => {
                 return (
-                  <Link key={menuItem.title} style={{ textDecoration: 'none', color: "black" }} to={`${department.path}/${menuItem.path}`}>
-                <MenuItem key={menuItem.title} onClick={() => handleClickMenuItem(menuItem)}>{menuItem.title}</MenuItem>
-                </Link>)
+                  <Link
+                    key={menuItem.title}
+                    style={{ textDecoration: "none", color: "black" }}
+                    to={`${department.path}/${menuItem.path}`}
+                  >
+                    <MenuItem
+                      key={menuItem.title}
+                      onClick={() => handleClickDepartmentMenuItem(menuItem)}
+                    >
+                      {menuItem.title}
+                    </MenuItem>
+                  </Link>
+                );
               })}
-              
-            
             </Menu>
           </>
         )}
+
         {departmentOperation && (
           <>
-            <Typography
-              variant="h6"
-              className={classes.menuTitleSecondary}
-            >{`/`}</Typography>
-            <Typography variant="h6" className={classes.menuTitleSecondary}>
-              Monetary Policy
+            <Typography variant="h6" >
+              {`/`}
             </Typography>
+            <Button
+              color="primary"
+              variant="outline"
+              className={classes.buttonMenuTwo}
+              onClick={handleClickDepartmentOperationMenu}
+            >
+              {departmentOperation.title}
+              <ArrowDropDownIcon/>
+            </Button>
+            <Menu
+              id="menudepartment"
+              className={classes.menu}
+              anchorEl={anchorElDepartmentOperationMenu}
+              open={openDepartmentOperationMenu}
+              onClose={handleCloseDepartmentOperationMenu}
+              MenuListProps={{
+                "aria-labelledby": "basic-button",
+              }}
+            >
+              {departmentOperation.menuItems.map((menuItem) => {
+                return (
+                  <Link
+                    key={menuItem.title}
+                    style={{ textDecoration: "none", color: "black" }}
+                    to={`${department.path}/${departmentOperation.path}/${menuItem.path}`}
+                  >
+                    <MenuItem
+                      key={menuItem.title}
+                      onClick={() =>
+                        handleClickDepartmentOperationMenuItem(menuItem)
+                      }
+                    >
+                      {menuItem.title}
+                    </MenuItem>
+                  </Link>
+                );
+              })}
+            </Menu>
           </>
         )}
       </Toolbar>

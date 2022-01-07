@@ -19,7 +19,6 @@ export default function Bloc() {
   ];
   return (
     <>
-      <PageTitle title={title} menuItems={menuItems} />
       <Outlet />
     </>
   );

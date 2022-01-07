@@ -33,10 +33,13 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
   },
 }));
-export default function CentralBank() {
+export default function InflationHome() {
   const classes = useStyles();
   return (
     <>
+        <Typography align="left" variant="h4">
+          Inflation
+        </Typography>
       <Box className={classes.containerCharts}>
         <InflationChange />
         <InflationRate />

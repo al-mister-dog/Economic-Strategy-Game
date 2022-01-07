@@ -39,7 +39,7 @@ const useStyles = makeStyles(() => ({
     "@media (max-width: 620px)": {
       margin: 0,
       flexDirection: "column",
-      width: "100%"
+      width: "100%",
     },
   },
   containerSetRate: {
@@ -95,56 +95,57 @@ function InterestRate({
 
   return (
     <>
-      {/* <Paper className={classes.paper}>
-        <Box className={classes.container}>
-        <Typography align="center" variant="h4">
-              Interest Rate
-            </Typography> */}
-          <Typography align="left">
-            {encyclopedia.interestRate.objective}
-          </Typography>
-          <Box className={classes.containerInterestRate}>
-            <Box className={classes.containerSetRate}>
-              <Tooltip align="left" title={<h3>{encyclopedia.interestRate.bankrate}</h3>}>
-                <Typography>Bank Rate: %{bankRate}</Typography>
-              </Tooltip>
-              <Tooltip
-                align="left" title={<h3>{encyclopedia.interestRate.inflationRate}</h3>}
-              >
-                <Typography>Inflation Rate: %{inflationRate}</Typography>
-              </Tooltip>
-              <Tooltip
-                align="left" title={<h3>{encyclopedia.interestRate.inflationTarget}</h3>}
-              >
-                <Typography>Inflation Target: %{inflationTarget}</Typography>
-              </Tooltip>
-              <TextField
-                className={classes.textField}
-                type="number"
-                defaultValue={bankRate}
-                placeholder={0.1}
-                label="Change Bank Rate"
-                onChange={handleChangeBankRate}
-                inputProps={{
-                  min: minBankRate,
-                  max: maxBankRate,
-                  step: { step },
-                }}
-              />
-              <Button
-                variant="outlined"
-                color="primary"
-                onClick={() => submitBankRate(formBankRate)}
-              >
-                submit
-              </Button>
-            </Box>
-            <Box className={classes.containerChart}>
-              <Chart />
-            </Box>
-          </Box>
-        {/* </Box>
-      </Paper> */}
+      <Typography align="left" variant="h4">
+        Interest Rate
+      </Typography>
+      <Typography align="left">
+        {encyclopedia.interestRate.objective}
+      </Typography>
+      <Box className={classes.containerInterestRate}>
+        <Box className={classes.containerSetRate}>
+          <Tooltip
+            align="left"
+            title={<h3>{encyclopedia.interestRate.bankrate}</h3>}
+          >
+            <Typography>Bank Rate: %{bankRate}</Typography>
+          </Tooltip>
+          <Tooltip
+            align="left"
+            title={<h3>{encyclopedia.interestRate.inflationRate}</h3>}
+          >
+            <Typography>Inflation Rate: %{inflationRate}</Typography>
+          </Tooltip>
+          <Tooltip
+            align="left"
+            title={<h3>{encyclopedia.interestRate.inflationTarget}</h3>}
+          >
+            <Typography>Inflation Target: %{inflationTarget}</Typography>
+          </Tooltip>
+          <TextField
+            className={classes.textField}
+            type="number"
+            defaultValue={bankRate}
+            placeholder={0.1}
+            label="Change Bank Rate"
+            onChange={handleChangeBankRate}
+            inputProps={{
+              min: minBankRate,
+              max: maxBankRate,
+              step: { step },
+            }}
+          />
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => submitBankRate(formBankRate)}
+          >
+            submit
+          </Button>
+        </Box>
+        <Box className={classes.containerChart}>
+          <Chart />
+        </Box>
+      </Box>
     </>
   );
 }
