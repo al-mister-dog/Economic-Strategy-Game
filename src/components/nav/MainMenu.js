@@ -9,17 +9,15 @@ import {
 } from "@material-ui/core";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
-
+const darkPrimary = "#191919";
 const useStyles = makeStyles(() => ({
+  mainMenu: {
+    background: darkPrimary,
+    color: "white",
+  },
 
 }))
-export default function MainMenu() {
-  const departments = [
-    { name: "Treasury", path: "/treasury" },
-    { name: "Central Bank", path: "/centralbank" },
-    { name: "Bloc", path: "/bloc" },
-    { name: "Performace", path: "/performance" },
-  ];
+export default function MainMenu({departments, getDepartment}) {
   return (
     <>
       <List>
@@ -36,7 +34,7 @@ export default function MainMenu() {
       <List>
         {departments.map((department, index) => (
           <Link key={index} style={{ textDecoration: 'none', color: "black" }} to={department.path}>
-            <ListItem button key={index}>
+            <ListItem button key={index} onClick={() => getDepartment(department)}>
               <ListItemText primary={department.name} />
             </ListItem>
           </Link>
