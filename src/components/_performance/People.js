@@ -48,7 +48,7 @@ const useStyles = makeStyles(() => ({
 
 function BalanceOfPayments({countries, keysData}) {
   const classes = useStyles();
-  const keys = keysData.balanceOfPayments
+  const keys = keysData.people
   return (
     <Box className={classes.people}>
       <Paper className={classes.paper}>

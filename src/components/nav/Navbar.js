@@ -14,7 +14,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 const lightPrimary = "#ECDBBA";
 const lightSecondary = "#C84B31";
 const darkPrimary = "#191919";
@@ -56,7 +56,10 @@ const useStyles = makeStyles(() => ({
 
 export default function Navbar() {
   const departments = [
-    { name: "Treasury", path: "/treasury" },
+    { name: "Treasury", path: "/treasury", menuItems: [
+      { title: "Desk", path: "desk", menuItems: [] },
+      { title: "Budget", path: "budget", menuItems: [] },
+    ] },
     {
       name: "Central Bank",
       path: "/centralbank",
@@ -76,17 +79,35 @@ export default function Navbar() {
         {
           title: "Financial Policy",
           path: "financialpolicy",
+          menuItems: [],
         },
-        { title: "Regulation", path: "regulation" },
-        { title: "Reserves", path: "reserves" },
+        { title: "Regulation", path: "regulation", menuItems: [] },
+        { title: "Reserves", path: "reserves", menuItems: [] },
       ],
     },
-    { name: "Bloc", path: "/bloc", menuItems: [
-      { title: "Overview", path: "overview" },
-      { title: "Trade", path: "trade" },
-      { title: "Alliance", path: "alliance" },
-    ] },
-    { name: "Performace", path: "/performance" },
+    {
+      name: "Bloc",
+      path: "/bloc",
+      title: "Bloc",
+      menuItems: [
+        { title: "Overview", path: "overview", menuItems: [] },
+        { title: "Trade", path: "trade", menuItems: [] },
+        { title: "Alliance", path: "alliance", menuItems: [] },
+      ],
+    },
+    {
+      name: "Performance",
+      path: "/performance",
+      menuItems: [
+        { title: "Overview", path: "overview", menuItems: [] },
+        { title: "Balance of Payments", path: "balanceofpayments", menuItems: [] },
+        { title: "Government Finance", path: "governmentfinance", menuItems: [] },
+        { title: "Monetary", path: "monetary", menuItems: [] },
+        { title: "National Accounts", path: "nationalaccounts", menuItems: [] },
+        { title: "People", path: "people", menuItems: [] },
+        { title: "Trade", path: "trade", menuItems: [] },
+      ],
+    },
   ];
   const classes = useStyles();
   const [department, setDepartment] = useState("");
@@ -149,8 +170,8 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    setDepartmentOperation(null)
-  }, [department])
+    setDepartmentOperation("");
+  }, [department]);
 
   return (
     <AppBar className={classes.nav} position="sticky">
@@ -169,9 +190,7 @@ export default function Navbar() {
         </Typography>
         {department && (
           <>
-            <Typography variant="h6" className={classes.menuTitle}>
-              
-            </Typography>
+            <Typography variant="h6" className={classes.menuTitle}></Typography>
             <Button
               color="primary"
               variant="outline"
@@ -214,9 +233,7 @@ export default function Navbar() {
 
         {departmentOperation && (
           <>
-            <Typography variant="h6" >
-              {`/`}
-            </Typography>
+            <Typography variant="h6">{`/`}</Typography>
             <Button
               color="primary"
               variant="outline"
@@ -224,37 +241,41 @@ export default function Navbar() {
               onClick={handleClickDepartmentOperationMenu}
             >
               {departmentOperation.title}
-              <ArrowDropDownIcon/>
+              {departmentOperation.menuItems.length > 0 && (
+                <ArrowDropDownIcon />
+              )}
             </Button>
-            <Menu
-              id="menudepartment"
-              className={classes.menu}
-              anchorEl={anchorElDepartmentOperationMenu}
-              open={openDepartmentOperationMenu}
-              onClose={handleCloseDepartmentOperationMenu}
-              MenuListProps={{
-                "aria-labelledby": "basic-button",
-              }}
-            >
-              {departmentOperation.menuItems.map((menuItem) => {
-                return (
-                  <Link
-                    key={menuItem.title}
-                    style={{ textDecoration: "none", color: "black" }}
-                    to={`${department.path}/${departmentOperation.path}/${menuItem.path}`}
-                  >
-                    <MenuItem
+            {departmentOperation.menuItems.length > 0 && (
+              <Menu
+                id="menudepartment"
+                className={classes.menu}
+                anchorEl={anchorElDepartmentOperationMenu}
+                open={openDepartmentOperationMenu}
+                onClose={handleCloseDepartmentOperationMenu}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+              >
+                {departmentOperation.menuItems.map((menuItem) => {
+                  return (
+                    <Link
                       key={menuItem.title}
-                      onClick={() =>
-                        handleClickDepartmentOperationMenuItem(menuItem)
-                      }
+                      style={{ textDecoration: "none", color: "black" }}
+                      to={`${department.path}/${departmentOperation.path}/${menuItem.path}`}
                     >
-                      {menuItem.title}
-                    </MenuItem>
-                  </Link>
-                );
-              })}
-            </Menu>
+                      <MenuItem
+                        key={menuItem.title}
+                        onClick={() =>
+                          handleClickDepartmentOperationMenuItem(menuItem)
+                        }
+                      >
+                        {menuItem.title}
+                      </MenuItem>
+                    </Link>
+                  );
+                })}
+              </Menu>
+            )}
           </>
         )}
       </Toolbar>

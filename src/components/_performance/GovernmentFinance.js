@@ -53,7 +53,7 @@ function GovernmentFinance({countries, keysData}) {
     <Box className={classes.container}>
       <Paper className={classes.paper}>
       <Typography variant="h4" align="left" className={classes.title}>
-        Balance of Payments
+        Government Finance
       </Typography>
         <Box className={classes.box}>
           <PerformanceMapChart countries={countries} keys={keys}/>

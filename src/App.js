@@ -12,7 +12,7 @@ import LogIn from "./pages/auth/LogIn";
 
 import CentralBank from "./pages/CentralBank";
 import MonetaryPolicy from "./components/_central_bank/monetary-policy/__MonetaryPolicy";
-import MonetaryPolicyDesk from "./components/_central_bank/monetary-policy/__Desk";
+import DeskMonetaryPolicy from "./components/_central_bank/monetary-policy/__Desk";
 import Inflation from "./components/_central_bank/monetary-policy/inflation/InflationHome";
 import FinancialPolicy from "./components/_central_bank/financial-policy/__FinancialPolicy";
 import Regulation from "./components/_central_bank/regulation/__Regulation";
@@ -30,7 +30,7 @@ import People from "./components/_performance/People";
 import Trade from "./components/_performance/Trade";
 
 import Bloc from "./pages/Bloc";
-import Overview from "./components/_bloc/Overview";
+import OverviewBloc from "./components/_bloc/Overview";
 import BlocTrade from "./components/_bloc/Trade";
 import Alliance from "./components/_bloc/Alliance";
 import InterestRate from "./components/_central_bank/monetary-policy/interestRate/InterestRate";
@@ -50,15 +50,15 @@ function App() {
             <Route path="login" element={<LogIn />} />
             <Route path="signup" element={<SignUp />} />
             <Route path="bloc" element={<Bloc />}>
-              <Route index element={<Overview />} />
-              <Route path="overview" element={<Overview />} />
+              <Route index element={<OverviewBloc />} />
+              <Route path="overview" element={<OverviewBloc />} />
               <Route path="trade" element={<BlocTrade />} />
               <Route path="alliance" element={<Alliance />} />
             </Route>
             <Route path="centralbank" element={<CentralBank />}>
               <Route path="monetarypolicy" element={<MonetaryPolicy />}>
-                <Route index element={<MonetaryPolicyDesk />} />
-                <Route path="desk" element={<MonetaryPolicyDesk />} />
+                <Route index element={<DeskMonetaryPolicy />} />
+                <Route path="desk" element={<DeskMonetaryPolicy />} />
                 <Route path="inflation" element={<Inflation />} />
                 <Route path="interest" element={<InterestRate />} />
               </Route>

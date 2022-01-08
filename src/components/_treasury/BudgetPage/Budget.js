@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     
     backgroundColor: "#fdfbf7",
     margin: "3rem 9rem 5rem 9rem",
+    padding: "25px",
     "@media (max-width: 620px)": {
       height: "210vh",
       margin: "0.3rem",
@@ -204,8 +205,9 @@ export default function Treasury() {
     <>
       
       <Paper className={classes.paper}>
-      <Typography variant="h4">Budget</Typography>
+      <Typography variant="h4" align="left">Budget</Typography>
       <Box className={classes.container}>
+      
       <Box className={classes.boxOne}>
           <Box className={classes.boxHmReport}>
             <HmReport
