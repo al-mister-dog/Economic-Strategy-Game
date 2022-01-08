@@ -1,24 +1,28 @@
+import {
+  Paper,
+  makeStyles,
+} from "@material-ui/core";
+
 import { Outlet } from "react-router-dom";
 
-
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    backgroundColor: "#fdfbf7",
+    width: "70vw",
+    margin: "auto",
+    marginTop: "2rem",
+    padding: "25px",
+    "@media (max-width: 620px)": {
+      width: "100vw",
+      padding: "5px",
+    },
+  },
+}));
 export default function Treasury() {
-  const title = "Treasury";
-  const menuItems = [
-    {
-      title: "Budget",
-      path: "budget",
-    },
-    {
-      title: "Bond Market",
-      path: "bondmarket",
-    },
-    { title: "Regulation", path: "regulation" },
-    { title: "Reserves", path: "reserves" },
-  ];
-
+  const classes = useStyles()
   return (
-    <>
-      <Outlet />
-    </>
+    <Paper className={classes.paper}>
+      <Outlet/>
+    </Paper>
   );
 }

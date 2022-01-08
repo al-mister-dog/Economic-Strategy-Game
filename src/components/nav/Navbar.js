@@ -57,7 +57,7 @@ const useStyles = makeStyles(() => ({
 export default function Navbar() {
   const departments = [
     { name: "Treasury", path: "/treasury", menuItems: [
-      { title: "Desk", path: "desk", menuItems: [] },
+      { title: "Overview", path: "overview", menuItems: [] },
       { title: "Budget", path: "budget", menuItems: [] },
     ] },
     {
@@ -65,6 +65,7 @@ export default function Navbar() {
       path: "/centralbank",
       title: "Central Bank",
       menuItems: [
+        { title: "Overview", path: "overview", menuItems: [] },
         {
           title: "Monetary Policy",
           path: "monetarypolicy",

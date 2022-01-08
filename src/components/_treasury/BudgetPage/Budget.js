@@ -5,6 +5,8 @@ import Graph from "./Graph";
 import SetBudget from "./SetBudget";
 import Calculator from "./Calculator";
 import { Paper, Box, Typography, makeStyles } from "@material-ui/core";
+import encyclopedia from "../__data__/encyclopedia";
+
 
 const FIRST_YEAR = [
   {
@@ -19,16 +21,15 @@ const FIRST_YEAR = [
 const useStyles = makeStyles((theme) => ({
   title: {
     marginTop: "1rem",
-    height: "5rem"
+    height: "5rem",
   },
   titleMenu: {
     color: "black",
     fontSize: "2.3rem",
     width: "3rem",
-    height: "3rem"
+    height: "3rem",
   },
   paper: {
-    
     backgroundColor: "#fdfbf7",
     margin: "3rem 9rem 5rem 9rem",
     padding: "25px",
@@ -38,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   container: {
+    marginTop: "25px",
     display: "flex",
     height: "80vh",
     "@media (max-width: 620px)": {
@@ -69,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#fdfbf7",
     border: "1px solid #d7d7d7",
     borderRadius: "5px",
-    margin: "10px",
+    marginTop: "10px",
     padding: "10px",
     height: "20%",
     display: "flex",
@@ -81,8 +83,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#fdfbf7",
     border: "1px solid #d7d7d7",
     borderRadius: "5px",
-    margin: "10px",
-    padding: "10px",
+    marginTop: "10px",
+    paddingTop: "10px",
     height: "80%",
     "@media (max-width: 620px)": {
       padding: "0px",
@@ -119,10 +121,14 @@ const useStyles = makeStyles((theme) => ({
       height: "80%",
     },
   },
+  containerDeficit: {
+    marginTop: "25px"
+  }
 }));
 
 export default function Treasury() {
   const classes = useStyles();
+  const deficitText = encyclopedia.budget.deficit;
 
   const [budget, setBudget] = useState(FIRST_YEAR);
   const [totalTax, setTotalTax] = useState(349);
@@ -204,61 +210,66 @@ export default function Treasury() {
   return (
     <>
       
-      <Paper className={classes.paper}>
-      <Typography variant="h4" align="left">Budget</Typography>
-      <Box className={classes.container}>
-      
-      <Box className={classes.boxOne}>
-          <Box className={classes.boxHmReport}>
-            <HmReport
-              budget={budget}
-              settingBudget={settingBudget}
-              setAnnualBudget={setAnnualBudget}
-            />
-          </Box>
-          <Box className={classes.boxGraph}>
-            <Graph budget={budget} />
-          </Box>
-        </Box>
-        <Box className={classes.boxTwo}>
-          <Box className={classes.boxBudgetCalculator}>
-            <Box className={classes.setBudget}>
-              <SetBudget
-                openSpendingCalculator={openSpendingCalculator}
-                openTaxCalculator={openTaxCalculator}
-                totalTax={totalTax}
-                totalSpending={totalSpending}
-                deficit={deficit}
+        <Typography variant="h4" align="left">
+          Budget
+        </Typography>
+        <Box className={classes.container}>
+          <Box className={classes.boxOne}>
+            <Box className={classes.boxHmReport}>
+              <HmReport
+                budget={budget}
                 settingBudget={settingBudget}
-                onSubmitBudget={onSubmitBudget}
-                calcToggle={calcToggle}
+                setAnnualBudget={setAnnualBudget}
               />
             </Box>
-            <Box className={classes.calculator}>
-              {calcToggle && (
-                <Calculator
-                  data={taxAndSpending.taxRevenueData}
+            <Box className={classes.boxGraph}>
+              <Graph budget={budget} />
+            </Box>
+          </Box>
+          <Box className={classes.boxTwo}>
+            <Box className={classes.boxBudgetCalculator}>
+              <Box className={classes.setBudget}>
+                <SetBudget
+                  openSpendingCalculator={openSpendingCalculator}
+                  openTaxCalculator={openTaxCalculator}
+                  totalTax={totalTax}
+                  totalSpending={totalSpending}
+                  deficit={deficit}
                   settingBudget={settingBudget}
-                  title={"Tax Revenues"}
-                  budgetType={"TAX"}
-                  calculateTotalAmount={calculateTotalAmount}
+                  onSubmitBudget={onSubmitBudget}
+                  calcToggle={calcToggle}
                 />
-              )}
-              {!calcToggle && (
-                <Calculator
-                  data={taxAndSpending.spendingData}
-                  settingBudget={settingBudget}
-                  title={"Expenditures"}
-                  budgetType={"SPENDING"}
-                  calculateTotalAmount={calculateTotalAmount}
-                />
-              )}
+              </Box>
+              <Box className={classes.calculator}>
+                {calcToggle && (
+                  <Calculator
+                    data={taxAndSpending.taxRevenueData}
+                    settingBudget={settingBudget}
+                    title={"Tax Revenues"}
+                    budgetType={"TAX"}
+                    calculateTotalAmount={calculateTotalAmount}
+                  />
+                )}
+                {!calcToggle && (
+                  <Calculator
+                    data={taxAndSpending.spendingData}
+                    settingBudget={settingBudget}
+                    title={"Expenditures"}
+                    budgetType={"SPENDING"}
+                    calculateTotalAmount={calculateTotalAmount}
+                  />
+                )}
+              </Box>
             </Box>
           </Box>
         </Box>
-
-      </Box>
-              </Paper>
+        <Box className={classes.containerDeficit}>
+          <Typography align="left" variant="h4" style={{marginBottom: "25px"}}>Deficit</Typography>
+<Typography align="left" style={{marginBottom: "25px"}}>{deficitText.p1}</Typography>
+<Typography align="left" style={{marginBottom: "25px"}}>{deficitText.p2}</Typography>
+<Typography align="left" style={{marginBottom: "25px"}}>{deficitText.p3}</Typography>
+        </Box>
+      
     </>
   );
 }

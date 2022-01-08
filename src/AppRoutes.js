@@ -5,6 +5,7 @@ import SignUp from "./pages/auth/SignUp";
 import LogIn from "./pages/auth/LogIn";
 
 import CentralBank from "./pages/CentralBank";
+import OverviewCentralBank from "./components/_central_bank/Overview"
 import MonetaryPolicy from "./components/_central_bank/monetary-policy/__MonetaryPolicy";
 import DeskMonetaryPolicy from "./components/_central_bank/monetary-policy/__Desk";
 import Inflation from "./components/_central_bank/monetary-policy/inflation/InflationHome";
@@ -13,6 +14,7 @@ import Regulation from "./components/_central_bank/regulation/__Regulation";
 import Reserves from "./components/_central_bank/reserves/__Reserves";
 
 import Treasury from "./pages/Treasury";
+import OverviewTreasury from "./components/_treasury/Overview";
 import Budget from "./components/_treasury/BudgetPage/Budget";
 
 import Performance from "./pages/Performance";
@@ -43,8 +45,10 @@ export default function AppRoutes() {
           <Route path="alliance" element={<Alliance />} />
         </Route>
         <Route path="centralbank" element={<CentralBank />}>
+        <Route index element={<OverviewCentralBank />} />
+        <Route path="overview" element={<OverviewCentralBank />} />
           <Route path="monetarypolicy" element={<MonetaryPolicy />}>
-            <Route index element={<DeskMonetaryPolicy />} />
+            <Route index element={<DeskMonetaryPolicy />} />            
             <Route path="desk" element={<DeskMonetaryPolicy />} />
             <Route path="inflation" element={<Inflation />} />
             <Route path="interest" element={<InterestRate />} />
@@ -62,6 +66,8 @@ export default function AppRoutes() {
           <Route path="trade" element={<Trade />} />
         </Route>
         <Route path="treasury" element={<Treasury />}>
+        <Route index element={<OverviewTreasury />} />
+          <Route path="overview" element={<OverviewTreasury />} />
           <Route path="budget" element={<Budget />} />
         </Route>
       </Routes>
