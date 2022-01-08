@@ -174,7 +174,9 @@ function CpiWeightCalculator({ cpiData, submitCpi }) {
   const classes = useStyles();
   return (
     <>
+    <Typography variant="h5" style={{marginBottom: "25px"}}>CPI Weight Calculator</Typography>
       <Box className={classes.boxCpi}>
+        
         <Box className={classes.inflationLabels}>
           <Typography variant="h6" className={classes.inflationLabelIndex}>
             Inflation index:{" "}

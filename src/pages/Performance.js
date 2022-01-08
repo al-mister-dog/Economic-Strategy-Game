@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-import PageTitle from "../components/__reusable/layout/PageTitle";
 
 export default function Performance() {
   const title = "Performance";
@@ -18,7 +17,6 @@ export default function Performance() {
   ];
   return (
     <>
-      {/* <PageTitle title={title} menuItems={menuItems} /> */}
       <Outlet />
     </>
   );

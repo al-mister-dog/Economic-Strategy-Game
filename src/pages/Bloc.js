@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-import PageTitle from "../components/__reusable/layout/PageTitle";
 
 export default function Bloc() {
   const title = "Bloc";
@@ -18,8 +17,8 @@ export default function Bloc() {
     },
   ];
   return (
-    <>
+    <div style={{backgroundColor: "#C84B31", minHeight: "150vh"}}>
       <Outlet />
-    </>
+    </div>
   );
 }

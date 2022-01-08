@@ -37,18 +37,18 @@ export default function InflationHome() {
   const classes = useStyles();
   return (
     <>
-        <Typography align="left" variant="h4">
+        <Typography align="left" variant="h4" style={{marginBottom: "25px"}}>
           Inflation
         </Typography>
-      <Box className={classes.containerCharts}>
+      <Box className={classes.containerCharts} style={{marginBottom: "25px"}}>
         <InflationChange />
         <InflationRate />
       </Box>
       <Box className={classes.containerCpiWeight}>
-        <Typography align="left" variant="h4">
+        <Typography align="left" variant="h4" style={{marginBottom: "25px"}}>
           CPI Weight
         </Typography>
-        <Typography align="left" variant="body">
+        <Typography align="left" variant="body" style={{marginBottom: "25px"}}>
           {encyclopedia.inflationRate.cpiWeight}
         </Typography>
         <CpiWeightCalculator />
