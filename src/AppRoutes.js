@@ -15,7 +15,7 @@ import Reserves from "./components/_central_bank/reserves/__Reserves";
 
 import Treasury from "./pages/Treasury";
 import OverviewTreasury from "./components/_treasury/Overview";
-import Budget from "./components/_treasury/BudgetPage/Budget";
+import Budget from "./components/_treasury/Budget/Budget";
 
 import Performance from "./pages/Performance";
 import OverviewPerformance from "./components/_performance/Overview";
