@@ -14,7 +14,7 @@ const useStyles = makeStyles(() => ({
     alignItems: "center",
   },
   title: {
-    fontWeight: "bold",
+    // fontWeight: "bold",
     // fontSize: "1.6rem",
     marginLeft: 10,
     overflow: "hidden",

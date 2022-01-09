@@ -50,16 +50,13 @@ function Monetary({countries, keysData}) {
   const classes = useStyles();
   const keys = keysData.monetary
   return (
-    <Box className={classes.container}>
-      <Paper className={classes.paper}>
+    <>
       <Typography variant="h4" align="left" className={classes.title}>
         Monetary
       </Typography>
-        <Box className={classes.box}>
-          <PerformanceMapChart countries={countries} keys={keys}/>
-        </Box>
-      </Paper>
-    </Box>
+
+      <PerformanceMapChart countries={countries} keys={keys} />
+    </>
   );
 }
 const mapStateToProps = (state) => {

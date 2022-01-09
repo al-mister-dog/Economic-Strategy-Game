@@ -30,50 +30,18 @@ const useStyles = makeStyles(() => ({
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
-const MapChart = ({ countries, keys }) => {
-  const classes = useStyles();
-  const [radioGroupValue, setRadioGroupValue] = useState(keys[0].name);
-  const [objectKey, setObjectKey] = useState(keys[0].name);
+const MapChart = ({ countries, blocs }) => {
   const [content, setContent] = useState("");
-  const min = Math.min(...countries.map((country) => country[objectKey]));
-  const max = Math.max(...countries.map((country) => country[objectKey]));
-  const range = ["#ffe9e3", "#ff410d"];
-  const colorScale = scaleLinear().domain([min, max]).range(range);
 
-  function getExpression(mappedCountry) {
-    const expressions = {
-      int: `${mappedCountry[objectKey]}`,
-      percent: `${parseFloat(mappedCountry[objectKey]).toFixed(2)}%`,
-      percentChange: `${parseFloat(mappedCountry[objectKey]).toFixed(
-        2
-      )}% change`,
-      million: `${roundToMillion(
-        parseFloat(mappedCountry[objectKey]).toFixed(2)
-      )}`,
-      billion: `${roundToBillion(
-        parseFloat(mappedCountry[objectKey]).toFixed(2)
-      )}`,
-    };
-    const target = keys.find((el) => el.name === objectKey);
-    return expressions[target.unit];
-  }
-
-  function handleChangeForm(event) {
-    setRadioGroupValue(event.target.value);
-    setMetric(event.target.value);
-  }
-
-  function setMetric(name) {
-    setObjectKey(name);
-  }
 
   function setFill(mappedCountry) {
-    return colorScale(mappedCountry[objectKey]);
+    const bloc = blocs.find(bloc => bloc.name === mappedCountry.bloc);
+    return bloc ? bloc.color : "#333"
+    
   }
 
   function setToolTip(mappedCountry) {
-    const expression = getExpression(mappedCountry);
-    setContent(`${mappedCountry.NAME}: ${expression}`);
+    setContent(`${mappedCountry.NAME}: ${mappedCountry.bloc}`);
   }
 
   return (
@@ -101,13 +69,15 @@ const MapChart = ({ countries, keys }) => {
                         key={geo.rsmKey}
                         geography={geo}
                         fill={mappedCountry ? setFill(mappedCountry) : "#333"}
+                        stroke="green"
+                        strokeWidth={0.3}
                         onMouseEnter={() => {
                           mappedCountry
                             ? setToolTip(mappedCountry)
                             : setContent("no data");
                         }}
                         onMouseLeave={() => {
-                          setContent("");
+                          setContent(mappedCountry.bloc);
                         }}
                         style={{
                           hover: {
@@ -128,29 +98,6 @@ const MapChart = ({ countries, keys }) => {
           </ComposableMap>
           <ReactTooltip>{content}</ReactTooltip>
         </div>
-        <FormControl component="fieldset">
-          <RadioGroup
-          // sx={{display: "flex", }}
-          row
-            aria-label="radiogroupmap"
-            name="radiogroupmap1"
-            value={radioGroupValue}
-            onChange={handleChangeForm}
-          >
-            {keys.map((key) => {
-              const { name, label } = key;
-              return (
-                <FormControlLabel
-                  labelPlacement="right"
-                  value={name}
-                  control={<Radio color="primary" />}
-                  label={<Typography style={{fontSize: "0.8rem"}}>{label}</Typography>}
-                  // label={label}
-                />
-              );
-            })}
-          </RadioGroup>
-        </FormControl>
       </Box>
     </>
   );

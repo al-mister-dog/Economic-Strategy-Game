@@ -96,6 +96,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "5px",
     height: "100%",
     margin: "10px",
+    marginBottom: "0px",
     padding: "10px",
     display: "flex",
     flexDirection: "column",

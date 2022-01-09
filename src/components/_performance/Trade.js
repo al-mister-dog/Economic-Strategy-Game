@@ -1,12 +1,7 @@
 import { connect } from "react-redux";
-import {
-  Paper,
-  Box,
-  Typography,
-  makeStyles,
-} from "@material-ui/core";
+import { Paper, Box, Typography, makeStyles } from "@material-ui/core";
 
-import PerformanceMapChart from "../__reusable/maps/components/MapChart"
+import PerformanceMapChart from "../__reusable/maps/components/MapChart";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -46,20 +41,17 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function Trade({countries, keysData}) {
+function Trade({ countries, keysData }) {
   const classes = useStyles();
-  const keys = keysData.trade
+  const keys = keysData.trade;
   return (
-    <Box className={classes.container}>
-      <Paper className={classes.paper}>
+    <>
       <Typography variant="h4" align="left" className={classes.title}>
         Trade
       </Typography>
-        <Box className={classes.box}>
-          <PerformanceMapChart countries={countries} keys={keys}/>
-        </Box>
-      </Paper>
-    </Box>
+
+      <PerformanceMapChart countries={countries} keys={keys} />
+    </>
   );
 }
 const mapStateToProps = (state) => {

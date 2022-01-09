@@ -50,16 +50,13 @@ function GovernmentFinance({countries, keysData}) {
   const classes = useStyles();
   const keys = keysData.govFinance
   return (
-    <Box className={classes.container}>
-      <Paper className={classes.paper}>
-      <Typography variant="h4" align="left" className={classes.title}>
-        Government Finance
-      </Typography>
-        <Box className={classes.box}>
-          <PerformanceMapChart countries={countries} keys={keys}/>
-        </Box>
-      </Paper>
-    </Box>
+    <>
+    <Typography variant="h4" align="left" className={classes.title}>
+      Government Finance
+    </Typography>
+
+    <PerformanceMapChart countries={countries} keys={keys} />
+  </>
   );
 }
 const mapStateToProps = (state) => {
