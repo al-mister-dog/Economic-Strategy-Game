@@ -13,6 +13,12 @@ const useStyles = makeStyles((theme) => ({
   title: {
     marginBottom: "5px",
     // fontWeight: "bold",
+    padding: "20px 0 10px 0",
+    "@media (max-width: 620px)": {
+      fontSize: "0.7rem",
+      margin: "15px 0 15px 0",
+      padding: "0",
+    },
   },
   boxCpi: {
     padding: "20px",
@@ -24,12 +30,33 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     margin: "auto",
     "@media (max-width: 620px)": {
-      width: "100vw",
+      width: "90%",
     },
   },
   inflationLabels: {
     display: "flex",
     justifyContent: "space-around",
+  },
+  inflationLabelIndex: {
+    backgroundColor: theme.palette.common.lightSecondary,
+    borderRadius: "5px",
+    padding: "10px",
+    color: "white",
+    "@media (max-width: 620px)": {
+      fontSize: "0.8rem",
+      padding: "5px"
+    },
+
+  },
+  inflationLabelRate: {
+    backgroundColor: theme.palette.common.lightSecondary,
+    borderRadius: "5px",
+    padding: "10px",
+    color: "white",
+    "@media (max-width: 620px)": {
+      fontSize: "0.8rem",
+      padding: "5px"
+    },
   },
   containerCalculator: {},
 
@@ -46,16 +73,25 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "0.8rem",
     fontWeight: "bold",
     textAlign: "left",
+    "@media (max-width: 620px)": {
+      fontSize: "0.6rem"
+    }
   },
   sliderLabelChange: {
     fontSize: "0.8rem",
     fontWeight: "bold",
+    "@media (max-width: 620px)": {
+      fontSize: "0.6rem"
+    }
     // width: "40%",
   },
   sliderLabelWeight: {
     fontSize: "0.8rem",
     fontWeight: "bold",
     paddingLeft: "15px",
+    "@media (max-width: 620px)": {
+      fontSize: "0.6rem"
+    }
   },
 
   slider: {
@@ -68,6 +104,10 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     color: "#808080",
     textAlign: "left",
+    // margin: "auto",
+    "@media (max-width: 620px)": {
+      fontSize: "0.4rem",
+    },
   },
   change: {
     fontSize: "0.8rem",
@@ -190,7 +230,7 @@ function CpiWeightCalculator({ cpiData, submitCpi }) {
         <Box className={classes.containerCalculator}>
           <Typography
             variant="subtitle1"
-            align="left"
+            align="center"
             className={classes.title}
           >
             Weight allocation of items to Consumer Prices Index
@@ -211,7 +251,7 @@ function CpiWeightCalculator({ cpiData, submitCpi }) {
                 variant="body1"
                 align="left"
               >
-                Weight
+                Weight (% of 100)
               </Typography>
             </Box>
             {cpi.map((object, index) => {

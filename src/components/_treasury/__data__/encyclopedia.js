@@ -1,5 +1,5 @@
 const encyclopedia = {
-  overview: "It is responsible for developing and executing the government's public finance policy and economic policy.",
+  overview: "The treasury is responsible for developing and executing the government's public finance policy and economic policy.",
   budget: {
     deficit: {
       p1: "As of 2022 the national deficit of the UK stands at around one trillion. In 1999 the deficit was zero. A deficit is zero when government spending is the same amount as government revenue, (which is mostly through taxation.)",

@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "25px",
     display: "flex",
     "@media (max-width: 620px)": {
+      minHeight: "70vh",
       width: "100vw",
       padding: "5px",
       flexDirection: "column",
@@ -32,14 +33,35 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   welcome: {
+    width: "50%",
     "@media (max-width: 620px)": {
-      display: "none"
+      padding: "10px",
+      // display: "flex",
+      // alignItems: "center",
+      width: "90%",
+      margin: "auto"
     },
     
   },
+  img: {
+    "@media (max-width: 620px)": {
+      width: "10rem"
+    },
+  },
+  title: {
+    "@media (max-width: 620px)": {
+      // fontSize: "1.5rem"
+      display: "none"
+    },
+  },
   auth: {
     width: "50%",
+    marginTop: 8,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     "@media (max-width: 620px)": {
+      marginTop: 4,
       width: "90%",
       margin: "auto"
     },
@@ -62,22 +84,14 @@ export default function SignUp() {
     <>
     
     <Paper className={classes.paper}>
-      <Box sx={{width: "50%"}} className={classes.welcome}>
-        <img src={owl} alt="owl"/>
-      <Typography variant="h3">Trial of the Pyx</Typography>
+      <Box className={classes.welcome}>
+        <img className={classes.img} src={owl} alt="owl"/>
+      <Typography variant="h3" className={classes.title}>Trial of the Pyx</Typography>
       </Box>
       <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
+
         className={classes.auth}
       >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockIcon />
-          </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
@@ -85,28 +99,18 @@ export default function SignUp() {
             component="form"
             noValidate
             onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
+            sx={{ mt: 2 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} >
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="username"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  id="userName"
+                  label="Username"
                   autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -130,28 +134,21 @@ export default function SignUp() {
                   autoComplete="new-password"
                 />
               </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="I want to receive inspiration and updates via email."
-                />
-              </Grid>
+            
             </Grid>
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              style={{marginTop: "40px"}}
             >
               Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
-              <Grid item>
+              <Grid item style={{marginTop: "20px"}}>
                 <Link to="/login">
                   <Typography variant="body2">
-                    Already have an account? Sign in
+                    Already have an account? Log in
                   </Typography>
                 </Link>
               </Grid>

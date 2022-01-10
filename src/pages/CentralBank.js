@@ -10,10 +10,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#fdfbf7",
     width: "70vw",
     margin: "auto",
-    marginTop: "2rem",
+    marginTop: "6rem",
     padding: "25px",
     "@media (max-width: 620px)": {
-      width: "100vw",
+      width: "95vw",
       padding: "5px",
     },
   },
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 export default function CentralBank() {
   const classes = useStyles()
   return (
-    <Paper className={classes.paper}>
+    <Paper elevation={0} className={classes.paper}>
       <Outlet/>
     </Paper>
   );

@@ -5,53 +5,69 @@ import InflationChange from "./InflationChange";
 import InflationRate from "./InflationRate";
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    backgroundColor: "#fdfbf7",
-    width: "70vw",
-    margin: "auto",
-    marginTop: "2rem",
-    padding: "25px",
-    "@media (max-width: 620px)": {
-      width: "100vw",
-      padding: "5px",
-    },
-  },
   box: {
     width: "100%",
     display: "flex",
     flexDirection: "column",
+    "@media (max-width: 620px)": {
+      width: "90%",
+
+    },
   },
   containerCharts: {
     display: "flex",
     border: "1px solid #d7d7d7",
     borderRadius: "5px",
     paddingBottom: "70px",
+    "@media (max-width: 620px)": {
+      flexDirection: "column",
+    },
   },
   containerCpiWeight: {
     // marginTop: "30px",
     display: "flex",
     flexDirection: "column",
   },
+  cpiWeightText: {
+    "@media (max-width: 620px)": {
+      padding: "5px",
+      fontSize: "0.7rem"
+    },
+  }
 }));
 export default function InflationHome() {
   const classes = useStyles();
   return (
     <>
-        <Typography align="left" variant="h4" style={{marginBottom: "25px"}}>
+      <Box className={classes.box}>
+        <Typography align="left" variant="h4" style={{ marginBottom: "25px" }}>
           Inflation
         </Typography>
-      <Box className={classes.containerCharts} style={{marginBottom: "25px"}}>
-        <InflationChange />
-        <InflationRate />
-      </Box>
-      <Box className={classes.containerCpiWeight}>
-        <Typography align="left" variant="h4" style={{marginBottom: "25px"}}>
-          CPI Weight
-        </Typography>
-        <Typography align="left" variant="body" style={{marginBottom: "25px"}}>
-          {encyclopedia.inflationRate.cpiWeight}
-        </Typography>
-        <CpiWeightCalculator />
+        <Box
+          className={classes.containerCharts}
+          style={{ marginBottom: "25px" }}
+        >
+          <InflationChange />
+          <InflationRate />
+        </Box>
+        <Box className={classes.containerCpiWeight}>
+          <Typography
+            align="left"
+            variant="h4"
+            style={{ marginBottom: "25px" }}
+          >
+            CPI Weight
+          </Typography>
+          <Typography
+            align="justify"
+            variant="body"
+            className={classes.cpiWeightText}
+            style={{ marginBottom: "25px" }}
+          >
+            {encyclopedia.inflationRate.cpiWeight}
+          </Typography>
+          <CpiWeightCalculator />
+        </Box>
       </Box>
     </>
   );

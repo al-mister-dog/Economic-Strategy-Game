@@ -1,10 +1,16 @@
-import { Typography } from "@material-ui/core"
+import { Box, Typography } from "@material-ui/core"
 import encyclopedia from "./__data__/encyclopedia"
 export default function Overview(){
   return (
     <>
-    <Typography>Overview: Treasury</Typography>
-    <Typography>{encyclopedia.overview}</Typography>
+    <Box>
+      <Box>
+      <Typography variant="h4" align="left" style={{padding: "25px"}}>Overview: Treasury</Typography>
+      </Box>
+    
+    <Typography align="left" style={{padding: "25px"}}>{encyclopedia.overview}</Typography>
+    </Box>
+    
     </>
   )
 }

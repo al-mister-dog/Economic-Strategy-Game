@@ -3,8 +3,8 @@ import encyclopedia from "./encyclopedia"
 export default function Overview(){
   return (
     <>
-    <Typography>Overview: Central Bank</Typography>
-    <Typography>{encyclopedia.overview}</Typography>
+    <Typography variant="h4" align="left" style={{padding: "25px"}}>Overview: Central Bank</Typography>
+    <Typography align="left" style={{padding: "25px"}}>{encyclopedia.overview}</Typography>
     </>
   )
 }

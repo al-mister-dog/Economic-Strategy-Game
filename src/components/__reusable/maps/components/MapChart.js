@@ -79,7 +79,7 @@ const MapChart = ({ countries, keys }) => {
   return (
     <>
       <Box sx={{ border: "1px solid #d7d7d7", borderRadius: "5px", padding: "10px" }}>
-        <div style={{ width: "100%", height: "60vh" }}>
+        <div style={{ width: "100%" }}>
           <ComposableMap
             data-tip=""
             width={900}

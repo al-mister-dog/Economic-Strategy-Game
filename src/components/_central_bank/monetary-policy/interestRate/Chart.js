@@ -44,7 +44,7 @@ export default function Chart() {
         data={data}
         margin={{
           top: 5,
-          right: 50,
+          right: 5,
           left: 0,
           bottom: 5,
         }}
