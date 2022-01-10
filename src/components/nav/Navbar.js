@@ -21,9 +21,22 @@ const darkPrimary = "#191919";
 const darkSecondary = "#2D4263";
 const useStyles = makeStyles(() => ({
   nav: {
-    background: darkPrimary,
+    backgroundColor: darkPrimary,
     color: "white",
     boxShadow: "none",
+  },
+  toolbarOne: {
+    margin: "0 1.5rem 0 1.5rem",
+    display: "flex",
+    justifyContent: "space-between",
+    borderBottom: "1px solid white",
+    "@media (max-width: 620px)": {
+      margin: "0px 0px 0px 0px"
+    }
+  },
+  toolbarTwo: {
+    backgroundColor: darkPrimary, 
+    // position: "fixed"
   },
   mainMenu: {
     background: darkSecondary,
@@ -32,25 +45,47 @@ const useStyles = makeStyles(() => ({
 
   title: {
     fontFamily: "Open Sans",
+    fontWeight: "bold",
+    "@media (max-width: 620px)": {
+      fontSize: "1rem"
+    }
+  },
+  trial: {
+    fontFamily: "Open Sans",
+    "@media (max-width: 620px)": {
+      fontSize: "0.9rem"
+    }
   },
   menuTitle: {
     marginLeft: "1.5rem",
     fontWeight: "bold",
+    "@media (max-width: 620px)": {
+      fontSize: "0.9rem"
+    }
   },
   menuTitleSecondary: {
     marginLeft: "1.5rem",
+    "@media (max-width: 620px)": {
+      fontSize: "0.9rem"
+    }
   },
   buttonMenu: {
     color: "white",
     // borderBottom: "1px solid white",
     fontWeight: "bold",
     fontSize: "1rem",
+    "@media (max-width: 620px)": {
+      fontSize: "0.7rem"
+    }
   },
   buttonMenuTwo: {
     color: "white",
     // borderBottom: "1px solid white",
     // fontWeight: "bold",
     fontSize: "1rem",
+    "@media (max-width: 620px)": {
+      fontSize: "0.7rem"
+    }
   },
 }));
 
@@ -176,7 +211,7 @@ export default function Navbar() {
 
   return (
     <AppBar className={classes.nav} position="sticky">
-      <Toolbar>
+      <Toolbar className={classes.toolbarOne}>
         <IconButton
           // size="large"
           edge="start"
@@ -186,9 +221,15 @@ export default function Navbar() {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" className={classes.title}>
+        <Typography variant="h4" className={classes.title}>
           Trial of the Pyx
         </Typography>
+        <Typography variant="h6" className={classes.trial}>
+          My Trial
+        </Typography>
+        
+      </Toolbar>
+      <Toolbar className={classes.toolbarTwo}>
         {department && (
           <>
             <Typography variant="h6" className={classes.menuTitle}></Typography>
