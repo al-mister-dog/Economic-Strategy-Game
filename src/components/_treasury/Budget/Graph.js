@@ -32,7 +32,12 @@ export default function Treasury({ budget }) {
         UK revenue, expenditure and deficit/surplus (Billion GBP)
       </Typography>
       <ResponsiveContainer width="93%" height="80%">
-        <LineChart data={budget} height="" width="">
+        <LineChart data={budget} height="" width=""  margin={{
+            top: 15,
+            right: 0,
+            left: -10,
+            // bottom: 5,
+          }}>
           <CartesianGrid strokeDasharray="3 3" strokeWidth={2} />
           <XAxis dataKey="year" strokeWidth={2} />
           <YAxis strokeWidth={2} />

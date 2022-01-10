@@ -56,7 +56,7 @@ export default function InflationChart() {
           <XAxis dataKey="year" />
           <YAxis />
           <Tooltip />
-          <Legend />
+          {/* <Legend /> */}
           <ReferenceLine y={0} stroke="#000" />
           <Bar dataKey="change" fill="#8884d8" />
         </BarChart>

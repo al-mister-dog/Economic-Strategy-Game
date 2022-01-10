@@ -43,10 +43,12 @@ export default function InflationHome() {
         <Typography align="left" variant="h4" style={{ marginBottom: "25px" }}>
           Inflation
         </Typography>
+        <hr></hr>
         <Box
           className={classes.containerCharts}
           style={{ marginBottom: "25px" }}
         >
+          
           <InflationChange />
           <InflationRate />
         </Box>

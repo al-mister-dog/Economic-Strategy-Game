@@ -6,6 +6,9 @@ const useStyles = makeStyles(() => ({
     flexDirection: "column",
     justifyContent: "space-between",
     width: "75%",
+    "@media (max-width: 620px)": {
+      width: "100%"
+    },
   },
   logoAndButton: {
     display: "flex",
@@ -28,9 +31,10 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     justifyContent: "space-around",
     "@media (max-width: 620px)": {
-      flexDirection: "column",
+      // flexDirection: "column",
       flexWrap: "wrap",
-      margin: "5px",
+      margin: "auto",
+      marginTop: "15px"
     },
   },
   text: {
@@ -38,7 +42,8 @@ const useStyles = makeStyles(() => ({
     color: "#808080",
     "@media (max-width: 620px)": {
       justifyContent: "space-between",
-      fontSize: "0.5rem"
+      fontSize: "0.6rem",
+      marginLeft: "25px"
     },
   },
   textNum: {
@@ -46,11 +51,15 @@ const useStyles = makeStyles(() => ({
     fontSize: "1.2rem",
     "@media (max-width: 620px)": {
       justifyContent: "space-between",
-      fontSize: "0.5rem"
+      fontSize: "0.6rem",
+      marginLeft: "25px"
     },
   },
   submitBtn: {
     minWidth: "10rem",
+    "@media (max-width: 620px)": {
+      marginTop: "25px"
+    },
   },
 }));
 export default function HmReport({ budget, settingBudget, setAnnualBudget }) {
@@ -61,7 +70,7 @@ export default function HmReport({ budget, settingBudget, setAnnualBudget }) {
     <>
       <Box className={classes.hmReportTitle}>
         <Typography variant="h4" className={classes.title} align="left">
-          {year}
+          Year: {year}
         </Typography>
         <Box className={classes.totals}>
           <Box>

@@ -1,4 +1,5 @@
-import { Box } from "@material-ui/core";
+import { Box, makeStyles } from "@material-ui/core";
+
 import {
   LineChart,
   Line,
@@ -35,9 +36,19 @@ const data = [
   { year: 2020, rate: 0.9895, change: -0.75 },
 ];
 
-export default function inflationRate() {
+const useStyles = makeStyles(() => ({
+  box: {
+    width: "100%", height: 300,
+    "@media (max-width: 620px)": {
+      marginTop: "50px"
+    }
+  }
+}))
+
+export default function InflationRate() {
+  const classes = useStyles()
   return (
-    <Box sx={{width: "100%", height: 300}}>
+    <Box className={classes.box}>
       <p>% Rate of Inflation</p>
       <ResponsiveContainer width="90%" height="100%">
         <LineChart
@@ -55,7 +66,7 @@ export default function inflationRate() {
           <XAxis dataKey="year" />
           <YAxis />
           <Tooltip />
-          <Legend />
+          {/* <Legend /> */}
           <Line
             type="monotone"
             dataKey="rate"

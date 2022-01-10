@@ -71,9 +71,10 @@ function Desk({
   ];
   return (
     <>
-      <Typography variant="h4" align="left">
+      <Typography variant="h4" align="left" style={{ marginBottom: "25px" }}>
         Desk: Monetary Policy
       </Typography>
+      <hr></hr>
       <Typography align="left" style={{ marginTop: "25px" }}>
         {encyclopedia.welcome}
       </Typography>

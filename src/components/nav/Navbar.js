@@ -36,6 +36,7 @@ const useStyles = makeStyles(() => ({
   },
   toolbarTwo: {
     backgroundColor: darkPrimary, 
+    
     // position: "fixed"
   },
   mainMenu: {

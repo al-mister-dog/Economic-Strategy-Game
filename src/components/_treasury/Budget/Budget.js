@@ -4,9 +4,8 @@ import HmReport from "./HmReport";
 import Graph from "./Graph";
 import SetBudget from "./SetBudget";
 import Calculator from "./Calculator";
-import { Paper, Box, Typography, makeStyles } from "@material-ui/core";
+import { Box, Typography, makeStyles } from "@material-ui/core";
 import encyclopedia from "../__data__/encyclopedia";
-
 
 const FIRST_YEAR = [
   {
@@ -29,21 +28,14 @@ const useStyles = makeStyles((theme) => ({
     width: "3rem",
     height: "3rem",
   },
-  paper: {
-    backgroundColor: "#fdfbf7",
-    margin: "3rem 9rem 5rem 9rem",
-    padding: "25px",
-    "@media (max-width: 620px)": {
-      height: "210vh",
-      margin: "0.3rem",
-    },
-  },
+
   container: {
     marginTop: "25px",
     display: "flex",
     height: "80vh",
     "@media (max-width: 620px)": {
       flexDirection: "column",
+      height: "160vh",
     },
   },
   boxOne: {
@@ -77,6 +69,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     "@media (max-width: 620px)": {
       height: "25%",
+      flexDirection: "column",
     },
   },
   boxGraph: {
@@ -123,8 +116,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   containerDeficit: {
-    marginTop: "25px"
-  }
+    marginTop: "25px",
+  },
 }));
 
 export default function Treasury() {
@@ -210,67 +203,82 @@ export default function Treasury() {
 
   return (
     <>
-      
-        <Typography variant="h4" align="left">
-          Budget
-        </Typography>
-        <Box className={classes.container}>
-          <Box className={classes.boxOne}>
-            <Box className={classes.boxHmReport}>
-              <HmReport
-                budget={budget}
+      <Typography variant="h4" align="left">
+        Budget
+      </Typography>
+      <Box className={classes.container}>
+        <Box className={classes.boxOne}>
+          <Box className={classes.boxHmReport}>
+            <HmReport
+              budget={budget}
+              settingBudget={settingBudget}
+              setAnnualBudget={setAnnualBudget}
+            />
+          </Box>
+          <Box className={classes.boxGraph}>
+            <Graph budget={budget} />
+          </Box>
+        </Box>
+        <Box className={classes.boxTwo}>
+          <Box className={classes.boxBudgetCalculator}>
+            <Box className={classes.setBudget}>
+              <SetBudget
+                openSpendingCalculator={openSpendingCalculator}
+                openTaxCalculator={openTaxCalculator}
+                totalTax={totalTax}
+                totalSpending={totalSpending}
+                deficit={deficit}
                 settingBudget={settingBudget}
-                setAnnualBudget={setAnnualBudget}
+                onSubmitBudget={onSubmitBudget}
+                calcToggle={calcToggle}
               />
             </Box>
-            <Box className={classes.boxGraph}>
-              <Graph budget={budget} />
-            </Box>
-          </Box>
-          <Box className={classes.boxTwo}>
-            <Box className={classes.boxBudgetCalculator}>
-              <Box className={classes.setBudget}>
-                <SetBudget
-                  openSpendingCalculator={openSpendingCalculator}
-                  openTaxCalculator={openTaxCalculator}
-                  totalTax={totalTax}
-                  totalSpending={totalSpending}
-                  deficit={deficit}
+            <Box className={classes.calculator}>
+              {calcToggle && (
+                <Calculator
+                  data={taxAndSpending.taxRevenueData}
                   settingBudget={settingBudget}
-                  onSubmitBudget={onSubmitBudget}
-                  calcToggle={calcToggle}
+                  title={"Tax Revenues"}
+                  budgetType={"TAX"}
+                  calculateTotalAmount={calculateTotalAmount}
                 />
-              </Box>
-              <Box className={classes.calculator}>
-                {calcToggle && (
-                  <Calculator
-                    data={taxAndSpending.taxRevenueData}
-                    settingBudget={settingBudget}
-                    title={"Tax Revenues"}
-                    budgetType={"TAX"}
-                    calculateTotalAmount={calculateTotalAmount}
-                  />
-                )}
-                {!calcToggle && (
-                  <Calculator
-                    data={taxAndSpending.spendingData}
-                    settingBudget={settingBudget}
-                    title={"Expenditures"}
-                    budgetType={"SPENDING"}
-                    calculateTotalAmount={calculateTotalAmount}
-                  />
-                )}
-              </Box>
+              )}
+              {!calcToggle && (
+                <Calculator
+                  data={taxAndSpending.spendingData}
+                  settingBudget={settingBudget}
+                  title={"Expenditures"}
+                  budgetType={"SPENDING"}
+                  calculateTotalAmount={calculateTotalAmount}
+                />
+              )}
             </Box>
           </Box>
         </Box>
-        <Box className={classes.containerDeficit}>
-          <Typography align="left" variant="h4" style={{marginBottom: "25px"}}>Deficit</Typography>
-<Typography align="left" style={{marginBottom: "25px"}}>{deficitText.p1}</Typography>
-<Typography align="left" style={{marginBottom: "25px"}}>{deficitText.p2}</Typography>
-<Typography align="left" style={{marginBottom: "25px"}}>{deficitText.p3}</Typography>
-        </Box>
-      
+      </Box>
+      <Box className={classes.containerDeficit}>
+        <Typography align="left" variant="h4" style={{ marginBottom: "25px" }}>
+          Deficit
+        </Typography>
+        <Typography
+          align="justify"
+          style={{ marginBottom: "25px", fontSize: "0.7rem" }}
+        >
+          {deficitText.p1}
+        </Typography>
+        <Typography
+          align="justify"
+          style={{ marginBottom: "25px", fontSize: "0.7rem" }}
+        >
+          {deficitText.p2}
+        </Typography>
+        <Typography
+          align="justify"
+          style={{ marginBottom: "25px", fontSize: "0.7rem" }}
+        >
+          {deficitText.p3}
+        </Typography>
+      </Box>
     </>
   );
 }

@@ -7,7 +7,7 @@ export default function Overview(){
       <Box>
       <Typography variant="h4" align="left" style={{padding: "25px"}}>Overview: Treasury</Typography>
       </Box>
-    
+    <hr></hr>
     <Typography align="left" style={{padding: "25px"}}>{encyclopedia.overview}</Typography>
     </Box>
     
