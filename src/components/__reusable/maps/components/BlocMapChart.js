@@ -1,14 +1,7 @@
 import { useState, memo } from "react";
 import ReactTooltip from "react-tooltip";
-import { roundToMillion, roundToBillion } from "../../tools/RoundNums";
 import {
   Box,
-  FormControl,
-  FormControlLabel,
-  RadioGroup,
-  Radio,
-  Typography,
-  makeStyles,
 } from "@material-ui/core";
 import {
   Sphere,
@@ -19,13 +12,6 @@ import {
   Geography,
 } from "react-simple-maps";
 
-import { scaleLinear } from "d3-scale";
-
-const useStyles = makeStyles(() => ({
-  formCtrlLabel: {
-    fontSize: "0.2rem",
-  },
-}));
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";

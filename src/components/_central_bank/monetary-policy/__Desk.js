@@ -5,6 +5,15 @@ import encyclopedia from "./_encyclopedia";
 import { Box, Typography, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
+  titleText: {
+    padding: "25px",
+  },
+  introductoryText: {
+    padding: "25px 0 25px 0",
+    "@media (max-width: 620px)": {
+      fontSize: "0.8rem",
+    },
+  },
   containerOverview: {
     marginTop: "25px",
     padding: "25px",
@@ -71,11 +80,11 @@ function Desk({
   ];
   return (
     <>
-      <Typography variant="h4" align="left" style={{ marginBottom: "25px" }}>
+      <Typography variant="h4" align="left" className={classes.title}>
         Desk: Monetary Policy
       </Typography>
       <hr></hr>
-      <Typography align="left" style={{ marginTop: "25px" }}>
+      <Typography align="justify" className={classes.introductoryText}>
         {encyclopedia.welcome}
       </Typography>
       <Box className={classes.containerOverview}>

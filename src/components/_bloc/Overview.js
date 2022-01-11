@@ -2,6 +2,15 @@ import { connect } from "react-redux";
 import { Typography, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
+  titleText: {
+    padding: "25px",
+  },
+  introductoryText: {
+    padding: "25px 0 25px 0",
+    "@media (max-width: 620px)": {
+      fontSize: "0.8rem",
+    },
+  },
 }));
 
 function Overview() {
@@ -9,18 +18,19 @@ function Overview() {
 
   return (
     <>
-      <Typography variant="h4" align="left" className={classes.title} style={{padding: "25px"}}>
+      <Typography variant="h4" align="left" className={classes.title}>
         Overview: Bloc
       </Typography>
       <hr></hr>
-      <Typography align="left" style={{padding: "25px"}}>
-        Blocs are agreements between governments to reduce barriers to trade among participating states. Blocs vary in their level of integration, from preferential access and reduced tarrifs, to economic and monetary unions.
+      <Typography align="justify" className={classes.introductoryText}>
+        Blocs are agreements between governments to reduce barriers to trade
+        among participating states. Blocs vary in their level of integration,
+        from preferential access and reduced tarrifs, to economic and monetary
+        unions.
       </Typography>
     </>
   );
 }
-const mapStateToProps = () => {
-
-};
+const mapStateToProps = () => {};
 
 export default connect(mapStateToProps)(Overview);

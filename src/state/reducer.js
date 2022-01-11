@@ -25,7 +25,14 @@ function reducer(state = initialStore, action) {
   if (action.type === SET_CPI) {
     const newCpi = action.payload.cpi;
     const newInflationRate = functions.getInflationRate(newCpi);
-    return { ...state, cpi: newCpi, inflationRate: newInflationRate };
+
+    const lastYear = state.inflationByYear[state.inflationByYear.length -1];
+    const newYear = lastYear.year + 1;
+    const newRate = parseFloat(newInflationRate)
+    const newChange = parseFloat(lastYear.rate.toFixed(2)) + newRate
+    const newElement = {year: newYear, rate: newRate, change: newChange}
+
+    return { ...state, cpi: newCpi, inflationRate: newInflationRate, inflationByYear: [...state.inflationByYear, newElement] };
   }
   return state;
 }

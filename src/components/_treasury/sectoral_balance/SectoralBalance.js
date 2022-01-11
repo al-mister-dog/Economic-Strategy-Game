@@ -135,3 +135,60 @@ const privateSector = {
  * In business or retail, deposits are included with currency and gold
  * what counts as money or credit depends on the situation
  */
+
+
+ const gold = 100
+ const currency = 200
+ const deposits = 300
+ const securities = 400
+ 
+ const institutionsTwo = {
+   centralBank: {
+     assets: { asset: "gold", amount: 100 },
+     liabilities: { liability: "currency", amount: 100 },
+   },
+   
+   bankingSystem: {
+     assets: { asset: "currency",  amount: 100},
+     liabilities: { liability: "deposits", amount: 100 },
+   },
+   
+   privateSector: {
+     assets: { asset: "deposits", amount: 100 },
+     liabilities: { liability: "securities", amount: 100 },
+   },
+ }
+ 
+ function bankWithdrawal(amount) {
+   const {bankingSystem, privateSector} = institutionsTwo
+ 
+   privateSector.assets.amount = privateSector.assets.amount + amount
+   bankingSystem.liabilities.amount = bankingSystem.liabilities.amount - amount
+   return 
+ }
+ 
+ function bankDeposit(amount) {
+   const {bankingSystem, privateSector} = institutionsTwo
+   
+   privateSector.assets.amount = privateSector.assets.amount - amount
+   bankingSystem.liabilities.amount = bankingSystem.liabilities.amount + amount
+   return 
+ }
+ 
+ console.log(institutionsTwo)
+ bankWithdrawal(20)
+ console.log(institutionsTwo)
+ bankDeposit(20)
+ console.log(institutionsTwo)
+ 
+ //the bank is losing assets as these are used to pay off the liabilities to the customer
+ //this loss must be equalled on the balance sheet otherwise the bank will become insolvent
+ //the bank can gain more assets by either attracting more depositors or go to a lender of last resort
+
+
+ /**
+  * The scarcity of (ultimate) money
+  * The elasticity of derivative credit (denominated in but NOT money)
+  * If i say im going to get something from you and owe you later thats using credit. no gold needed
+  * 
+  */
