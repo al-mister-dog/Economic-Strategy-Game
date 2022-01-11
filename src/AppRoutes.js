@@ -41,7 +41,7 @@ function AppRoutes({ departments, setDepartment, setDepartmentOperation }) {
       let segments = location.pathname
         .split("/")
         .filter((segment) => segment !== "");
-      
+
       if (segments.length === 0) {
         setDepartment("");
       }
@@ -57,7 +57,7 @@ function AppRoutes({ departments, setDepartment, setDepartmentOperation }) {
         let departmentOperation = department.menuItems.find(
           (dOp) => dOp.path === segments[1]
         );
-        setDepartment(department)
+        setDepartment(department);
         setDepartmentOperation(departmentOperation);
       }
     }, [location]);
