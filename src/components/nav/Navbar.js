@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { SET_DEPARTMENT, SET_DEPARTMENT_OPERATION } from "../../state/actions";
 import { Link } from "react-router-dom";
 import MainMenu from "./MainMenu";
 import {
@@ -31,13 +33,11 @@ const useStyles = makeStyles(() => ({
     justifyContent: "space-between",
     borderBottom: "1px solid white",
     "@media (max-width: 620px)": {
-      margin: "0px 0px 0px 0px"
-    }
+      margin: "0px 0px 0px 0px",
+    },
   },
   toolbarTwo: {
-    backgroundColor: darkPrimary, 
-    
-    // position: "fixed"
+    backgroundColor: darkPrimary,
   },
   mainMenu: {
     background: darkSecondary,
@@ -48,27 +48,27 @@ const useStyles = makeStyles(() => ({
     fontFamily: "Open Sans",
     fontWeight: "bold",
     "@media (max-width: 620px)": {
-      fontSize: "1rem"
-    }
+      fontSize: "1rem",
+    },
   },
   trial: {
     fontFamily: "Open Sans",
     "@media (max-width: 620px)": {
-      fontSize: "0.9rem"
-    }
+      fontSize: "0.9rem",
+    },
   },
   menuTitle: {
     marginLeft: "1.5rem",
     fontWeight: "bold",
     "@media (max-width: 620px)": {
-      fontSize: "0.9rem"
-    }
+      fontSize: "0.9rem",
+    },
   },
   menuTitleSecondary: {
     marginLeft: "1.5rem",
     "@media (max-width: 620px)": {
-      fontSize: "0.9rem"
-    }
+      fontSize: "0.9rem",
+    },
   },
   buttonMenu: {
     color: "white",
@@ -76,8 +76,8 @@ const useStyles = makeStyles(() => ({
     fontWeight: "bold",
     fontSize: "1rem",
     "@media (max-width: 620px)": {
-      fontSize: "0.7rem"
-    }
+      fontSize: "0.7rem",
+    },
   },
   buttonMenuTwo: {
     color: "white",
@@ -85,70 +85,20 @@ const useStyles = makeStyles(() => ({
     // fontWeight: "bold",
     fontSize: "1rem",
     "@media (max-width: 620px)": {
-      fontSize: "0.7rem"
-    }
+      fontSize: "0.7rem",
+    },
   },
 }));
 
-export default function Navbar() {
-  const departments = [
-    { name: "Treasury", path: "/treasury", menuItems: [
-      { title: "Overview", path: "overview", menuItems: [] },
-      { title: "Budget", path: "budget", menuItems: [] },
-    ] },
-    {
-      name: "Central Bank",
-      path: "/centralbank",
-      title: "Central Bank",
-      menuItems: [
-        { title: "Overview", path: "overview", menuItems: [] },
-        {
-          title: "Monetary Policy",
-          path: "monetarypolicy",
-          menuItems: [
-            { title: "Desk", path: "desk" },
-            { title: "Interest", path: "interest" },
-            { title: "Inflation", path: "inflation" },
-            { title: "Quantitative Easing", path: "quantitativeeasing" },
-            { title: "Forward Guidance", path: "forwardguidance" },
-          ],
-        },
-        {
-          title: "Financial Policy",
-          path: "financialpolicy",
-          menuItems: [],
-        },
-        { title: "Regulation", path: "regulation", menuItems: [] },
-        { title: "Reserves", path: "reserves", menuItems: [] },
-      ],
-    },
-    {
-      name: "Bloc",
-      path: "/bloc",
-      title: "Bloc",
-      menuItems: [
-        { title: "Overview", path: "overview", menuItems: [] },
-        { title: "Trade", path: "trade", menuItems: [] },
-        { title: "Alliance", path: "alliance", menuItems: [] },
-      ],
-    },
-    {
-      name: "Performance",
-      path: "/performance",
-      menuItems: [
-        { title: "Overview", path: "overview", menuItems: [] },
-        { title: "Balance of Payments", path: "balanceofpayments", menuItems: [] },
-        { title: "Government Finance", path: "governmentfinance", menuItems: [] },
-        { title: "Monetary", path: "monetary", menuItems: [] },
-        { title: "National Accounts", path: "nationalaccounts", menuItems: [] },
-        { title: "People", path: "people", menuItems: [] },
-        { title: "Trade", path: "trade", menuItems: [] },
-      ],
-    },
-  ];
+function Navbar({
+  departments,
+  department,
+  departmentOperation,
+  setDepartment,
+  setDepartmentOperation,
+}) {
+
   const classes = useStyles();
-  const [department, setDepartment] = useState("");
-  const [departmentOperation, setDepartmentOperation] = useState("");
 
   const [isOpen, setIsOpen] = useState(false);
   const toggleDrawer = (bool) => (event) => {
@@ -185,7 +135,6 @@ export default function Navbar() {
   const handleClickDepartmentMenuItem = (menuItem) => {
     handleCloseDepartmentMenu();
     setDepartmentOperation(menuItem);
-    console.log(menuItem.menuItems);
   };
 
   function getDepartment(department) {
@@ -207,7 +156,6 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    setDepartmentOperation("");
   }, [department]);
 
   return (
@@ -228,8 +176,8 @@ export default function Navbar() {
         <Typography variant="h6" className={classes.trial}>
           My Trial
         </Typography>
-        
       </Toolbar>
+
       <Toolbar className={classes.toolbarTwo}>
         {department && (
           <>
@@ -333,3 +281,27 @@ export default function Navbar() {
     </AppBar>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    departments: state.departments,
+    department: state.department,
+    departmentOperation: state.departmentOperation,
+  };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    setDepartment: (department) =>
+      dispatch({
+        type: SET_DEPARTMENT,
+        payload: { department },
+      }),
+    setDepartmentOperation: (departmentOperation) =>
+      dispatch({
+        type: SET_DEPARTMENT_OPERATION,
+        payload: { departmentOperation },
+      }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

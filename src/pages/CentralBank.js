@@ -1,3 +1,4 @@
+import { connect } from "react-redux"
 import {
   Paper,
   makeStyles,
@@ -19,11 +20,15 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-export default function CentralBank() {
+function CentralBank() {
+
   const classes = useStyles()
+
   return (
     <Paper elevation={0} className={classes.paper}>
       <Outlet/>
     </Paper>
   );
 }
+
+export default connect()(CentralBank)

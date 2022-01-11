@@ -1,5 +1,7 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/nav/Navbar";
+import { connect } from "react-redux";
+import { useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { SET_DEPARTMENT, SET_DEPARTMENT_OPERATION } from "./state/actions";
 
 import SignUp from "./pages/auth/SignUp";
 import LogIn from "./pages/auth/LogIn";
@@ -32,54 +34,104 @@ import BlocTrade from "./components/_bloc/Trade";
 import Alliance from "./components/_bloc/Alliance";
 import InterestRate from "./components/_central_bank/monetary-policy/interestRate/InterestRate";
 
-export default function AppRoutes() {
+function AppRoutes({ departments, setDepartment, setDepartmentOperation }) {
+  function usePageViews() {
+    let location = useLocation();
+    useEffect(() => {
+      let segments = location.pathname
+        .split("/")
+        .filter((segment) => segment !== "");
+      
+      if (segments.length === 0) {
+        setDepartment("");
+      }
+      if (segments.length === 1) {
+        let department = departments.find((d) => d.path === segments[0]);
+        setDepartment(department);
+        setDepartmentOperation("");
+      }
+
+      if (segments.length > 1) {
+        let department = departments.find((d) => d.path === segments[0]);
+        console.log(department);
+        let departmentOperation = department.menuItems.find(
+          (dOp) => dOp.path === segments[1]
+        );
+        setDepartment(department)
+        setDepartmentOperation(departmentOperation);
+      }
+    }, [location]);
+  }
   const loggedin = false;
+  usePageViews();
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        {loggedin ? (
-          <Route index element={<LogIn />} />
-        ) : (
-          <Route index element={<SignUp />} />
-        )}
-        <Route path="login" element={<LogIn />} />
-        <Route path="signup" element={<SignUp />} />
-        <Route path="bloc" element={<Bloc />}>
-          <Route index element={<OverviewBloc />} />
-          <Route path="overview" element={<OverviewBloc />} />
-          <Route path="trade" element={<BlocTrade />} />
-          <Route path="alliance" element={<Alliance />} />
+    <Routes>
+      {loggedin ? (
+        <Route index element={<LogIn />} />
+      ) : (
+        <Route index element={<SignUp />} />
+      )}
+      <Route path="login" element={<LogIn />} />
+      <Route path="signup" element={<SignUp />} />
+      <Route path="bloc" element={<Bloc />}>
+        <Route index element={<OverviewBloc />} />
+        <Route path="overview" element={<OverviewBloc />} />
+        <Route path="trade" element={<BlocTrade />} />
+        <Route path="alliance" element={<Alliance />} />
+      </Route>
+      <Route path="centralbank" element={<CentralBank />}>
+        <Route index element={<OverviewCentralBank />} />
+        <Route path="overview" element={<OverviewCentralBank />} />
+        <Route path="monetarypolicy" element={<MonetaryPolicy />}>
+          <Route index element={<DeskMonetaryPolicy />} />
+          <Route path="desk" element={<DeskMonetaryPolicy />} />
+          <Route path="inflation" element={<Inflation />} />
+          <Route path="interest" element={<InterestRate />} />
         </Route>
-        <Route path="centralbank" element={<CentralBank />}>
-          <Route index element={<OverviewCentralBank />} />
-          <Route path="overview" element={<OverviewCentralBank />} />
-          <Route path="monetarypolicy" element={<MonetaryPolicy />}>
-            <Route index element={<DeskMonetaryPolicy />} />
-            <Route path="desk" element={<DeskMonetaryPolicy />} />
-            <Route path="inflation" element={<Inflation />} />
-            <Route path="interest" element={<InterestRate />} />
-          </Route>
-          <Route path="financialpolicy" element={<FinancialPolicy />} />
-          <Route path="regulation" element={<Regulation />} />
-          <Route path="reserves" element={<Reserves />} />
-        </Route>
-        <Route path="performance" element={<Performance />}>
+        <Route path="financialpolicy" element={<FinancialPolicy />} />
+        <Route path="regulation" element={<Regulation />} />
+        <Route path="reserves" element={<Reserves />} />
+      </Route>
+      <Route path="performance" element={<Performance />}>
         <Route index element={<OverviewPerformance />} />
-          <Route path="overview" element={<OverviewPerformance />} />
-          <Route path="balanceofpayments" element={<BalanceOfPayments />} />
-          <Route path="governmentfinance" element={<GovernmentFinance />} />
-          <Route path="monetary" element={<Monetary />} />
-          <Route path="nationalaccounts" element={<NationalAccounts />} />
-          <Route path="people" element={<People />} />
-          <Route path="trade" element={<Trade />} />
-        </Route>
-        <Route path="treasury" element={<Treasury />}>
-          <Route index element={<OverviewTreasury />} />
-          <Route path="overview" element={<OverviewTreasury />} />
-          <Route path="budget" element={<Budget />} />
-        </Route>
-      </Routes>
-    </Router>
+        <Route path="overview" element={<OverviewPerformance />} />
+        <Route path="balanceofpayments" element={<BalanceOfPayments />} />
+        <Route path="governmentfinance" element={<GovernmentFinance />} />
+        <Route path="monetary" element={<Monetary />} />
+        <Route path="nationalaccounts" element={<NationalAccounts />} />
+        <Route path="people" element={<People />} />
+        <Route path="trade" element={<Trade />} />
+      </Route>
+      <Route path="treasury" element={<Treasury />}>
+        <Route index element={<OverviewTreasury />} />
+        <Route path="overview" element={<OverviewTreasury />} />
+        <Route path="budget" element={<Budget />} />
+      </Route>
+    </Routes>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    departments: state.departments,
+    department: state.department,
+    departmentOperation: state.departmentOperation,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setDepartment: (department) =>
+      dispatch({
+        type: SET_DEPARTMENT,
+        payload: { department },
+      }),
+    setDepartmentOperation: (departmentOperation) =>
+      dispatch({
+        type: SET_DEPARTMENT_OPERATION,
+        payload: { departmentOperation },
+      }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppRoutes);
