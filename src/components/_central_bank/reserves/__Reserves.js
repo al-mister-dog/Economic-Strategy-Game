@@ -1,5 +1,5 @@
 export default function Reserves() {
   return (
-    <h1>Reserves</h1>
+    <h1>Under Contruction</h1>
   )
 }

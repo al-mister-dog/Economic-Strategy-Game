@@ -190,9 +190,9 @@ function CpiWeightCalculator({ cpiData, submitCpi }) {
 
     const newInflationIndex = weightedIndexSum;
     const newInflationRate = newInflationIndex - 100;
-
-    setInflationIndex(newInflationIndex.toFixed(2));
-    setInflationRate(newInflationRate.toFixed(2));
+    
+    setInflationIndex(parseFloat(newInflationIndex.toFixed(2)));
+    setInflationRate(parseFloat(newInflationRate.toFixed(2)));
   }
 
   const firstUpdate = useRef(true);
@@ -292,6 +292,7 @@ function CpiWeightCalculator({ cpiData, submitCpi }) {
           variant="contained"
           color="secondary"
           onClick={() => submitCpi(cpi)}
+          style={{marginTop: "10px"}}
         >
           Submit New Weights
         </Button>

@@ -6,8 +6,8 @@ const useStyles = makeStyles(() => ({
 export default function FinancialPolicy() {
   const classes = useStyles();
   return (
-    <Box className={classes.container}>
-      <h1>Financial Policy</h1>
-    </Box>
+    <>
+      <h1>Under Contruction</h1>
+    </>
   );
 }

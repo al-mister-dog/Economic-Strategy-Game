@@ -14,10 +14,12 @@ import Inflation from "./components/_central_bank/monetary-policy/inflation/Infl
 import FinancialPolicy from "./components/_central_bank/financial-policy/__FinancialPolicy";
 import Regulation from "./components/_central_bank/regulation/__Regulation";
 import Reserves from "./components/_central_bank/reserves/__Reserves";
+import QuantitativeEasing from "./components/_central_bank/monetary-policy/quantitative-easing/QuantitativeEasing"
 
 import Treasury from "./pages/Treasury";
 import OverviewTreasury from "./components/_treasury/Overview";
 import Budget from "./components/_treasury/Budget/Budget";
+import Balances from "./components/_treasury/balances/Balances"
 
 import Performance from "./pages/Performance";
 import OverviewPerformance from "./components/_performance/Overview";
@@ -33,6 +35,7 @@ import OverviewBloc from "./components/_bloc/Overview";
 import BlocTrade from "./components/_bloc/Trade";
 import Alliance from "./components/_bloc/Alliance";
 import InterestRate from "./components/_central_bank/monetary-policy/interestRate/InterestRate";
+import ForwardGuidance from "./components/_central_bank/monetary-policy/forward_guidance/forwardGuidance";
 
 function AppRoutes({ departments, setDepartment, setDepartmentOperation }) {
   function usePageViews() {
@@ -87,6 +90,8 @@ function AppRoutes({ departments, setDepartment, setDepartmentOperation }) {
           <Route path="desk" element={<DeskMonetaryPolicy />} />
           <Route path="inflation" element={<Inflation />} />
           <Route path="interest" element={<InterestRate />} />
+          <Route path="quantitativeeasing" element={<QuantitativeEasing />} />
+          <Route path="forwardguidance" element={<ForwardGuidance />} />
         </Route>
         <Route path="financialpolicy" element={<FinancialPolicy />} />
         <Route path="regulation" element={<Regulation />} />
@@ -106,6 +111,7 @@ function AppRoutes({ departments, setDepartment, setDepartmentOperation }) {
         <Route index element={<OverviewTreasury />} />
         <Route path="overview" element={<OverviewTreasury />} />
         <Route path="budget" element={<Budget />} />
+        <Route path="balances" element={<Balances />} />
       </Route>
     </Routes>
   );

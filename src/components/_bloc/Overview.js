@@ -2,10 +2,11 @@ import { connect } from "react-redux";
 import { Typography, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
-  titleText: {
+  textTitle: {
     padding: "25px",
+    fontWeight: "bold"
   },
-  introductoryText: {
+  textIntro: {
     padding: "25px 0 25px 0",
     "@media (max-width: 620px)": {
       fontSize: "0.8rem",
@@ -22,7 +23,7 @@ function Overview() {
         Overview: Bloc
       </Typography>
       <hr></hr>
-      <Typography align="justify" className={classes.introductoryText}>
+      <Typography align="justify" className={classes.textIntro}>
         Blocs are agreements between governments to reduce barriers to trade
         among participating states. Blocs vary in their level of integration,
         from preferential access and reduced tarrifs, to economic and monetary

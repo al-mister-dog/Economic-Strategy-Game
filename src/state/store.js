@@ -3,6 +3,7 @@ const store = {
     { name: "Treasury", path: "treasury", menuItems: [
       { title: "Overview", path: "overview", menuItems: [] },
       { title: "Budget", path: "budget", menuItems: [] },
+      { title: "Balances", path: "balances", menuItems: [] },
     ] },
     {
       name: "Central Bank",

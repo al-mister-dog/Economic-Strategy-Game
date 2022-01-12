@@ -4,10 +4,10 @@ import InflationChangeRedux from "./InflationChangeRedux";
 import InflationRateRedux from "./InflationRateRedux";
 
 const useStyles = makeStyles((theme) => ({
-  titleText: {
+  textTitle: {
     padding: "25px",
   },
-  introductoryText: {
+  textIntro: {
     padding: "25px 0 25px 0",
     "@media (max-width: 620px)": {
       fontSize: "0.8rem",

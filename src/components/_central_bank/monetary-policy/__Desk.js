@@ -5,13 +5,23 @@ import encyclopedia from "./_encyclopedia";
 import { Box, Typography, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
-  titleText: {
+  textTitle: {
     padding: "25px",
+    fontWeight: "bold",
+    "@media (max-width: 620px)": {
+      fontSize: "1.5rem",
+    },
   },
-  introductoryText: {
+  textIntro: {
     padding: "25px 0 25px 0",
     "@media (max-width: 620px)": {
       fontSize: "0.8rem",
+    },
+  },
+  containerArticle: {
+    padding: "0 6rem 0 6rem",
+    "@media (max-width: 620px)": {
+      padding: "0 1rem 0 1rem",
     },
   },
   containerOverview: {
@@ -80,13 +90,16 @@ function Desk({
   ];
   return (
     <>
-      <Typography variant="h4" align="left" className={classes.title}>
+    <Box className={classes.containerArticle}>
+    <Typography variant="h4" className={classes.textTitle}>
         Desk: Monetary Policy
       </Typography>
       <hr></hr>
-      <Typography align="justify" className={classes.introductoryText}>
+      <Typography align="justify" className={classes.textIntro}>
         {encyclopedia.welcome}
       </Typography>
+    </Box>
+      
       <Box className={classes.containerOverview}>
         {overviewItems.map((item) => {
           const { text, number, path } = item;
