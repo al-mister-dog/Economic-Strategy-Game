@@ -273,6 +273,7 @@ const store = {
     {iso: "ZMB", NAME:	"Zambia",	generalGovTotalExp:28.413, generalGovRevenue:	19.081, generalGovNetLendBorrow:	-9.332, generalGovStrucBal:		null, genGovNetPriLenBor:	-6.182, generalGovGrossDebt:	118.731, currentAccBal:	1.235, currentAccBalGDP:	6.516, inflationEndOfPeriodCP:		16.300, inflationAvgCP:	17.750, gdpConstPricePct:		0.598, gdpConstPrice:	18.955, ppp:	64.638, importVolGdsSvcs:		-10.773, importVolGds:		-10.773,   exportVolGdsSvcs:		5.263, exportVolGds:		5.263, unemployment:		null, bloc: "SADC"},
     {iso: "ZWE", NAME:	"Zimbabwe",	generalGovTotalExp:17.581, generalGovRevenue:	16.766, generalGovNetLendBorrow:	-0.814, generalGovStrucBal:		null, genGovNetPriLenBor:	-0.572, generalGovGrossDebt:	51.359, currentAccBal:	1.138, currentAccBalGDP:	4.364, inflationEndOfPeriodCP:		49.441, inflationAvgCP:	99.254, gdpConstPricePct:		3.069, gdpConstPrice:	26.085, ppp:	41.794, importVolGdsSvcs:		null, importVolGds:		19.752,   exportVolGdsSvcs:		null, exportVolGds:		25.628, unemployment:		null, bloc: "SADC"},
     ],
+    //TAKE OUT OF STOR \/
   keysData: {
     govFinance: [
       {
@@ -421,3 +422,9 @@ const store = {
     ]
 }
 export default store;
+
+/**
+ * GAME DATA
+ * USER DATA
+ * COUNTRY DATA
+ */

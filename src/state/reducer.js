@@ -6,16 +6,13 @@ import {
 } from "./actions";
 import initialStore from "./store";
 import functions from "./functions";
-
-function reducer(state = initialStore, action) {
+function reducerDbWrapper(state, action) {
   if (action.type === SET_DEPARTMENT) {
     const newDepartment = action.payload.department;
-    console.log(state.department)
     return { ...state, department: newDepartment };
   }
   if (action.type === SET_DEPARTMENT_OPERATION) {
     const newDepartmentOperation = action.payload.departmentOperation;
-    console.log(state.department)
     return { ...state, departmentOperation: newDepartmentOperation };
   }
   if (action.type === SET_BANK_RATE) {
@@ -35,6 +32,14 @@ function reducer(state = initialStore, action) {
     return { ...state, cpi: newCpi, inflationRate: newInflationRate, inflationByYear: [...state.inflationByYear, newElement] };
   }
   return state;
+}
+function reducer(state = initialStore, action) {
+  const reducedState = reducerDbWrapper(state, action)
+  // fetch('', {
+  //   state
+  // })
+  console.log('saving to database')
+  return reducedState
 }
 
 export default reducer;
