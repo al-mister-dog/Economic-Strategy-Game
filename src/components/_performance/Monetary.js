@@ -59,10 +59,10 @@ function Monetary({countries, keysData}) {
     </>
   );
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     countries: state.countriesData,
-    keysData: state.keysData,
+    keysData: ownProps.keysData,
     inflationTarget: state.inflationTarget,
   };
 };

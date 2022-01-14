@@ -102,6 +102,7 @@ const keysData = {
     },
     {
       name: "gdpConstPrice",
+      path: "/api/v1/performance/gdpconstantprice",
       label: "Gross Domestic Product",
       unit: "billion",
       category: "national account",

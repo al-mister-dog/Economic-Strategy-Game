@@ -21,17 +21,11 @@ import {
 
 import { scaleLinear } from "d3-scale";
 
-const useStyles = makeStyles(() => ({
-  formCtrlLabel: {
-    fontSize: "0.2rem",
-  },
-}));
-
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
 const MapChart = ({ countries, keys }) => {
-  const classes = useStyles();
+  
   const [radioGroupValue, setRadioGroupValue] = useState(keys[0].name);
   const [objectKey, setObjectKey] = useState(keys[0].name);
   const [content, setContent] = useState("");

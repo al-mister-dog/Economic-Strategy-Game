@@ -1,3 +1,4 @@
+import { connect } from "react-redux"
 import {
   Paper,
   makeStyles,
@@ -10,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#fdfbf7",
     width: "70vw",
     margin: "auto",
-    marginTop: "7rem",
+    marginTop: "6rem",
     padding: "25px",
     "@media (max-width: 620px)": {
       width: "95vw",
@@ -19,12 +20,16 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+function CentralBank() {
 
-export default function Performance() {
   const classes = useStyles()
+
   return (
-    <Paper className={classes.paper}>
+    <Paper elevation={0} className={classes.paper}>
+      <h1>Hello User</h1>
       <Outlet/>
     </Paper>
   );
 }
+
+export default connect()(CentralBank)

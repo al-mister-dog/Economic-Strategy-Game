@@ -19,12 +19,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
-export default function Performance() {
+export default function NotFound() {
   const classes = useStyles()
   return (
     <Paper className={classes.paper}>
-      <Outlet/>
+      <h1>Not Found!</h1>
     </Paper>
   );
 }

@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { SET_DEPARTMENT } from "../../state/actions";
 import MainMenu from "./MainMenu";
@@ -14,7 +15,7 @@ import {
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 const darkPrimary = "#191919";
-const darkSecondary = "#2D4263";
+
 const useStyles = makeStyles(() => ({
   nav: {
     backgroundColor: darkPrimary,
@@ -49,10 +50,14 @@ const useStyles = makeStyles(() => ({
     "@media (max-width: 620px)": {
       fontSize: "0.9rem",
     },
+    "&:hover": {
+      cursor: "pointer"
+    }
   },
 }));
 
 function Navbar({ departments, department, setDepartment }) {
+  const loggedin = false
   const classes = useStyles();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -97,9 +102,12 @@ function Navbar({ departments, department, setDepartment }) {
         <Typography variant="h4" className={classes.title}>
           Trial of the Pyx
         </Typography>
+        <Link to={loggedin ? `user` : `login`} style={{textDecoration: "none", color: "white"}}>
         <Typography variant="h6" className={classes.trial}>
           My Trial
         </Typography>
+        </Link>
+        
       </Toolbar>
       <SubNav />
       <SwipeableDrawer

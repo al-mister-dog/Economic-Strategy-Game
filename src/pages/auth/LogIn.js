@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import {
   Paper,
   Avatar,
@@ -12,7 +13,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 
-import LockIcon from "@material-ui/icons/Lock";
+import api from "../../api";
 import owl from "./owl.jpeg";
 
 const useStyles = makeStyles((theme) => ({
@@ -69,14 +70,58 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login() {
   const classes = useStyles();
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+  const [loggedIn, setLoggedIn] = useState(true)
+  const [remember, setRemember] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [isDisabled, setIsDisabled] = useState(true);
+  const validEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+
+  const handleChangeEmail = (event) => {
+    setEmail(event.target.value);
+    validateLogin();
+  };
+  const handleChangePassword = (event) => {
+    setPassword(event.target.value);
+    validateLogin();
+  };
+
+  const validateLogin = () => {
+    if (validEmail.test(email) && password.length > 4) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  };
+
+  const handleKeypressLogin = (e) => {
+    if (e.code === "Enter") {
+      onClickLogin();
+    }
+  };
+
+  const onClickLogin = async () => {
+    try {
+      const response = await api.login({ email, password });
+      const data = await response.json();
+      if (response.status === 401) {
+        setMessage(data.message);
+        setIsDisabled(true);
+        return;
+      } else {
+        handleLoginSuccess(data);
+      }
+    } catch (error) {
+      setMessage("there was a problem with the server. please try again later");
+      setIsDisabled(true);
+    }
+  };
+
+  const handleLoginSuccess = (data) => {
+    const token = data.token;
+    localStorage.setItem("token", JSON.stringify(token));
+    setLoggedIn(true);
   };
 
   return (
@@ -88,19 +133,11 @@ export default function Login() {
             Trial of the Pyx
           </Typography>
         </Box>
-        <Box
-
-          className={classes.auth}
-        >
+        <Box className={classes.auth}>
           <Typography component="h1" variant="h5">
             Log in
           </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
+          <Box component="form" noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -110,6 +147,9 @@ export default function Login() {
               name="email"
               autoComplete="email"
               autoFocus
+              value={email}
+              onKeyPress={handleKeypressLogin}
+              onChange={handleChangeEmail}
             />
             <TextField
               margin="normal"
@@ -120,12 +160,21 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={password}
+              onKeyPress={handleKeypressLogin}
+              onChange={handleChangePassword}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Button type="submit" fullWidth variant="contained">
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              disabled={isDisabled}
+              onClick={onClickLogin}
+            >
               Log In
             </Button>
             <Grid container>

@@ -5,6 +5,8 @@ import { SET_DEPARTMENT, SET_DEPARTMENT_OPERATION } from "./state/actions";
 
 import SignUp from "./pages/auth/SignUp";
 import LogIn from "./pages/auth/LogIn";
+import NotFound from "./pages/NotFound"
+import User from "./pages/User"
 
 import CentralBank from "./pages/CentralBank";
 import OverviewCentralBank from "./components/_central_bank/Overview";
@@ -29,6 +31,7 @@ import Monetary from "./components/_performance/Monetary";
 import NationalAccounts from "./components/_performance/NationalAccounts";
 import People from "./components/_performance/People";
 import Trade from "./components/_performance/Trade";
+import keysData from "../src/data/performance"
 
 import Bloc from "./pages/Bloc";
 import OverviewBloc from "./components/_bloc/Overview";
@@ -76,6 +79,9 @@ function AppRoutes({ departments, setDepartment, setDepartmentOperation }) {
       )}
       <Route path="login" element={<LogIn />} />
       <Route path="signup" element={<SignUp />} />
+      <Route path="User" element={<User/>}>
+        
+      </Route>
       <Route path="bloc" element={<Bloc />}>
         <Route index element={<OverviewBloc />} />
         <Route path="overview" element={<OverviewBloc />} />
@@ -100,12 +106,12 @@ function AppRoutes({ departments, setDepartment, setDepartmentOperation }) {
       <Route path="performance" element={<Performance />}>
         <Route index element={<OverviewPerformance />} />
         <Route path="overview" element={<OverviewPerformance />} />
-        <Route path="balanceofpayments" element={<BalanceOfPayments />} />
-        <Route path="governmentfinance" element={<GovernmentFinance />} />
-        <Route path="monetary" element={<Monetary />} />
-        <Route path="nationalaccounts" element={<NationalAccounts />} />
-        <Route path="people" element={<People />} />
-        <Route path="trade" element={<Trade />} />
+        <Route path="balanceofpayments" element={<BalanceOfPayments keysData={keysData}/>} />
+        <Route path="governmentfinance" element={<GovernmentFinance keysData={keysData}/>} />
+        <Route path="monetary" element={<Monetary keysData={keysData}/>} />
+        <Route path="nationalaccounts" element={<NationalAccounts keysData={keysData}/>} />
+        <Route path="people" element={<People keysData={keysData}/>} />
+        <Route path="trade" element={<Trade keysData={keysData}/>} />
       </Route>
       <Route path="treasury" element={<Treasury />}>
         <Route index element={<OverviewTreasury />} />
@@ -113,6 +119,7 @@ function AppRoutes({ departments, setDepartment, setDepartmentOperation }) {
         <Route path="budget" element={<Budget />} />
         <Route path="balances" element={<Balances />} />
       </Route>
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
